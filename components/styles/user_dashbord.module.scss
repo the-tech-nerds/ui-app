@@ -1,0 +1,88 @@
+.select-dropdown {
+  height: 50px !important;
+  margin-bottom: 20px !important;
+  font-size: 12px !important;
+}
+.cursor-point{
+  cursor: pointer;
+}
+.verify-btn{
+  font-size: 7px!important;
+}
+.fa-check-circle{
+  color: green;
+  font-size: 14px !important;
+  margin-left: 3px;
+}
+.popup-btn{
+  color: white!important;
+}
+.facebook-btn{
+  background-color: #5890FF !important;
+}
+.inputStyle{
+  width: 3rem !important;
+  height: 3rem;
+  margin: 20px 1rem;
+  fontSize: 2rem !important;
+  borderRadius: 4;
+  border: 2px solid rgba(0,0,0,0.3);
+}
+.fa-user{
+  color:#018f96;
+}
+.fa-envelope{
+  color: #480c0c;
+}
+.fa-phone{
+  color: #07bc0c;
+}
+.fa-intersex{
+  color:#0b2e13;
+}
+
+.fa-birthday-cake{
+  color:#aa4d00;
+}
+
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+.profile-userpic{
+  text-align: center;
+}
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 30%;
+  height: 30%;
+  -webkit-border-radius: 30% !important;
+  -moz-border-radius: 30% !important;
+  border-radius: 30% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.font-14 {
+  font-size: 14px;
+}

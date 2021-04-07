@@ -1,0 +1,1 @@
+ERROR: Time: 2021-04-07 11:33:16 pm :: Service Name: auth. Response :: Error: Failed making POST request to http://localhost:8081/api/v1/authentication/login/user: {"message":["Sorry! You are not authorized to perform this action"],"status":"Unauthorized","code":401,"data":null}
