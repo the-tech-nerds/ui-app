@@ -1,0 +1,1 @@
+ERROR: Time: 2021-04-09 01:25:44 am :: Service Name: auth. Response :: FetchError: invalid json response body at http://localhost:8081/api/v1/authentication/logout? reason: Unexpected end of JSON input

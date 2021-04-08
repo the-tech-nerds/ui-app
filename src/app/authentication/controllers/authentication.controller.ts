@@ -1,14 +1,14 @@
-import {Body, Controller, Get, Post, Render, Req, Res} from '@nestjs/common';
+import { Body, Controller, Get, Post, Render, Req, Res } from '@nestjs/common';
 import { UserRegistrationRequest } from '../requests/user-registration.request';
 import { UserRegistrationService } from '../services/user-registration.service';
 import { Response } from 'express';
-import {UserLoginRequest} from "../requests/user-login.request";
-import {UserLoginService} from "../services/user-login.service";
-import {UserResetPasswordRequest} from "../requests/reset-password.request";
-import {UserPasswordResetService} from "../services/user-password-reset.service";
-import {UserLogoutService} from "../services/user-logout.service";
-import {UserService} from "../../user/services/user.service";
-import {CreatePasswordRequest} from "../requests/create-password.request";
+import { UserLoginRequest } from "../requests/user-login.request";
+import { UserLoginService } from "../services/user-login.service";
+import { UserResetPasswordRequest } from "../requests/reset-password.request";
+import { UserPasswordResetService } from "../services/user-password-reset.service";
+import { UserLogoutService } from "../services/user-logout.service";
+import { UserService } from "../../user/services/user.service";
+import { CreatePasswordRequest } from "../requests/create-password.request";
 import { UserForgotPasswordService } from '../services/user-forgot-password.service';
 import { ForgetPasswordCompleteRequest } from '../requests/ForgetPasswordCompleteRequest';
 // import {ConfigService} from "@nestjs/config";
@@ -16,7 +16,7 @@ import { ForgetPasswordCompleteRequest } from '../requests/ForgetPasswordComplet
 @Controller()
 export class AuthenticationController {
     constructor(
-        private userRegistrationService:  UserRegistrationService,
+        private userRegistrationService: UserRegistrationService,
         private userLoginService: UserLoginService,
         private userResetPasswordService: UserPasswordResetService,
         private userLogOutService: UserLogoutService,
@@ -31,8 +31,8 @@ export class AuthenticationController {
         return {};
     }
     @Post('/sign-up')
-    async signUp(@Body() userRegistrationRequest: UserRegistrationRequest, @Res() res: Response){
-        await  this.userRegistrationService.register(userRegistrationRequest);
+    async signUp(@Body() userRegistrationRequest: UserRegistrationRequest, @Res() res: Response) {
+        await this.userRegistrationService.register(userRegistrationRequest);
         res.redirect('/login')
     }
     @Get('/login')
@@ -41,8 +41,8 @@ export class AuthenticationController {
         return {};
     }
     @Post('/login')
-    async signIn(@Body() userLoginRequest: UserLoginRequest, @Res() res: any) :Promise<any> {
-        const result  = await this.userLoginService.login(userLoginRequest);
+    async signIn(@Body() userLoginRequest: UserLoginRequest, @Res() res: any): Promise<any> {
+        const result = await this.userLoginService.login(userLoginRequest);
         if (result.code === 200) {
             const cookieParams = {
                 httpOnly: true,
@@ -55,15 +55,15 @@ export class AuthenticationController {
         return result;
     }
 
-    @Get('/changePassword')
-    @Render('pages/changePassword')
+    @Get('/change-password')
+    @Render('change-password')
     async passwordChange() {
-        const user = await this.userService.getById();
-        return {'userResponse' : user.data};
+        const response = await this.userService.getById();
+        return { 'user': response };
     }
 
     @Post('/change-password')
-    async changePassword(@Body() request: UserResetPasswordRequest,  @Res() res: Response){
+    async changePassword(@Body() request: UserResetPasswordRequest, @Res() res: Response) {
         request.user_id = 0;
         await this.userResetPasswordService.changePassword(request);
         this.userLogOutService.logout();
@@ -71,19 +71,19 @@ export class AuthenticationController {
         res.redirect('/login')
     }
     @Post('/create-password')
-    async createPassword(@Body() request: CreatePasswordRequest,  @Res() res: Response){
+    async createPassword(@Body() request: CreatePasswordRequest, @Res() res: Response) {
         request.user_id = 0;
         await this.userResetPasswordService.createPassword(request);
         res.redirect('/dashboard')
     }
 
     @Get('/forgot-password')
-    @Render('pages/forgot-password')
+    @Render('forgot-password')
     async pageForgotPassword() {
-       return {}
+        return {}
     }
     @Post('/recover/password')
-    async forgotPassword(@Body() fgPasswordRequest: ForgetPasswordCompleteRequest,  @Res() res: Response) {
+    async forgotPassword(@Body() fgPasswordRequest: ForgetPasswordCompleteRequest, @Res() res: Response) {
         await this.userForgotPasswordService.createPassword(fgPasswordRequest);
         res.redirect('/login')
     }
@@ -95,15 +95,15 @@ export class AuthenticationController {
     }
 
     @Get('/login/check')
-    async isLogin(@Req() req:any) {
+    async isLogin(@Req() req: any) {
         const data = req.headers.access_token || null;
-        if(data){
+        if (data) {
             return {
                 code: 200,
                 isLogin: true
             };
         }
-        return  {
+        return {
             code: 401,
             isLogin: false
         };

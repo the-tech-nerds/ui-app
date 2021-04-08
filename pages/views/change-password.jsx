@@ -1,21 +1,22 @@
 import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
-import "components/styles/user_dashbord.module.scss"
-import { Dashboard as ComponentDashboard } from '../../components/pages/dashboard';
+import '../../components/styles/user_dashbord.module.scss'
+import ComponentResetPassword from '../../components/pages/change-password';
 
-const Dashboard = ({ user }) => (<div>
+const ChangePassword = ({ user }) => (<div>
     <Head>
-        <title>Khan Fresh Corner | User Dashboard.</title>
+        <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Root>
-        <ComponentDashboard user={user} />
+        <ComponentResetPassword user={user} />
     </Root>
 </div>)
 
 export async function getServerSideProps(ctx) {
     const { user } = ctx.query;
+
     if (user) {
         return {
             props: {
@@ -31,4 +32,4 @@ export async function getServerSideProps(ctx) {
     };
 }
 
-export default Dashboard;
+export default ChangePassword;

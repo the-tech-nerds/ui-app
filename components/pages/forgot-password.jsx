@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Breadcrumb from "../common/breadcrumb";
-import '../../index.scss';
-import ReactDom from 'react-dom';
-import Root from "../layouts/Root";
 import CheckUserName from '../functional/forgot-password/check-user-name';
 import OtpForm from '../functional/otp/otp-form';
 import axios from "axios";
@@ -96,9 +93,4 @@ class ForgetPassword extends Component {
     }
 }
 
-const forgotPassword = (<Root>
-    <ForgetPassword />
-</Root>)
-if (typeof document !== "undefined" && document.getElementById('forgot-password')) {
-    ReactDom.render(forgotPassword, document.getElementById('forgot-password'));
-}
+export default ForgetPassword;
