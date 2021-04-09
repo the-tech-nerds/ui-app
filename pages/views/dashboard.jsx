@@ -1,9 +1,8 @@
 import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
-import "components/styles/user_dashbord.module.scss"
 import { Dashboard as ComponentDashboard } from '../../components/pages/dashboard';
-
+import '../../components/styles/user_dashbord.module.scss'
 const Dashboard = ({ user }) => (<div>
     <Head>
         <title>Khan Fresh Corner | User Dashboard.</title>

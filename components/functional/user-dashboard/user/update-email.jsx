@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import '../../../styles/user_dashbord.module.scss'
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { errorHandle } from "../../../../share";

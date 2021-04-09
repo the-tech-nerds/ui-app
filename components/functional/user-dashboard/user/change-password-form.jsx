@@ -2,10 +2,8 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { CHANGE_PASSWORD, CREATE_PASSWORD, SERVER_PATH, USER_LOGIN } from "../../../../constants/app_constant";
 import React, { useState, useRef } from 'react';
-import '../../../styles/user_dashbord.module.scss'
 import { errorHandle } from '../../../../share'
 import AlertMessage from "../../../common/alert/alert-message";
-import { AlertType } from "../utils";
 import { PasswordStrengthMeter } from "../../../common/password-strength-meter";
 import Button from "../../../common/buttons/button";
 

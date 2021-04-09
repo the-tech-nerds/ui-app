@@ -1,10 +1,8 @@
 import React, { Component, useState } from 'react';
-import Root from "../layouts/Root";
-import ReactDom from "react-dom";
 import DefaultAddress from "../functional/user-dashboard/user/default-address";
 import UserDashboard from "../functional/user-dashboard/user/user-dashboard";
 import UpdateProfile from "../functional/user-dashboard/user/user-form";
-import { ACCESS_TOKEN, CHANGE_PASSWORD, USER_DASHBOARD, USER_LOGIN } from "../../constants/app_constant";
+import { CHANGE_PASSWORD, USER_DASHBOARD, USER_LOGIN } from "../../constants/app_constant";
 import OtpForm from "../functional/otp/otp-form";
 import axios from "axios";
 import { errorHandle } from "../../share";
@@ -165,7 +163,7 @@ export default function AccountInfo({ userInfo, profileEdit, verifyPhone, addPho
                                 </h6>
                                 <h6 className="mt-2"><i className="fa fa-intersex" aria-hidden="true"></i> {userInfo.gender}</h6>
                                 <h6 className="mt-2"><i className="fa fa-birthday-cake" aria-hidden="true"></i> {userInfo.birthday}</h6>
-                                <h6 className="mt-2"><a href={CHANGE_PASSWORD}>Change Password</a></h6>
+                                <h6 className="mt-2 font14"><a href={CHANGE_PASSWORD}>Change Password</a></h6>
                             </div>
                         </div>
                     </div>

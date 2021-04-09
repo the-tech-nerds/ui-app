@@ -2,7 +2,6 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { SERVER_PATH, USER_ADDRESS } from "../../../../constants/app_constant";
 import React, { useState, useEffect } from 'react';
-import '../../../styles/user_dashbord.module.scss'
 export default function AddAddress(props) {
     const { register, handleSubmit, errors } = useForm();
     const [serverError, setError] = useState({

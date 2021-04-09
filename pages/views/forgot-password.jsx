@@ -15,8 +15,6 @@ const ForgotPassword = () => (<div>
 </div>)
 
 export async function getServerSideProps(ctx) {
-    console.log(ctx.query);
-
     return {
         props: {}
     };

@@ -1,7 +1,7 @@
 import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
-import  '../../components/styles/user_dashbord.module.scss'
+import '../../components/styles/user_dashbord.module.scss'
 import ComponentLogin from '../../components/pages/login';
 
 const Login = () => (<div>
@@ -15,11 +15,9 @@ const Login = () => (<div>
 </div>)
 
 export async function getServerSideProps(ctx) {
-    console.log(ctx.query);
-
     return {
         props: {}
-    };  
+    };
 }
 
 export default Login;

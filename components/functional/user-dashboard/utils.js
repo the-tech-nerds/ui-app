@@ -49,16 +49,14 @@ export function getSideMenus(name) {
 }
 
 export function ValidateEmail(email) {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        return true;
-    }
-    return false;
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+
 }
 
 export function PhoneNumber(phone) {
-    var phoneno = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    const phoneno = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     if (phone.match(phoneno)) {
-        return phone.length == 11 ? true : false;
+        return phone.length === 11;
     }
 
     return false;

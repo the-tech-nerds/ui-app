@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import  '../../../styles/user_dashbord.module.scss'
-import axios from "axios";
 export default function UserProfilePic(){
     const [user, setUser] = useState(null);
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('userInfo')) || {});
     }, [])
-    
+
     return user ? (
          <div className="profile-sidebar ">
             <div className="profile-userpic">

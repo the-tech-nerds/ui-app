@@ -1,8 +1,6 @@
 import React from 'react';
 import Breadcrumb from "../../../common/breadcrumb";
-import {USER_DASHBOARD} from "../../../../constants/app_constant";
 import {utils} from "../index";
-import  '../../../styles/user_dashbord.module.scss'
 import UserProfilePic from "./user-profile-pic";
 export default  function UserDashboard({name,title,component}){
     const menuList = [];

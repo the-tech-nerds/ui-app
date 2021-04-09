@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { AlertType } from '../user-dashboard/utils';
 import AlertMessage from '../../common/alert/alert-message';
 import { USER_LOGIN } from '../../../constants/app_constant';
 import { errorHandle } from '../../../share';

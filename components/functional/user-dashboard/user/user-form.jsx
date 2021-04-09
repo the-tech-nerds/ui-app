@@ -1,8 +1,7 @@
 import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
-import {SERVER_PATH, USER_DASHBOARD} from "../../../../constants/app_constant";
+import {USER_DASHBOARD} from "../../../../constants/app_constant";
 import React, {useState, useEffect} from 'react';
-import  '../../../styles/user_dashbord.module.scss'
 import {errorHandle} from "../../../../share";
 import {utils} from "../index";
 import Button from "../../../common/buttons/button";
