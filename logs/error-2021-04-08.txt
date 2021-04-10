@@ -1,0 +1,1 @@
+ERROR: Time: 2021-04-08 11:59:37 pm :: Service Name: auth. Response :: Error: Failed making GET request to http://localhost:8081/api/v1/user/profile/info: {"message":["Sorry! You are not authorized to perform this action"],"status":"Unauthorized","code":401,"data":null}

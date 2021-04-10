@@ -1,0 +1,18 @@
+.category {
+    width: 200px;
+    float: left;
+    height: 250px;
+    margin: 5px;
+    padding: 5px;
+    box-sizing: content-box;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.placeholder-item {
+    box-shadow: 0 4px 10px 0 rgba(33, 33, 33, 0.15);
+    border-radius: 4px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
