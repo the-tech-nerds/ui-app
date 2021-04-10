@@ -1,7 +1,6 @@
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {
-    ACCESS_TOKEN,
     Facebook_LOGIN,
     GMAIL_LOGIN,
     FORGOT_PASSWORD,
@@ -13,7 +12,6 @@ import React, {useState} from 'react';
 import {errorHandle} from "../../../share";
 import  '../../styles/user_dashbord.module.scss'
 import AlertMessage from "../../common/alert/alert-message";
-import {AlertType} from "../user-dashboard/utils";
 import Button from "../../common/buttons/button";
 
 export default  function    LoginForm(){
@@ -23,7 +21,7 @@ export default  function    LoginForm(){
     })
     const  [isLoading, setLoading] = useState(false)
     const onSubmit = (data, e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setError({
             error: undefined
         });
@@ -78,7 +76,7 @@ export default  function    LoginForm(){
                                 <div className="form-group">
                                     <label htmlFor="review">Password</label>
                                     <input type="password" name="password" className="form-control" id="review"
-                                            {...register('password', { required: true })} 
+                                            {...register('password', { required: true })}
                                                placeholder="Enter your password" required="" />
                                     {errors && errors.password && <span style={error}>Password is required</span>}
                                 </div>

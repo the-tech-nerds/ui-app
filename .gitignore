@@ -1,3 +1,5 @@
 .next
 .yalc
 node_modules
+logs
+.idea

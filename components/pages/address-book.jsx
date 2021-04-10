@@ -1,26 +1,25 @@
-import React, {Component} from 'react';
-import Root from "../layouts/Root";
-import ReactDom from "react-dom";
+import React, { Component } from 'react';
 import AddAddress from "../functional/user-dashboard/user/address-form";
 import UserDashboard from "../functional/user-dashboard/user/user-dashboard";
 class AddressBook extends Component {
 
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
         this.handleClick = this.handleClick.bind(this);
         this.handleCancel = this.handleCancel.bind(this)
-        const data = window.addressResponse.data.map((m) =>{
+        const { address = [] } = this.props
+        const data = address.map((m) => {
             return {
-             'name' : m.name,
-              'address': m.details,
+                'name': m.name,
+                'address': m.details,
                 'mobile': m.contact_no,
                 'region': m.division_id + '->' + m.city_id + '->' + m.area_id,
                 'postcode': m.postcode,
-                'address_default': m.is_default ? 'Default': 'Make default'
+                'address_default': m.is_default ? 'Default' : 'Make default'
             };
         })
         this.state = {
-            addresses : data,
+            addresses: data,
             isViewMode: true
         }
     }
@@ -34,28 +33,28 @@ class AddressBook extends Component {
             isViewMode: !state.isViewMode
         }))
     }
-    render (){
+    render() {
         const isViewMode = this.state.isViewMode;
         let addresses = [];
-        this.state.addresses.forEach( (d, index)=>{
-            addresses.push( <MyAddress key={index} item={d}/>)
+        this.state.addresses.forEach((d, index) => {
+            addresses.push(<MyAddress key={index} item={d} />)
         })
         let dyComponent;
         if (isViewMode) {
             dyComponent = <div>
-                <button type="submit"  onClick={this.handleClick} className="btn btn-solid mb-2">add new address</button>
+                <button type="submit" onClick={this.handleClick} className="btn btn-solid mb-2">add new address</button>
                 {addresses}
             </div>
         } else {
-            dyComponent = <AddAddress cancel ={this.handleCancel}/>;
+            dyComponent = <AddAddress cancel={this.handleCancel} />;
         }
         return (
-            <UserDashboard name ={'AddressBook'} component={dyComponent} title={'Address Book'}/>
+            <UserDashboard name={'AddressBook'} component={dyComponent} title={'Address Book'} />
         )
     }
 }
 
-export default function MyAddress({item}){
+function MyAddress({ item }) {
     const error = {
         fontSize: "8px"
     };
@@ -72,11 +71,4 @@ export default function MyAddress({item}){
     return element
 }
 
-
-
-const addressBook = (<Root>
-    <AddressBook/>
-</Root>)
-if(typeof document !== "undefined" && document.getElementById('addressBook')){
-    ReactDom.render(addressBook, document.getElementById('addressBook'));
-}
+export default AddressBook;

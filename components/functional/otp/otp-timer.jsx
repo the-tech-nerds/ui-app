@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import  '../../styles/user_dashbord.module.scss'
 export default function OtpTimer({timeInSecond, resend}) {
     const initialMinute =  Math.floor(timeInSecond/60)
     const initialSeconds = timeInSecond % 60;

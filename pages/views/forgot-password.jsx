@@ -2,15 +2,15 @@ import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
 import '../../components/styles/user_dashbord.module.scss'
-import ComponentLogin from '../../components/pages/login';
+import ComponentForgotPassword from '../../components/pages/forgot-password';
 
-const Login = () => (<div>
+const ForgotPassword = () => (<div>
     <Head>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Root>
-        <ComponentLogin />
+        <ComponentForgotPassword />
     </Root>
 </div>)
 
@@ -20,4 +20,4 @@ export async function getServerSideProps(ctx) {
     };
 }
 
-export default Login;
+export default ForgotPassword;

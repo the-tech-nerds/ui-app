@@ -1,1 +1,0 @@
-ERROR: Time: 2021-04-09 07:03:40 pm :: Service Name: product. Response :: Error: Failed making GET request to http://localhost:8082/api/v1/category/rice-1617965207534/products: {"message":["Something went wrong. Please try again later."],"status":"failure","code":500,"data":null}

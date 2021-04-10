@@ -1,33 +1,34 @@
 import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
-import { Dashboard as ComponentDashboard } from '../../components/pages/dashboard';
 import '../../components/styles/user_dashbord.module.scss'
-const Dashboard = ({ user }) => (<div>
+import ComponentAddressBook from '../../components/pages/address-book';
+
+const Address = ({ address }) => (<div>
     <Head>
-        <title>Khan Fresh Corner | User Dashboard.</title>
+        <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Root>
-        <ComponentDashboard user={user} />
+        <ComponentAddressBook address={address} />
     </Root>
 </div>)
 
 export async function getServerSideProps(ctx) {
-    const { user } = ctx.query;
-    if (user) {
+    const { address } = ctx.query;
+    if (address) {
         return {
             props: {
-                user: user.data
+                address: address.data
             }
         }
     }
 
     return {
         props: {
-            user: null
+            address: null
         }
     };
 }
 
-export default Dashboard;
+export default Address;

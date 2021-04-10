@@ -4,7 +4,6 @@ import type { AppProps /*, AppContext */ } from 'next/app';
 import '../pages/index.scss';
 import '../components/common/index.scss';
 
-
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <div>

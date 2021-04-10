@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { ACCESS_TOKEN, Facebook_LOGIN, USER_LOGIN, GMAIL_LOGIN, USER_SIGNUP } from "../../../constants/app_constant";
+import { ACCESS_TOKEN, Facebook_LOGIN, USER_LOGIN, GMAIL_LOGIN } from "../../../constants/app_constant";
 import Breadcrumb from "../../common/breadcrumb";
 import React, { useState, useRef } from 'react';
 import { errorHandle } from "../../../share";
 import AlertMessage from "../../common/alert/alert-message";
-import { AlertType, ValidateEmail, PhoneNumber } from "../user-dashboard/utils";
+import { ValidateEmail, PhoneNumber } from "../user-dashboard/utils";
 import '../../styles/user_dashbord.module.scss'
 import OtpForm from "../otp/otp-form";
 import {PasswordStrengthMeter} from "../../common/password-strength-meter";
 import Button from "../../common/buttons/button";
 
 export default function RegisterForm() {
-    const { register, handleSubmit, errors, watch, getValues } = useForm({
+    const { register, errors, watch, getValues } = useForm({
             defaultValues: {
                 is_used_promotion: true
             }
@@ -216,7 +216,7 @@ export default function RegisterForm() {
                                     <div className="form-row">
                                         {signUpWith.name == 'email' && <div className="col-md-12">
                                             <label htmlFor="email">email</label>
-                                            <input type="text" 
+                                            <input type="text"
                                                   readOnly={isVerified}
                                                    name="email" className="form-control" id="email"
                                                    {...register('email', {
@@ -225,13 +225,13 @@ export default function RegisterForm() {
                                                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                                            message: "invalid email address",
                                                        },
-                                                   })} 
+                                                   })}
                                                    placeholder="enter your emial, example: example@gmail.com" required="" />
                                             {errors && errors.email && <span className="mb-2" style={error}>Email Name is required</span>}
                                         </div>}
                                         {signUpWith.name == 'phone' && <div className="col-md-12">
                                             <label htmlFor="phone">Mobile</label>
-                                            <input 
+                                            <input
                                                  readOnly={isVerified}
                                                  type="text"
                                                  name="phone"
@@ -245,7 +245,7 @@ export default function RegisterForm() {
                                                     },
                                                 })}
                                                 placeholder="enter your phone number, example: 0167****753"
-                                                required="" 
+                                                required=""
                                             />
                                             {errors && errors.phone && <span className="mb-2" style={error}>please input valid phone number</span>}
                                         </div>}
@@ -254,7 +254,7 @@ export default function RegisterForm() {
                                     <div className="form-row mt-2">
                                         <div className="col-md-6">
                                             <label htmlFor="first_name">First Name</label>
-                                            <input type="text" 
+                                            <input type="text"
                                             {...register('first_name', { required: true })}
                                              className="form-control" id="first_name"
                                                    name="first_name" placeholder="First Name" required="" />
@@ -274,7 +274,7 @@ export default function RegisterForm() {
                                             <label htmlFor="review">Password</label>
                                             <input type="password" name="password" className="form-control" id="password"
                                                    placeholder="Enter your password"
-                                                    {...register('password', { required: true, minLength: 8 })} 
+                                                    {...register('password', { required: true, minLength: 8 })}
                                                     />
                                             {errors &&  errors.password && errors.password.type === "required" && (
                                                 <span style={error} role="alert" className="mb-2">Password is required</span>
@@ -298,7 +298,7 @@ export default function RegisterForm() {
                                         <div className="col-md-12">
 
                                             <label >
-                                                <input  onClick={handleChange} type="checkbox"  defaultValue={is_used_promotion}  
+                                                <input  onClick={handleChange} type="checkbox"  defaultValue={is_used_promotion}
                                                 {...register('is_used_promotion')}
                                                  name="is_used_promotion"
                                                  />
