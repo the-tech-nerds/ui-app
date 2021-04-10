@@ -1,50 +1,97 @@
-import React, {Component} from 'react';
-import Slider from "react-slick"
-import {connect} from "react-redux";
+import React, { useEffect, useState} from 'react';
 
-// import Custom Components
-import Breadcrumb from "../../common/breadcrumb";
 import ProductStyleOne from "./common/product-style-one";
+import InfiniteScroll from 'react-infinite-scroller';
 import {getVisibleproducts} from "../../../services";
 import {addToCart, addToCompare, addToWishlist} from "../../../actions";
-import {Product4} from "../../../services/script";
+import { Skeleton } from 'components/skeleton-loader/skeletons';
 
-class ElementProductNoSlider extends Component {
+const ElementProductNoSlider = (props) => {
+        const {addToCart, symbol, addToWishlist, addToCompare, slug } = props;
 
 
-    render (){
-        const {products, addToCart, symbol, addToWishlist, addToCompare} = this.props;
+        const [products, setProducts] = useState([]);
+        const [loading, setLoading] = useState(false);
+        const [nextUrl, setNextUrl] = useState(`?limit=10`);
+
+        const fetchData = async () => {
+           if (nextUrl && !loading) {
+                setLoading(true);
+                fetch(`/category-products/${slug}${nextUrl}`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.code === 200) {
+                        setProducts([...products, ...res.data.results]);
+                        setNextUrl(res.data.links.next)
+                    }
+                    setLoading(false);
+                })
+           }
+        }
+
+        useEffect(() => {
+            setLoading(true);
+            fetchData();
+        }, []);
+
+        const items = products.map((product, index) =>
+        <ProductStyleOne 
+            product={product} 
+            symbol={symbol}
+            // onAddToCompareClicked={() => addToCompare(product)}
+            // onAddToWishlistClicked={() => addToWishlist(product)}
+            // onAddToCartClicked={addToCart}
+            key={index}
+        />
+    );
+
+        if (!products.length) {
+            return (
+                <section className="ratio_asos section-b-space">
+                <div className="container">
+                    <h4>No products available!</h4>
+                </div>
+            </section>
+            )
+        }
+
         return (
             <div>
-                <Breadcrumb parent={'Elements'} title={'product Slider'}/>
+                {/* <Breadcrumb parent={'Elements'} title={'product Slider'}/> */}
 
                 <section className="ratio_asos section-b-space">
                     <div className="container">
-                        <div className="row">
-                            <div className="col">
-                                <div className="no-slider row">
-                                { products.slice(2, 10).map((product, index) =>
-                                    <ProductStyleOne product={product} symbol={symbol}
-                                         onAddToCompareClicked={() => addToCompare(product)}
-                                         onAddToWishlistClicked={() => addToWishlist(product)}
-                                         onAddToCartClicked={addToCart} key={index}/>
-                                    )}
+                        <h4>Products</h4>
+                        <InfiniteScroll
+                            loadMore={fetchData}
+                            hasMore={!!nextUrl}
+                            loader={() => <Skeleton width={500}></Skeleton>}
+                        >
+                                <div className="row">
+                                    <div className="col">
+                                        <div className="no-slider row">
+                                            {items}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                        </InfiniteScroll>
+                        <Skeleton width={500}></Skeleton>
                     </div>
                 </section>
 
             </div>
         )
-    }
+    
 }
 
-const mapStateToProps = (state) => ({
-    products: getVisibleproducts(state.data, state.filters),
-    symbol: state.data.symbol,
-})
+// const mapStateToProps = (state) => ({
+//     products: getVisibleproducts(state.data, state.filters),
+//     symbol: state.data.symbol,
+// })
 
-export default connect(
-    mapStateToProps, {addToCart, addToWishlist, addToCompare}
-)(ElementProductNoSlider)
+export default 
+// connect(
+//     mapStateToProps, {addToCart, addToWishlist, addToCompare}
+// )(
+    ElementProductNoSlider
+    // )

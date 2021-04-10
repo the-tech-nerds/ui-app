@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
 import { SlideToggle } from 'react-slide-toggle';
 
 
 class BrandBlock extends Component {
-
-
     render (){
+        const { categories } = this.props;
         return (
             <div className="collection-filter-block">
                 <div className="collection-mobile-back">
@@ -21,11 +19,7 @@ class BrandBlock extends Component {
                             <div className="collection-collapse-block-content" ref={setCollapsibleElement}>
                                 <div className="collection-brand-filter">
                                     <ul className="category-list">
-                                        <li><a href="#">clothing</a></li>
-                                        <li><a href="#">bags</a></li>
-                                        <li><a href="#">footwear</a></li>
-                                        <li><a href="#">watches</a></li>
-                                        <li><a href="#">accessories</a></li>
+                                        {categories.map(category => <li><a href="#">clothing</a></li>)}
                                     </ul>
                                 </div>
                             </div>
@@ -36,12 +30,3 @@ class BrandBlock extends Component {
         )
     }
 }
-
-const mapStateToProps = state => ({
-    products: state.products
-})
-
-export default connect(
-    mapStateToProps,
-    null
-)(BrandBlock)

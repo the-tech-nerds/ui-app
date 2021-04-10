@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 
 import { CategoryService } from '../services/category.service';
 
@@ -10,5 +10,22 @@ export class CategoryController {
     @Get('/category/all')
     async index() {
         return this.categoryService.getAll();
+    }
+
+    @Get('/:slug')
+    @Render('category/[slug]')
+    async getProductsByCategorySlug(
+        @Param('slug') slug: string
+    ) {
+        return {
+            slug,
+        };
+    }
+
+    @Get('/category-products/:slug')
+    async getProductItemsByCategorySlug(
+        @Param('slug') slug: string
+    ) {
+        return this.categoryService.getProductsByCategorySlug(slug);
     }
 }

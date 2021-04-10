@@ -93,7 +93,7 @@ class HeaderThree extends Component {
 
         return (
             <div>
-                <header id="sticky" className="sticky header-2 header-6">
+                <header id="sticky" className="fixed-top w-100 header-2 header-6" style={{ zIndex: 2000 }}>
                     {this.state.isLoading ? <div>Loading...</div> : null}
                     <div className="mobile-fix-option"></div>
                     {/*Top Header Component*/}

@@ -11,4 +11,11 @@ export class CategoryService {
             method: 'GET'
         })
     }
+
+    async getProductsByCategorySlug(slug: string) {
+        return this.gatewayService.execute('product', {
+            path: `/api/v1/category/${slug}/products?limit=20`,
+            method: 'GET'
+        })
+    }
 }

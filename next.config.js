@@ -6,4 +6,7 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['khan-fresh-corner.s3.amazonaws.com'],
+  },
 }

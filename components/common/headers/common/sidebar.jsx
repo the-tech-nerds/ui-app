@@ -2,63 +2,27 @@ import React, { Component } from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
 class SideBar extends Component {
     state = {
-        menu: [
-            {
-                name: 'Rice',
-                id: 1,
-                slug: 'rice',
-                children: [
-                    {
-                        name: 'Thick Rice',
-                        id: 2,
-                        slug: 'thick-rice'
-                    },
-                    {
-                        name: 'Fine Rice',
-                        id: 3,
-                        slug: 'fine-rice'
-                    },
-                ],
-                icon: 'cutlery'
-            },
-            {
-                name: 'Vegetables',
-                slug: 'vegetables',
-                id: 4,
-                children: [
-                    {
-                        name: 'Fresh Fruits',
-                        slug: 'fresh-fruits',
-                        id: 5,
-                    },
-                    {
-                        name: 'Raw vegetables',
-                        slug: 'raw-vegetables',
-                        id: 6,
-                    },
-                ],
-                icon: 'lemon-o'
-            }
-        ],
+        menu: []
     }
 
     componentDidMount() {
-        // const cachedMenu = localStorage.getItem('menu');
-        // if (cachedMenu) {
-        //     this.setState({
-        //         menu: JSON.parse(cachedMenu),
-        //     })
-        // } else {
-        //     fetch("/category/all")
-        //         .then(res => res.json())
-        //         .then(res => {
-        //             const { data: menu } = res;
-        //             localStorage.setItem("menu", JSON.stringify(menu));
-        //             this.setState({
-        //                 menu,
-        //             })
-        //         }).catch(e => { throw e; });
-        // }
+        const cachedMenu = localStorage.getItem('menu');
+        if (cachedMenu) {
+            this.setState({
+                menu: JSON.parse(cachedMenu),
+            })
+        }
+        fetch("/category/all")
+        .then(res => res.json())
+        .then(res => {
+            console
+            const { data: menu } = res;
+            localStorage.setItem("menu", JSON.stringify(menu));
+            this.setState({
+                menu,
+            })
+        }).catch(e => { throw e; });
+      
     }
 
     closeNav() {

@@ -15,8 +15,6 @@ export class UserService {
             path: '/api/v1/user/profile/info',
             method: 'GET'
         });
-        console.log("This is user data");
-        console.log(user);
         if(user?.data){
             user.data.birthday = user.data.birthday ? moment(user.data.birthday).format('YYYY-MM-DD') : 'N/A';
             user.data.id = null;

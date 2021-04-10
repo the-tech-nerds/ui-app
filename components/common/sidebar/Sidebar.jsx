@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 const MENU_STATUS = {
     EXPANDED: true,
@@ -13,15 +13,15 @@ const SideBarItem = ({
     status = MENU_STATUS.COLLAPSED,
     icon = null,
     slug,
-}) => {
-    const subItemsWithOutChildren = <Link key={index} href={`/category/${slug}`}>
+}) => { 
+    const subItemsWithOutChildren = <Link key={index} href={`/${slug}`}>
         <li key={index} className="p-2">
             {icon && <i className={`fa fa-${icon} p-2`} />}{name}
         </li>
     </Link>;
     const subItemsWithChildren = children ? <div key={index} className="d-flex flex-column">
         <li className="d-flex flex-row justify-content-between p-2" onClick={() => onToggle(index)}>
-            <Link href={`/category/${slug}`}><span>{icon && <i className={`fa fa-${icon} p-2`}></i>}{name}</span></Link>
+            <Link  href={`/${slug}`}><span>{icon && <i className={`fa fa-${icon} p-2`}></i>}{name}</span></Link>
             {children.length > 0 && <span onClick={() => onToggle(index)}>
                 {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" />}
                 {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" />}
@@ -36,6 +36,7 @@ const SideBarItem = ({
                     onToggle={() => onToggle(child.index)}
                     status={child.status}
                     icon={child.icon}
+                    slug={child.slug}
                 />)
             }</ul>)
         }
@@ -63,9 +64,9 @@ export const SideMenu = ({
             };
         }
         return items.map(item => createIndividualMenu(item))
-    }, [])
-    const [menu, setMenu] = useState(createMenu(items));
+    }, [items])
 
+    const [menu, setMenu] = useState(createMenu(items));
     const toggleMenu = (index) => {
         const updateItems = (items, index) => items.map(item => ({
             ...item,
@@ -75,6 +76,10 @@ export const SideMenu = ({
         const itemsToChange = updateItems(menu, index);
         setMenu(itemsToChange);
     }
+
+    useEffect(() => {
+        setMenu(createMenu(items));
+    }, [items])
 
     return (
         <div className="d-flex flex-column sidemenu">
