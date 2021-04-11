@@ -95,14 +95,14 @@ export default function UpdateEmail({ cancel }) {
                                     <div className="col-md-6">
                                         <label htmlFor="email">email</label>
                                         <input type="text" name="email" className="form-control" id="email"
-                                            ref={register({
+                                            {...register('email',{
                                                 required: true,
                                                 pattern: {
                                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                                     message: "invalid email address",
                                                 },
                                             })} placeholder="enter email. e.g. example@gmail.com" required="" />
-                                        {errors.email && <span style={error}>valid email address is required</span>}
+                                        {errors && errors.email && <span style={error}>valid email address is required</span>}
                                     </div>
                                 </div>
                                 <div className="form-row mt-2">

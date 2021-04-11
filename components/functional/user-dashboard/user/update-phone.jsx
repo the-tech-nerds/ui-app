@@ -97,12 +97,12 @@ export  default function UpdatePhone({cancel, verifyPhone}) {
                                 <div className="form-row">
                                     <div className="col-md-6">
                                         <input type="text" name="phone"  className="form-control" id="phone"
-                                               ref={register({ required: true, minLength: 11,
+                                               {...register('phone',{ required: true, minLength: 11,
                                                    pattern:{
                                                        value: /^[0-9]*$/,
                                                        message: "invalid phone number",
                                                    },})}   placeholder="enter your phone number without country code, e.g. 0167******3" required="" />
-                                        {errors.phone && <span style={error}>please input valid phone number</span>}
+                                        {errors && errors.phone && <span style={error}>please input valid phone number</span>}
                                     </div>
                                 </div>
                                 <div className="form-row">

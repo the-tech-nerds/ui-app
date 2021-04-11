@@ -70,14 +70,14 @@ export  default function UpdateProfile({userData, cancel}) {
                             <div className="form-row">
                                 <div className="col-md-6">
                                     <label htmlFor="FirstName">First Name</label>
-                                    <input type="text" ref={register({ required: true })} className="form-control" id="first_name"
+                                    <input type="text" {...register('first_name',{ required: true })} className="form-control" id="first_name"
                                            name="first_name"  placeholder="Enter your first name. Example: Asif"/>
-                                    {errors.first_name && <span style={error}>Fist Name is required</span>}
+                                    {errors && errors.first_name && <span style={error}>Fist Name is required</span>}
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="LastName">Last Name</label>
                                     <input type="text"
-                                           name="last_name" className="form-control" id="last_name" ref={register}
+                                           name="last_name" className="form-control" id="last_name" {...register('last_name')}
                                            placeholder="Enter your last name. Example: Ahmed"/>
                                 </div>
                             </div>
@@ -85,14 +85,14 @@ export  default function UpdateProfile({userData, cancel}) {
                                 <div className="col-md-6">
                                     <label htmlFor="Gender">Gender</label>
                                     <select name="gender_type" value ={gender_type}  className="form-control select-dropdown"  onChange={handleSelect}
-                                            ref={register ({required: true})}>
+                                            {...register ('gender_type',{required: true})}>
                                         {genders}
                                     </select>
-                                    {errors.gender_type && <span style={error}>Gender is required</span>}
+                                    {errors && errors.gender_type && <span style={error}>Gender is required</span>}
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="BirthDay">Birth Day</label>
-                                    <input  className="form-control select-dropdown" ref={register} type="date" id="birthday" name="birthday"/>
+                                    <input  className="form-control select-dropdown" {...register('birthday')} type="date" id="birthday" name="birthday"/>
                                 </div>
                                 <Button type="submit" loading={isLoading} disabled={isLoading}>Update Profile</Button>
                                 <button type="button" onClick={cancel} className="btn btn-solid ml-4">Cancel</button>
