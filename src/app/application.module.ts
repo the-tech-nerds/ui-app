@@ -12,11 +12,12 @@ import { UserModule } from "./user/user.module";
 import { HomeModule } from "./Home/home.module";
 import { CategoryModule } from './category/category.module';
 import { resolve } from 'path';
+import {ProductModule} from "./product/product.module";
 
 @Module({
   imports: [
     RenderModule.forRootAsync(
-      Next({  
+      Next({
         dev: process.env.NODE_ENV !== 'production',
         // conf: { useFilesystemPublicRoutes: false },
         dir: resolve  (__dirname, '../../')
@@ -32,6 +33,7 @@ import { resolve } from 'path';
       UserModule,
       HomeModule,
       CategoryModule,
+      ProductModule
   ],
   controllers: [AppController],
   providers: [AppService],

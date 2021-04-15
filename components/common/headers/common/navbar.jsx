@@ -109,7 +109,7 @@ class NavBar extends Component {
                             {/*</li>*/}
                             {/*<li >*/}
                             {/*    <Link to="#" className="nav-link" onClick={(e) => this.handleSubmenu(e)}>*/}
-                            {/*        {translate('products')}*/}
+                            {/*        {translate('product')}*/}
                             {/*        <span className="sub-arrow"></span>*/}
                             {/*    </Link>*/}
                             {/*    <ul className="nav-submenu">*/}

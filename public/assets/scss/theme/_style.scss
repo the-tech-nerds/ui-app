@@ -34,7 +34,7 @@
    17.5. metro demo
    17.6. gym demo
    17.7. extra layout css */
-/* 18. Flying products CSS */
+/* 18. Flying product CSS */
 /* 19. Footer CSS */
 /* 20. Loader CSS*/
 /* 21. Tap to top CSS */
@@ -8067,7 +8067,7 @@ footer{
   }
 }
 
-// shopping products //
+// shopping product //
 .qty-box {
   .input-group {
     justify-content: center;
@@ -14260,7 +14260,7 @@ body {
   0% {
    transform: translate3d(-90px,0,0);
   }
-  100% { 
+  100% {
     transform: translate3d(85px,0,0);
   }
 }
@@ -14288,7 +14288,7 @@ body {
   }
 
   ul {
-    padding-inline-start: 40px;  
+    padding-inline-start: 40px;
     cursor: pointer;
   }
 
@@ -14296,7 +14296,7 @@ body {
     color: black;
     text-decoration: none;
 
-    
+
     &:focus, &:visited, &:active {
       color: $theme-deafult;
     }

@@ -9,7 +9,7 @@ class BlogPage extends Component {
     }
 
     componentDidMount() {
-        // axios.get('/products', {
+        // axios.get('/product', {
         //
         // })
     }
@@ -19,7 +19,7 @@ class BlogPage extends Component {
         return (
             <div>
                 <Breadcrumb title={'Blog Page'}/>
-                
+
                 {/*Blog Details section*/}
                 <section className="section-b-space  blog-page">
                     <div className="container">

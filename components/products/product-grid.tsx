@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 
 import ProductGridSingle from "./common/product/product-grid-single";
+// @ts-ignore
 import InfiniteScroll from 'react-infinite-scroller';
 // import {getVisibleproducts} from "../../../services";
 // import {addToCart, addToCompare, addToWishlist} from "../../../actions";
@@ -39,7 +40,7 @@ const ProductGrid = (props: ProductGridProps) => {
     }, []);
 
     const items = products.map((product, index) =>
-        <ProductGridSingle 
+        <ProductGridSingle
             key={product.id}
             product={product}
         />
