@@ -17,6 +17,7 @@ export type Product = {
   id: number;
   name: string;
   symbol: string;
+  slug: string;
   productVariances: ProductVariant[];
 };
 

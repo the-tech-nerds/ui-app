@@ -12,32 +12,34 @@ import { UserModule } from "./user/user.module";
 import { HomeModule } from "./Home/home.module";
 import { CategoryModule } from './category/category.module';
 import { resolve } from 'path';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     RenderModule.forRootAsync(
-      Next({  
+      Next({
         dev: process.env.NODE_ENV !== 'production',
         // conf: { useFilesystemPublicRoutes: false },
-        dir: resolve  (__dirname, '../../')
+        dir: resolve(__dirname, '../../')
       }),
       { passthrough404: true, }
     ),
     GatewayModule,
-      ConfigModule.forRoot({
-        isGlobal: true,
-        load: [configuration, commonConfig],
-      }),
-      AuthenticationModule,
-      UserModule,
-      HomeModule,
-      CategoryModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration, commonConfig],
+    }),
+    AuthenticationModule,
+    UserModule,
+    HomeModule,
+    CategoryModule,
+    ProductModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule
-implements NestModule {
+  implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LocalsMiddleware)
       .forRoutes({
