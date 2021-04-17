@@ -11,7 +11,7 @@ RUN npm install --production
 RUN rm -f .npmrc
 
 COPY .next /app/.next
-COPY assets /app/assets
+COPY public /app/public
 
 CMD [ "npm start" ]
 ENTRYPOINT [ "sh", "-c" ]
