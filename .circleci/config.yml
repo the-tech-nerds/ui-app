@@ -84,7 +84,7 @@ jobs:
             if [[ ! "${status}" -eq 0 ]]; then
                 aws ecr create-repository --repository-name ${CIRCLE_PROJECT_REPONAME}
             fi
-            if [ "develop" == "$CIRCLE_BRANCH" ]
+            if [ "master" == "$CIRCLE_BRANCH" ]
             then
               IMAGES_TO_DELETE=$( aws ecr list-images --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --filter "tagStatus=UNTAGGED" --query 'imageIds[*]' --output json )
               aws ecr batch-delete-image --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --image-ids "$IMAGES_TO_DELETE" || true
