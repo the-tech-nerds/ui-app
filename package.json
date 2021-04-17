@@ -7,9 +7,9 @@
     "dev": "nodemon src/main.ts",
     "build:clean": "rimraf .next",
     "build:ui": "npx next build",
-    "build:server": "npx tsc --project tsconfig.server.json && npx babel .next/production-server -d .next/production-server --extensions \".js\"",
+    "build:server": "npx tsc --project tsconfig.server.json && npx babel .next -d .next --extensions \".js\"",
     "build": "npm run build:clean && npm run build:ui && npm  run build:server",
-    "start": "cross-env NODE_ENV=production node .next/production-server/src/main.js"
+    "start": "cross-env NODE_ENV=production node .next/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.5",
