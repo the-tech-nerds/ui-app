@@ -86,12 +86,12 @@ jobs:
             fi
             if [ "develop" == "$CIRCLE_BRANCH" ]
             then
+              IMAGES_TO_DELETE=$( aws ecr list-images --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --filter "tagStatus=UNTAGGED" --query 'imageIds[*]' --output json )
+              aws ecr batch-delete-image --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --image-ids "$IMAGES_TO_DELETE" || true
               docker build -t $DEV_IMAGE_NAME .
               docker tag $DEV_IMAGE_NAME $DEV_IMAGE_NAME_LATEST
               docker push $DEV_IMAGE_NAME_LATEST
               echo "Pushed ${DEV_IMAGE_NAME_LATEST}"
-              IMAGES_TO_DELETE=$( aws ecr list-images --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --filter "tagStatus=UNTAGGED" --query 'imageIds[*]' --output json )
-              aws ecr batch-delete-image --region $AWS_DEFAULT_REGION --repository-name $CIRCLE_PROJECT_REPONAME --image-ids "$IMAGES_TO_DELETE" || true
             fi
 workflows:
   version: 2
