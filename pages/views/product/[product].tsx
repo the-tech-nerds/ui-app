@@ -1,10 +1,8 @@
 import Root from 'components/layouts/Root';
-import React  from 'react';
+import React from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import LeftSideBar from "components/products/left-sidebar";
-import {GetServerSideProps} from "next";
-import CategoryProducts from "../category/[slug]";
 type ProductSlug = {
     product: any;
 };

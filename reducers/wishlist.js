@@ -1,28 +1,40 @@
 import {
-    ADD_TO_WISHLIST,REMOVE_FROM_WISHLIST } from "../constants/ActionTypes";
+    ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST
+} from "../constants/ActionTypes";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { errorHandle } from "share";
+import FetchData from 'api/fetchdata'
+const addWishlist = (item) => {
+    const model = {
+        product_variance_Id: item.id,
+        product_id: item.product_id
+    }
+    axios.post(`/wishlist/create`, model).then(res => {
+        toast.success('Add to wishlist');
+        return res;
 
+    }).catch(error => {
+        const err = errorHandle.serverError(error.response.data.message);
+        toast.error('Already have in wishlist');
+    })
+}
 
 export default function wishlistReducer(state = {
     list: []
 }, action) {
     switch (action.type) {
         case ADD_TO_WISHLIST:
-            const productId = action.product.id
-            if (state.list.findIndex(product => product.id === productId) !== -1) {
-                const list = state.list.reduce((cartAcc, product) => {
-                    if (product.id === productId) {
-                        cartAcc.push({ ...product }) 
-                    } else {
-                        cartAcc.push(product)
+            const variance = action.payload;
+            addWishlist(variance);
+            FetchData({
+                url: '/wishlist/list', callback: (response, isSucess) => {
+                    if (isSucess) {
+                        return { ...state, list: response.data }
                     }
-
-                    return cartAcc
-                }, [])
-
-                return { ...state, list }
-            }
-
-            return { ...state, list: [...state.list, action.product] }
+                }
+            })
+            return state;
 
         case REMOVE_FROM_WISHLIST:
             return {

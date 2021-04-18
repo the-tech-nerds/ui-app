@@ -13,6 +13,7 @@ import { HomeModule } from "./Home/home.module";
 import { CategoryModule } from './category/category.module';
 import { resolve } from 'path';
 import { ProductModule } from './product/product.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { ProductModule } from './product/product.module';
     UserModule,
     HomeModule,
     CategoryModule,
-    ProductModule
+    ProductModule,
+    WishlistModule
   ],
   controllers: [AppController],
   providers: [AppService],
