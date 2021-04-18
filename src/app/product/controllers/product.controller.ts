@@ -17,7 +17,7 @@ export class ProductController {
         };
     }
 
-    @Get('/product/all')
+    @Get('/product/search/:q')
     async getProductItemsBySearchParam(
         @Param('q') query: string
     ) {

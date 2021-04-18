@@ -8,7 +8,7 @@ export class ProductService {
 
     async getProductsBySearchParam(query: string) {
         return this.gatewayService.execute('product', {
-            path: `/api/v1/product/search/?search=${query}&limit=20`,
+            path: `/api/v1/product/search/?search=${query}&limit=10`,
             method: 'GET'
         })
     }

@@ -1,5 +1,5 @@
 import Root from 'components/layouts/Root';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
@@ -9,27 +9,27 @@ type CategoryListProps = {
     slug: string;
 };
 
-const CategoryList = ({ slug }: CategoryListProps) => {
+const CategoryList = ({slug}: CategoryListProps) => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        const menu  = JSON.parse(localStorage.getItem('menu'));
+        const menu = JSON.parse(localStorage.getItem('menu'));
         for (let category of menu) {
             if (category.slug === slug) {
                 if (category.children && category.children.length > 0) {
                     setCategories(category.children);
-                    break;    
+                    break;
                 }
             }
         }
     }, []);
 
     if (!categories.length) {
-        return <span />
+        return <span/>
     }
 
     return (
-        <div style={{ marginTop: '4%' }}>
-            <ComponentCategoryList categories={categories} />
+        <div style={{marginTop: '4%'}}>
+            <ComponentCategoryList categories={categories}/>
         </div>
     )
 }
@@ -37,28 +37,30 @@ const CategoryList = ({ slug }: CategoryListProps) => {
 
 type ProductListProps = {
     slug: string;
+    fetchUrl: string
 }
 
-const ProductList = ({ slug }: ProductListProps) => {
-    return <ProductGrid slug={slug}/>
+const ProductList = ({slug, fetchUrl}: ProductListProps) => {
+    return <ProductGrid slug={slug} fetchUrl={'/category-product/' + slug}/>
 };
 
 type CategroyProductProps = {
     slug: string;
+    fetchUrl: string
 }
 
-const CategoryProducts = ({ slug }: CategroyProductProps) => {
+const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
     return (
-       <div>
+        <div>
             <Head>
                 <title>Khan Fresh Corner | Category.</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
             <Root>
-                <CategoryList slug={slug} />
-                <ProductList slug={slug} /> 
+                <CategoryList slug={slug}/>
+                <ProductList slug={slug} fetchUrl={fetchUrl}/>
             </Root>
-       </div>
+        </div>
     )
 }
 
@@ -66,6 +68,6 @@ CategoryProducts.getInitialProps = (ctx: any) => {
     return {
         slug: ctx.query.slug,
     }
-}            
+}
 
 export default CategoryProducts;

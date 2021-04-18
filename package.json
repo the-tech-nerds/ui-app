@@ -12,6 +12,8 @@
     "start": "cross-env NODE_ENV=production node .next/production-server/src/main.js"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@nestjs/common": "^7.6.5",
     "@nestjs/config": "^0.6.3",
     "@nestjs/core": "^7.6.5",
