@@ -35,8 +35,8 @@ const ElementProductNoSlider = (props) => {
         }, []);
 
         const items = products.map((product, index) =>
-        <ProductStyleOne 
-            product={product} 
+        <ProductStyleOne
+            product={product}
             symbol={symbol}
             // onAddToCompareClicked={() => addToCompare(product)}
             // onAddToWishlistClicked={() => addToWishlist(product)}
@@ -81,15 +81,15 @@ const ElementProductNoSlider = (props) => {
 
             </div>
         )
-    
+
 }
 
 // const mapStateToProps = (state) => ({
-//     products: getVisibleproducts(state.data, state.filters),
+//     product: getVisibleproducts(state.data, state.filters),
 //     symbol: state.data.symbol,
 // })
 
-export default 
+export default
 // connect(
 //     mapStateToProps, {addToCart, addToWishlist, addToCompare}
 // )(

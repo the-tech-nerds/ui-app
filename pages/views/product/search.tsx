@@ -4,6 +4,7 @@ import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
 import ProductGrid from '../../../components/products/product-grid';
+import {useRouter} from 'next/router'
 
 type CategoryListProps = {
     slug: string;
@@ -37,28 +38,29 @@ const CategoryList = ({slug}: CategoryListProps) => {
 
 type ProductListProps = {
     slug: string;
-    fetchUrl: string
+    searchKey: string
 }
 
-const ProductList = ({slug, fetchUrl}: ProductListProps) => {
-    return <ProductGrid slug={slug} fetchUrl={'/category-product/' + slug}/>
+const ProductList = ({slug, searchKey}: ProductListProps) => {
+    return <ProductGrid slug={slug} fetchUrl={'/product/search/' + searchKey}/>
 };
 
 type CategroyProductProps = {
     slug: string;
-    fetchUrl: string
+    searchKey: string,
 }
 
-const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
+const CategoryProducts = ({slug, searchKey}: CategroyProductProps) => {
+    const router = useRouter();
+    searchKey = router.asPath.replace('product/search?q=', '').replace('/', '');
     return (
         <div>
             <Head>
-                <title>Khan Fresh Corner | Category.</title>
+                <title>Khan Fresh Corner | Search Result.</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
             <Root>
-                <CategoryList slug={slug}/>
-                <ProductList slug={slug} fetchUrl={fetchUrl}/>
+                <ProductList slug={slug} searchKey={searchKey}/>
             </Root>
         </div>
     )
@@ -66,7 +68,7 @@ const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
 
 CategoryProducts.getInitialProps = (ctx: any) => {
     return {
-        slug: ctx.query.slug,
+        slug: ctx.query.query,
     }
 }
 

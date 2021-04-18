@@ -22,7 +22,7 @@ export class CategoryController {
         };
     }
 
-    @Get('/category-products/:slug')
+    @Get('/category-product/:slug')
     async getProductItemsByCategorySlug(
         @Param('slug') slug: string
     ) {

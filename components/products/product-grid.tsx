@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import ProductGridSingle from "./common/product/product-grid-single";
+// @ts-ignore
 import InfiniteScroll from 'react-infinite-scroller';
 // import {getVisibleproducts} from "../../../services";
 // import {addToCart, addToCompare, addToWishlist} from "../../../actions";
-import { Skeleton } from '../../components/skeleton-loader/skeletons';
-import { Product } from 'types';
+import {Skeleton} from '../../components/skeleton-loader/skeletons';
+import {Product} from 'types';
 
 type ProductGridProps = {
     slug: string;
+    fetchUrl: string
 }
 
 
 const ProductGrid = (props: ProductGridProps) => {
-    const { slug } = props;
+    const {slug} = props;
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const [nextUrl, setNextUrl] = useState(`?limit=10`);
 
     const fetchData = async () => {
-        debugger
         if (nextUrl && !loading) {
             setLoading(true);
-            fetch(`/category-products/${slug}${nextUrl}`)
+            fetch(`${props.fetchUrl}${nextUrl}`)
                 .then(res => res.json())
                 .then(res => {
                     if (res.code === 200) {

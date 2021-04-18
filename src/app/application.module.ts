@@ -12,7 +12,7 @@ import { UserModule } from "./user/user.module";
 import { HomeModule } from "./Home/home.module";
 import { CategoryModule } from './category/category.module';
 import { resolve } from 'path';
-import { ProductModule } from './product/product.module';
+import {ProductModule} from "./product/product.module";
 
 @Module({
   imports: [
