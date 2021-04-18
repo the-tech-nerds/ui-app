@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { SlideToggle } from 'react-slide-toggle';
+import SlideToggle  from 'react-slide-toggle';
 
 
 class BrandBlock extends Component {

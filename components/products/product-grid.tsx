@@ -29,7 +29,6 @@ const ProductGrid = (props: ProductGridProps) => {
                     if (res.code === 200) {
                         setProducts([...products, ...res.data.results]);
                         setNextUrl(res.data.links.next)
-                        console.log(res.data.links.next);
                     }
                     setLoading(false);
                 })

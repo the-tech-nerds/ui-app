@@ -1,37 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Slider from 'react-slick';
-import '../common/index.scss';
-import {connect} from "react-redux";
-
 // import custom Components
-import RelatedProduct from "../common/related-product"
+// import RelatedProduct from "../common/related-product"
 import Breadcrumb from "../common/breadcrumb";
 import DetailsWithPrice from "./common/product/details-price";
 import DetailsTopTabs from "./common/details-top-tabs";
-import {addToCart, addToCartUnsafe, addToWishlist} from '../../actions'
 import ImageZoom from './common/product/image-zoom'
 import SmallImages from './common/product/small-image'
 
-
-
-
 class LeftImage extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             nav1: null,
             nav2: null,
-            vertical:true
+            vertical: true,
         };
     }
 
     componentWillMount() {
-        if (window.innerWidth > 576) {
-            this.setState({vertical:true})
-        }else{
-            this.setState({vertical:false})
-        }
+        // if (window.innerWidth > 576) {
+        //     this.setState({ vertical: true })
+        // } else {
+        //     this.setState({ vertical: false })
+        // }
     }
 
     componentDidMount() {
@@ -42,15 +35,15 @@ class LeftImage extends Component {
 
     }
 
-    render(){
-        const {symbol, item, addToCart, addToCartUnsafe, addToWishlist} = this.props
-        var products = {
+    render() {
+        const { symbol, product } = this.props
+        const products = {
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: true,
             fade: true
         };
-        var productsnav = {
+        const productsnav = {
             vertical: this.state.vertical,
             verticalSwiping: this.state.vertical,
             slidesToShow: 3,
@@ -75,27 +68,27 @@ class LeftImage extends Component {
         return (
             <div>
 
-                <Breadcrumb  title={' Product / '+item.name} />
+                <Breadcrumb title={' Product / ' + product.name} />
 
                 {/*Section Start*/}
-                {(item)?
+                {(product) ?
                     <section >
                         <div className="collection-wrapper">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-lg-1 col-sm-2 col-xs-12 p-0">
-                                        <SmallImages item={item} settings={productsnav} navOne={this.state.nav1} />
+                                        {/*<SmallImages item={product} settings={productsnav} navOne={this.state.nav1} />*/}
                                     </div>
                                     <div className="col-lg-5 col-sm-10 col-xs-12  order-up">
                                         <Slider {...products} asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)} className="product-right-slick">
-                                            {item.variants.map((vari, index) =>
+                                            {product.productInfo.images.map((p, index) =>
                                                 <div key={index}>
-                                                    <ImageZoom image={vari.images} className="img-fluid image_zoom_cls-0" />
+                                                    <ImageZoom image={p} className="img-fluid image_zoom_cls-0" />
                                                 </div>
                                             )}
                                         </Slider>
                                     </div>
-                                    <DetailsWithPrice symbol={symbol} item={item} navOne={this.state.nav1} addToCartClicked={addToCart} BuynowClicked={addToCartUnsafe} addToWishlistClicked={addToWishlist} />
+                                    <DetailsWithPrice symbol={symbol} item={product} navOne={this.state.nav1}/>
                                 </div>
                             </div>
                         </div>
@@ -106,25 +99,17 @@ class LeftImage extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-12 col-lg-12">
-                                <DetailsTopTabs item={item} />
+                                <DetailsTopTabs item={product} />
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <RelatedProduct />
+                {/* <RelatedProduct /> */}
 
             </div>
         )
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    let productId = ownProps.match.params.id;
-    return {
-        item: state.data.products.find(el => el.id == productId),
-        symbol: state.data.symbol
-    }
-}
-
-export default connect(mapStateToProps, {addToCart, addToCartUnsafe, addToWishlist}) (LeftImage);
+export default LeftImage;

@@ -20,26 +20,26 @@ import {ProductModule} from "./product/product.module";
       Next({
         dev: process.env.NODE_ENV !== 'production',
         // conf: { useFilesystemPublicRoutes: false },
-        dir: resolve  (__dirname, '../../')
+        dir: resolve(__dirname, '../../')
       }),
       { passthrough404: true, }
     ),
     GatewayModule,
-      ConfigModule.forRoot({
-        isGlobal: true,
-        load: [configuration, commonConfig],
-      }),
-      AuthenticationModule,
-      UserModule,
-      HomeModule,
-      CategoryModule,
-      ProductModule
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration, commonConfig],
+    }),
+    AuthenticationModule,
+    UserModule,
+    HomeModule,
+    CategoryModule,
+    ProductModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule
-implements NestModule {
+  implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LocalsMiddleware)
       .forRoutes({

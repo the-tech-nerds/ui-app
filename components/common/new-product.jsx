@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Slider from 'react-slick';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
 
-import {getBestSeller} from "../../services";
+import { getBestSeller } from "../../services";
+import Link from 'next/link';
 
 
 class NewProduct extends Component {
-    render (){
-        const {items, symbol} = this.props;
+    render() {
+        const { items, symbol } = this.props;
 
         var arrays = [];
         while (items.length > 0) {
@@ -33,7 +33,7 @@ class NewProduct extends Component {
                                             <i className="fa fa-star"></i>
                                         </div>
                                         <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}><h6>{product.name}</h6></Link>
-                                        <h4>{symbol}{(product.price*product.discount/100)}
+                                        <h4>{symbol}{(product.price * product.discount / 100)}
                                             <del><span className="money">{symbol}{product.price}</span></del></h4>
                                     </div>
                                 </div>

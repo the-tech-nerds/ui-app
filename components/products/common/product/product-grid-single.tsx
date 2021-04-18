@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from '../../../../components/image/image';
 import { Product } from 'types';
@@ -19,20 +19,20 @@ const ProductGridSingle = ({
 }: ProductGridSingleProps) => {
     const [selectedVariant, setSelectedVariant] = useState(0);
 
-        return (
+    return (
 
-            <div className="card m-4 p-2 d-flex flex-column justify-content-center text-center">
-                <div className="img-wrapper">
-                    {/* <div className="lable-block">
+        <div className="card m-4 p-2 d-flex flex-column justify-content-center text-center">
+            <div className="img-wrapper">
+                {/* <div className="lable-block">
                         {(product.new == true)? <span className="lable3">new</span> : ''}
                         {(product.sale == true)? <span className="lable4">on sale</span> : ''}
                     </div> */}
-                    <div className="front">
-                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} >
-                            <Image src={product.productVariances[selectedVariant].images[0].url} height={150} width={200} alt={product.name} />
-                        </Link>
-                    </div>
-                    {/* <div className="cart-info cart-wrap">
+                <div className="front">
+                    <Link href={`/product/${product.id}`} >
+                        <Image src={product.productVariances[selectedVariant].images[0].url} height={150} width={200} alt={product.name} />
+                    </Link>
+                </div>
+                {/* <div className="cart-info cart-wrap">
                         <button title="Add to cart" onClick={() => onAddToCartClicked(product, 1)}>
                             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                         </button>
@@ -47,9 +47,9 @@ const ProductGridSingle = ({
                         <Link href={`${process.env.PUBLIC_URL}/compare`} title="Compare" onClick={onAddToCompareClicked}>
                             <i className="fa fa-refresh" aria-hidden="true"></i></Link>
                     </div> */}
-                    {product.productVariances?
+                {product.productVariances ?
                     <ul className="product-thumb-list">
-                        <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}> 
+                        <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}>
                             {product.productVariances.map((variant, index) => (
                                 <option value={index}>{variant.unit_value} {variant.unit.name}</option>
                             ))}
@@ -61,28 +61,28 @@ const ProductGridSingle = ({
                                 </a>
                             </li>)
                         } */}
-                    </ul>:''}
-                </div>
-                <div className="product-detail">
-                    <div>
-                        {/* <div className="rating">
+                    </ul> : ''}
+            </div>
+            <div className="product-detail">
+                <div>
+                    {/* <div className="rating">
                             {RatingStars}
                         </div> */}
-                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`}>
-                            <h6>{product.name}</h6>
-                        </Link>
-                        <h4>{product.symbol || <span className="font-weight-bold">৳ </span>}{product.productVariances[selectedVariant].price}</h4>
-                        {/* {product.productVariances?
+                    <Link href={`/product/${product.slug}`}>
+                        <h6>{product.name}</h6>
+                    </Link>
+                    <h4>{product.symbol || <span className="font-weight-bold">৳ </span>}{product.productVariances[selectedVariant].price}</h4>
+                    {/* {product.productVariances?
                         <ul className="color-variant">
                             {product.variants.map((vari, i) => {
                                 return (
                                     <li className={vari.color} key={i} title={vari.color} onClick={() => this.onClickHandle(vari.images)}></li>)
                             })}
                         </ul>:''} */}
-                    </div>
                 </div>
-                <button className="btn btn-success btn-lg w-full">Add to Cart</button>
             </div>
+            <button className="btn btn-success btn-lg w-full">Add to Cart</button>
+        </div>
     )
 };
 
