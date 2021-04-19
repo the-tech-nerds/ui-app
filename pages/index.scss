@@ -6,3 +6,15 @@
 a:hover {
   cursor:pointer !important;
 }
+ .menu-item:hover{
+  background-color: #beb9b9;
+   font-weight: bold;
+}
+.vl {
+  border-left: 1px dotted green;
+  margin-left: 25px;
+}
+.item-selected{
+  color: #aa4d00;
+  font-weight: bold;
+}

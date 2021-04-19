@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
+import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 class SideBar extends Component {
     state = {
         menu: []
@@ -7,6 +8,15 @@ class SideBar extends Component {
 
     componentDidMount() {
         const cachedMenu = localStorage.getItem('menu');
+        const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
+        const closemyslide = document.getElementById("mySidenav");
+        if(sideBarStatus === 'close'){
+                closemyslide.classList.remove('open-side');
+            document.getElementById('app-body').classList.remove('left-sidebar_space')
+        } else{
+            closemyslide.classList.add('open-side');
+            document.getElementById('app-body').classList.add('left-sidebar_space')
+        }
         if (cachedMenu) {
             this.setState({
                 menu: JSON.parse(cachedMenu),
@@ -15,17 +25,16 @@ class SideBar extends Component {
         fetch("/category/all")
         .then(res => res.json())
         .then(res => {
-            console
             const { data: menu } = res;
             localStorage.setItem("menu", JSON.stringify(menu));
             this.setState({
                 menu,
             })
         }).catch(e => { throw e; });
-      
+
     }
 
-    closeNav() {
+    closeNav = () => {
         var closemyslide = document.getElementById("mySidenav");
         if (closemyslide)
             closemyslide.classList.remove('open-side');

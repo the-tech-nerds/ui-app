@@ -8,6 +8,7 @@ import {useRouter} from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {makeStyles} from '@material-ui/core/styles';
+import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 
 const TopBar = (props) => {
     const [isLogin, setIsLogin] = useState(false);
@@ -29,9 +30,11 @@ const TopBar = (props) => {
             if (openmyslide.classList.contains('open-side')) {
                 openmyslide.classList.remove('open-side');
                 document.getElementById('app-body').classList.remove('left-sidebar_space')
+                localStorage.setItem(SIDEBAR_STATUS, 'close');
             } else {
                 openmyslide.classList.add('open-side')
                 document.getElementById('app-body').classList.add('left-sidebar_space')
+                localStorage.setItem(SIDEBAR_STATUS, 'open');
             }
         }
     }
