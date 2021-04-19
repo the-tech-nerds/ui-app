@@ -1,7 +1,8 @@
-import { ProductController } from './product.controller';
-import { Module } from "@nestjs/common";
-import { GatewayModule } from "@the-tech-nerds/common-services";
-import { ProductService } from "./product.service";
+import {ProductController} from './product.controller';
+import {Module} from "@nestjs/common";
+import {GatewayModule} from "@the-tech-nerds/common-services";
+import {ProductService} from "./product.service";
+
 @Module({
     imports: [GatewayModule],
     providers: [
@@ -11,4 +12,5 @@ import { ProductService } from "./product.service";
         ProductController
     ],
 })
-export class ProductModule { }
+export class ProductModule {
+}
