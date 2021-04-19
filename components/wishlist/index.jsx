@@ -1,95 +1,96 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
-
-
+import React, { useReducer, userSate } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Breadcrumb from '../common/breadcrumb';
-import {addToCartAndRemoveWishlist, removeFromWishlist} from '../../actions'
+import { addToCartAndRemoveWishlist, removeFromWishlist } from '../../actions'
+import Link from 'next/link';
+import Button from '@material-ui/core/Button';
+import wishlistReducer from 'reducers/wishlist';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { ShoppingCart, ShoppingBasket } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
 
-class wishList extends Component {
-
-
-    changeQty = (e) => {
-        this.setState({ quantity: parseInt(e.target.value) })
-    }
-
-    render (){
-
-        const {Items, symbol} = this.props;
-
-        return (
-            <div>
-                <Breadcrumb title={'Wishlist'} />
-                {Items.length>0 ?
+const useStyles = makeStyles((theme) => ({
+    button: {
+        margin: theme.spacing(1),
+    },
+}));
+const WishList = (props) => {
+    const { Items, symbol } = props;
+    const classes = useStyles();
+    return (
+        <div>
+            <Breadcrumb title={'Wishlist'} />
+            {Items?.length > 0 ?
                 <section className="wishlist-section section-b-space">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-12">
-                                <table className="table cart-table table-responsive-xs">
-                                    <thead>
-                                    <tr className="table-head">
-                                        <th scope="col">image</th>
-                                        <th scope="col">product name</th>
-                                        <th scope="col">price</th>
-                                        <th scope="col">availability</th>
-                                        <th scope="col">action</th>
-                                    </tr>
-                                    </thead>
-                                    {Items.map((item, index) => {
-                                        return (
-                                            <tbody key={index}>
-                                            <tr>
-                                                <td>
-                                                    <Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>
-                                                        <img src={item.variants?
-                                                                    item.variants[0].images
-                                                                    :item.pictures[0]} alt="" />
-                                                    </Link>
-                                                </td>
-                                                <td><Link to={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.id}`}>{item.name}</Link>
-                                                    <div className="mobile-cart-content row">
-                                                        <div className="col-xs-3">
-                                                            <p>in stock</p>
-                                                        </div>
-                                                        <div className="col-xs-3">
-                                                            <h2 className="td-color">{symbol}{item.price-(item.price*item.discount/100)}
-                                                            <del><span className="money">{symbol}{item.price}</span></del></h2>
-                                                        </div>
-                                                        <div className="col-xs-3">
-                                                            <h2 className="td-color">
-                                                                <a href="javascript:void(0)" className="icon" onClick={() => this.props.removeFromWishlist(item)}>
-                                                                    <i className="fa fa-times"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" className="cart" onClick={() => this.props.addToCartAndRemoveWishlist(item, 1)}>
-                                                                    <i className="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </h2>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><h2>{symbol}{item.price-(item.price*item.discount/100)}
-                                                     <del><span className="money">{symbol}{item.price}</span></del></h2></td>
-                                                <td >
-                                                    <p>in stock</p>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)" className="icon" onClick={() => this.props.removeFromWishlist(item)}>
-                                                        <i className="fa fa-times"></i>
-                                                    </a>
-                                                    <a href="javascript:void(0)" className="cart" onClick={() => this.props.addToCartAndRemoveWishlist(item, 1)}>
-                                                        <i className="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            </tbody> )
-                                    })}
-                                </table>
+                                {Items.map((item, index) => {
+                                    return (
+                                        <div className="d-flex flex-row bd-highlight mb-3 card" key={index}>
+                                            <div className="p-2 bd-highlight d-flex justify-content-center image-block" style={{ alignItems: 'center' }}>
+                                                <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.product_slug}`}>
+                                                    <img style={{ maxHeight: "50px", maxWidth: "50px" }} src={item.images ?
+                                                        item.images[0]
+                                                        : item.images[0]} alt="" />
+                                                </Link>
+                                            </div>
+                                            <div className="p-1 ml-3 bd-highlight flex-fill">
+                                                <div className="d-flex">
+                                                    <h3>{item.product_name}</h3>
+                                                </div>
+                                                <div className="d-flex">
+                                                    <h4>{item.variance_price} Tk
+                                                            {/* <del><span className="money">{symbol}{item.variance_price}</span></del> */}
+                                                    </h4>
+                                                </div>
+
+                                                <div className="d-flex">
+                                                    {item.stock_count > 0 && <p className="text-success">in stock</p>}
+                                                    {item.stock_count == 0 && <p className="text-danger">out of stock!</p>}
+                                                </div>
+                                                <div className="d-flex">
+                                                    <Button
+                                                        variant="contained"
+                                                        color="secondary"
+                                                        className={classes.button}
+                                                        startIcon={<ShoppingCart />}
+                                                    >
+                                                        Add to Cart
+                                             </Button>
+                                                </div>
+                                            </div>
+                                            <div class="p-2 bd-highlight">
+                                                <IconButton color="primary" component="span">
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </div>
+                                        </div>)
+                                })}
                             </div>
                         </div>
                         <div className="row wishlist-buttons">
                             <div className="col-12">
-                                <Link to={`${process.env.PUBLIC_URL}/left-sidebar/collection`} className="btn btn-solid">continue shopping</Link>
-                                <Link to={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid">check out</Link>
+                                <Link href={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        className={classes.button}
+                                        startIcon={<ShoppingBasket />}
+                                    >
+                                        continue shopping
+                                             </Button>
+                                </Link>
+                                <Link href={`${process.env.PUBLIC_URL}/checkout`}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                        startIcon={<ShoppingBasket />}
+                                    >
+                                        check out
+                                             </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -112,17 +113,9 @@ class wishList extends Component {
                         </div>
                     </div>
                 </section>
-                }
-            </div>
-        )
-    }
+            }
+        </div>
+    )
 }
-const mapStateToProps = (state) => ({
-    Items: state.wishlist.list,
-    symbol: state.data.symbol,
-})
 
-export default connect(
-    mapStateToProps,
-    {addToCartAndRemoveWishlist, removeFromWishlist}
-)(wishList)
+export default WishList;

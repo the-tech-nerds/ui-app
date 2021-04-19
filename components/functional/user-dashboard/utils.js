@@ -1,4 +1,4 @@
-import { CHANGE_PASSWORD, USER_ADDRESS, USER_DASHBOARD, USER_LOGOUT } from "../../../constants/app_constant";
+import { CHANGE_PASSWORD, USER_ADDRESS, USER_DASHBOARD, USER_LOGOUT, WISHLIST } from "../../../constants/app_constant";
 
 export const Gender = [
     {
@@ -35,12 +35,18 @@ export function getSideMenus(name) {
         },
         {
             id: 2,
+            name: 'Wishlist',
+            className: name === 'Wishlist' ? 'text-danger' : 'Inactive',
+            url: WISHLIST
+        },
+        {
+            id: 3,
             name: 'Change Password',
             className: name === 'ChangePassword' ? 'text-danger' : 'Inactive',
             url: CHANGE_PASSWORD
         },
         {
-            id: 3,
+            id: 4,
             name: 'Log Out',
             className: name === 'LogOut' ? 'text-danger' : 'Inactive',
             url: USER_LOGOUT
