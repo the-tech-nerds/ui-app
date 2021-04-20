@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
+import ComponentCategoryHeader from '../../../components/categories/category-header';
 import ProductGrid from '../../../components/products/product-grid';
 
 type CategoryListProps = {
@@ -11,10 +12,12 @@ type CategoryListProps = {
 
 const CategoryList = ({slug}: CategoryListProps) => {
     const [categories, setCategories] = useState([]);
+    const [currentCategory, setcurrentategory] = useState(null);
     useEffect(() => {
         const menu = JSON.parse(localStorage.getItem('menu'));
         for (let category of menu) {
             if (category.slug === slug) {
+                setcurrentategory(category);
                 if (category.children && category.children.length > 0) {
                     setCategories(category.children);
                     break;
@@ -29,7 +32,7 @@ const CategoryList = ({slug}: CategoryListProps) => {
 
     return (
         <div style={{marginTop: '4%'}}>
-            <ComponentCategoryList categories={categories}/>
+            <ComponentCategoryList categories={categories} category = {currentCategory}/>
         </div>
     )
 }

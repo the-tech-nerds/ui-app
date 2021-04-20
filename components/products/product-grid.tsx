@@ -3,8 +3,6 @@ import React, {useEffect, useState} from 'react';
 import ProductGridSingle from "./common/product/product-grid-single";
 // @ts-ignore
 import InfiniteScroll from 'react-infinite-scroller';
-// import {getVisibleproducts} from "../../../services";
-// import {addToCart, addToCompare, addToWishlist} from "../../../actions";
 import {Skeleton} from '../../components/skeleton-loader/skeletons';
 import {Product} from 'types';
 
@@ -61,7 +59,11 @@ const ProductGrid = (props: ProductGridProps) => {
         <div>
             <section className="ratio_asos section-b-space">
                 <div className="container">
-                    <h4>Products</h4>
+                    <div className="d-flex">
+                        <div className="flex-fill"><hr/></div>
+                        <div className="ml-4 mr-4 font-weight-bold">Product List</div>
+                        <div className="flex-fill"><hr/></div>
+                    </div>
                     <InfiniteScroll
                         loadMore={fetchData}
                         hasMore={!!nextUrl}
