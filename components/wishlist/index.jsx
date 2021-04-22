@@ -27,9 +27,9 @@ const WishList = (props) => {
                             <div className="col-sm-12">
                                 {Items.map((item, index) => {
                                     return (
-                                        <div className="d-flex flex-row bd-highlight mb-3 card" key={index}>
+                                        <div className="d-flex flex-row bd-highlight mb-3 card hover-item" key={index}>
                                             <div className="p-2 bd-highlight d-flex justify-content-center image-block" style={{ alignItems: 'center' }}>
-                                                <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${item.product_slug}`}>
+                                                <Link href={`/product/${item.product_slug}`}>
                                                     <img style={{ maxHeight: "50px", maxWidth: "50px" }} src={item.images ?
                                                         item.images[0]
                                                         : item.images[0]} alt="" />
@@ -37,32 +37,27 @@ const WishList = (props) => {
                                             </div>
                                             <div className="p-1 ml-3 bd-highlight flex-fill">
                                                 <div className="d-flex">
-                                                    <h3>{item.product_name}</h3>
+                                                    <Link href={`/product/${item.product_slug}`}>
+                                                        <span className="font-weight-bold">{item.product_name}</span>
+                                                    </Link>
                                                 </div>
                                                 <div className="d-flex">
-                                                    <h4>{item.variance_price} Tk
+                                                    <span className="font-weight-bold">{item.variance_price} Tk
                                                             {/* <del><span className="money">{symbol}{item.variance_price}</span></del> */}
-                                                    </h4>
+                                                    </span>
                                                 </div>
 
                                                 <div className="d-flex">
-                                                    {item.stock_count > 0 && <p className="text-success">in stock</p>}
-                                                    {item.stock_count == 0 && <p className="text-danger">out of stock!</p>}
-                                                </div>
-                                                <div className="d-flex">
-                                                    <Button
-                                                        variant="contained"
-                                                        color="secondary"
-                                                        className={classes.button}
-                                                        startIcon={<ShoppingCart />}
-                                                    >
-                                                        Add to Cart
-                                             </Button>
+                                                    {item.stock_count > 0 && <span className="text-success">in stock</span>}
+                                                    {item.stock_count == 0 && <span className="text-danger">out of stock!</span>}
                                                 </div>
                                             </div>
                                             <div class="p-2 bd-highlight">
                                                 <IconButton color="primary" component="span">
                                                     <DeleteIcon />
+                                                </IconButton>
+                                                <IconButton color="secondary" component="span">
+                                                    <ShoppingCart />
                                                 </IconButton>
                                             </div>
                                         </div>)
@@ -86,7 +81,7 @@ const WishList = (props) => {
                                         variant="contained"
                                         color="primary"
                                         className={classes.button}
-                                        startIcon={<ShoppingBasket />}
+                                        startIcon={<ShoppingCart />}
                                     >
                                         check out
                                              </Button>
