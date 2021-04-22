@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import {SIDEBAR_MENU, SIDEBAR_STATUS, USER_DASHBOARD} from "../../../constants/app_constant";
 const MENU_STATUS = {
     EXPANDED: true,
     COLLAPSED: false
@@ -13,21 +14,26 @@ const SideBarItem = ({
     status = MENU_STATUS.COLLAPSED,
     icon = null,
     slug,
-}) => { 
-    const subItemsWithOutChildren = <Link key={index} href={`/${slug}`}>
-        <li key={index} className="p-2">
-            {icon && <i className={`fa fa-${icon} p-2`} />}{name}
+    selected = false
+}) => {
+    const subItemsWithOutChildren = <a key={index} onClick={() =>{
+      //  window.location.href=`/${slug}`;
+    }}>
+        <li key={index} className="p-1">
+            {icon && <i className={`fa fa-${icon} p-1`} />}{name}
         </li>
-    </Link>;
+    </a>;
     const subItemsWithChildren = children ? <div key={index} className="d-flex flex-column">
-        <li className="d-flex flex-row justify-content-between p-2" onClick={() => onToggle(index)}>
-            <Link  href={`/${slug}`}><span>{icon && <i className={`fa fa-${icon} p-2`}></i>}{name}</span></Link>
+        <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={() => onToggle(index)}>
+            <a  onClick={() =>{
+                 window.location.href=`/${slug}`;
+            }}><span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span></a>
             {children.length > 0 && <span onClick={() => onToggle(index)}>
                 {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" />}
                 {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" />}
             </span>}
         </li>
-        {children.length > 0 && status === MENU_STATUS.EXPANDED && (<ul>
+        {children.length > 0 && status === MENU_STATUS.EXPANDED && (<ul className='vl'>
             {children.map(child =>
                 <SideBarItem
                     name={child.name}
@@ -37,6 +43,7 @@ const SideBarItem = ({
                     status={child.status}
                     icon={child.icon}
                     slug={child.slug}
+                    selected= {child.selected}
                 />)
             }</ul>)
         }
@@ -61,29 +68,37 @@ export const SideMenu = ({
                 status: MENU_STATUS.COLLAPSED,
                 icon: item.icon,
                 slug: item.slug,
+                selected: false,
             };
         }
         return items.map(item => createIndividualMenu(item))
     }, [items])
-
-    const [menu, setMenu] = useState(createMenu(items));
+    const [menu, setMenu] = useState(null);
     const toggleMenu = (index) => {
         const updateItems = (items, index) => items.map(item => ({
             ...item,
             children: item.children ? updateItems(item.children, index) : null,
             status: item.index === index ? item.status = !item.status : item.status,
+            selected: item.index === index
         }));
         const itemsToChange = updateItems(menu, index);
         setMenu(itemsToChange);
+        localStorage.setItem(SIDEBAR_MENU, JSON.stringify(itemsToChange));
     }
 
     useEffect(() => {
-        setMenu(createMenu(items));
+        const menus = localStorage.getItem(SIDEBAR_MENU) || null
+        if(!menus){
+            setMenu(createMenu(items));
+        }
+        else {
+            setMenu(JSON.parse(menus))
+        }
     }, [items])
 
     return (
         <div className="d-flex flex-column sidemenu">
-            {menu.map(item => <SideBarItem
+            {menu?.map(item => <SideBarItem
                 name={item.name}
                 children={item.children}
                 index={item.index}
@@ -91,6 +106,7 @@ export const SideMenu = ({
                 status={item.status}
                 icon={item.icon}
                 slug={item.slug}
+                selected= {item.selected}
             />)}
         </div>
     );

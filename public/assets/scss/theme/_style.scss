@@ -5240,7 +5240,7 @@ footer {
   }
 }
 .left-sidebar_space {
-  padding-left: 300px;
+  padding-left: 260px;
 }
 .header-6 {
   .top-header {
@@ -14287,7 +14287,7 @@ body {
   }
 
   ul {
-    padding-inline-start: 40px;
+    padding-inline-start: 15px;
     cursor: pointer;
   }
 
@@ -14300,4 +14300,24 @@ body {
       color: $theme-deafult;
     }
   }
+}
+a:hover {
+  cursor:pointer !important;
+}
+.menu-item:hover{
+  background-color: #beb9b9;
+  font-weight: bold;
+}
+.vl {
+  border-left: 1px dotted green;
+  margin-left: 25px;
+}
+.item-selected{
+  color: #aa4d00;
+  font-weight: bold;
+}
+.hover-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  cursor: pointer;
 }

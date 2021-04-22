@@ -1,5 +1,7 @@
 export const SERVER_PATH = 'http://localhost:3000/'
 export const ACCESS_TOKEN = 'access_token'
+export const SIDEBAR_STATUS ='sidebar_status'
+export const SIDEBAR_MENU ='side_menu'
 
 //............App RoutLink.............
 export const CHANGE_PASSWORD = '/change-password';
