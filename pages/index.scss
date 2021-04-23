@@ -18,7 +18,7 @@ a:hover {
   top: calc(50% - 13px) !important;
 }
 
- .MuiAutocomplete-input:first-child {
+.MuiAutocomplete-input:first-child {
   padding-left: 6px !important;
 }
 
@@ -30,6 +30,8 @@ a:hover {
   margin-right: 33% !important;
   height: 75% !important;
 }
-.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+
+.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"],
+.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-in{
   padding: 0 !important;
 }
