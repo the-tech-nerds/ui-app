@@ -10,6 +10,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import {makeStyles} from '@material-ui/core/styles';
 import Link from 'next/link'
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
+import SearchSuggestionBlock from './../../../products/common/product/search-suggestion-block'
 
 const TopBar = (props) => {
     const [isLogin, setIsLogin] = useState(false);
@@ -108,12 +109,7 @@ const TopBar = (props) => {
                         autoHighlight
                         getOptionLabel={(option) => option?.name || ''}
                         renderOption={(option) => (
-                            <a href={`/product/${option.slug}`}>
-                                <img width='20px'
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
-                                     alt=""/>
-                                <span className='ml-2'>{' ' + option?.name || ''}</span>
-                            </a>
+                                <SearchSuggestionBlock product={option}/>
                         )}
                         openOnFocus={false}
                         renderInput={(params) => (
