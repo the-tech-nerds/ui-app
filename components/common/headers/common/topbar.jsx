@@ -8,6 +8,7 @@ import {useRouter} from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {makeStyles} from '@material-ui/core/styles';
+import Link from 'next/link'
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 
 const TopBar = (props) => {
@@ -91,46 +92,50 @@ const TopBar = (props) => {
                     </div>
                 </div>
                 <div className="d-flex flex-row justify-content-between align-items-center col-sm-10 w-100 p-0">
-                    <div className="w-75 h-75">
-                        {/*<input type="text" placeholder="Search..."*/}
-                        {/*       className="form-control w-75 h-100 rounded d-inline"*/}
-                        {/*       onInput={searchInputHandle}*/}
-                        {/*       onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}/>*/}
-                        <Autocomplete
-                            style={{
-                                width: '75%',
-                                height: '80%',
-                                display: 'inline-block'
-                            }}
-                            options={SuggestionList}
-                            autoHighlight
-                            getOptionLabel={(option) => option?.name || ''}
-                            renderOption={(option) => (
-                                <React.Fragment>
-                                    <img  width='20px'
-                                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt=""/>
-                                    <span>{' '+option?.name || ''}</span>
-                                </React.Fragment>
-                            )}
-                            renderInput={(params) => (
-                                <TextField
-                                    onInput={searchInputHandle}
-                                    onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
-                                    {...params}
-                                    // label="Seach product"
-                                    variant="outlined"
-                                    inputProps={{
-                                        ...params.inputProps,
-                                        // autoComplete: 'procuct-serach', // disable autocomplete and autofill
-                                    }}
-                                />
-                            )}
-                        />
-                        <button onClick={searchSubmitHandle} className="btn btn-success h-100 rounded"
-                                type="button">
-                            <i className="fa fa-search"></i>
-                        </button>
-                    </div>
+                    {/*<input type="text" placeholder="Search..."*/}
+                    {/*       className="form-control w-75 h-100 rounded d-inline"*/}
+                    {/*       onInput={searchInputHandle}*/}
+                    {/*       onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}/>*/}
+                    <Autocomplete
+                        style={{
+                            width: '50%',
+                            height: '75%',
+                            display: 'inline-block',
+                            background: 'white',
+                        }}
+                        id="debug"
+                        options={[...SuggestionList]}
+                        autoHighlight
+                        getOptionLabel={(option) => option?.name || ''}
+                        renderOption={(option) => (
+                            <a href={`/product/${option.slug}`}>
+                                <img width='20px'
+                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                                     alt=""/>
+                                <span className='ml-2'>{' ' + option?.name || ''}</span>
+                            </a>
+                        )}
+                        openOnFocus={false}
+                        renderInput={(params) => (
+                            <TextField
+                                onFocus={searchInputHandle}
+                                onBlur={() => setSuggestionList([])}
+                                onInput={searchInputHandle}
+                                onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
+                                {...params}
+                                // label="Seach product"
+                                variant="outlined"
+                                inputProps={{
+                                    ...params.inputProps,
+                                    // autoComplete: 'procuct-serach', // disable autocomplete and autofill
+                                }}
+                            />
+                        )}
+                    />
+                    <button onClick={searchSubmitHandle} className="search-button btn btn-success h-100 rounded"
+                            type="button">
+                        <i className="fa fa-search"></i>
+                    </button>
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props}/>}
                         {!isLogin && <DropdownBeforeLogin props={props}/>}

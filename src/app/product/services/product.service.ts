@@ -6,10 +6,18 @@ export class ProductService {
     constructor(private readonly gatewayService: GatewayService) {
     }
 
-    async getProductsBySearchParam(query: string) {
+    async getProductsBySearchParam(query: string, limit = 10) {
         return this.gatewayService.execute('product', {
-            path: `/api/v1/product/search/?search=${query}&limit=10`,
+            path: `/api/v1/product/search/?search=${query}&limit=${limit}`,
             method: 'GET'
         })
     }
+    
+    async getProductBySlug(slug: string) {
+        return this.gatewayService.execute('product', {
+            path: `/api/v1/product/public/${slug}`,
+            method: 'GET'
+        })
+    }
+
 }

@@ -1,5 +1,35 @@
 @import "../public/assets/scss/font-awesome";
 @import "../public/assets/scss/bootstrap";
 @import "../components/styles/user_dashbord.module";
-@import 'react-tabs/style/react-tabs.scss';
+//@import 'react-tabs/style/react-tabs.scss';
 @import "../components/styles/wishlist";
+
+a:hover {
+  cursor: pointer !important;
+}
+
+
+.PrivateNotchedOutline-root-2 {
+  top: -5px !important;
+  bottom: 14px !important;
+}
+
+.MuiAutocomplete-endAdornment {
+  top: calc(50% - 13px) !important;
+}
+
+ .MuiAutocomplete-input:first-child {
+  padding-left: 6px !important;
+}
+
+.PrivateNotchedOutline-root-2.MuiOutlinedInput-notchedOutline {
+  border: none !important;
+}
+
+.search-button {
+  margin-right: 33% !important;
+  height: 75% !important;
+}
+.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+  padding: 0 !important;
+}
