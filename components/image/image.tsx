@@ -17,6 +17,8 @@ const Image = ({
     alt
 }: ImageProps) => {
     const [loaded, setLoaded] = useState(false);
+    const placeHolderImage = `https://via.placeholder.com/${width}`;
+    const [imageSrc, setImageSrc] = useState(src || placeHolderImage);
     return (
         <div>
             <img
@@ -26,11 +28,12 @@ const Image = ({
                     width,
                     height
                 }}
-                src={src}
+                src={imageSrc}
                 className={className}
                 width={width}
                 height={height}
                 onLoad={() => setLoaded(true)}
+                onError={() => setImageSrc(placeHolderImage)}
                 alt={alt} 
             />
             {!loaded && <Skeleton height={height} width={width}/>}
