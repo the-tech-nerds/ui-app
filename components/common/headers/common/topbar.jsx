@@ -8,6 +8,7 @@ import {useRouter} from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {makeStyles} from '@material-ui/core/styles';
+import Link from 'next/link'
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 
 const TopBar = (props) => {
@@ -107,12 +108,12 @@ const TopBar = (props) => {
                         autoHighlight
                         getOptionLabel={(option) => option?.name || ''}
                         renderOption={(option) => (
-                            <React.Fragment>
+                            <a href={`/product/${option.slug}`}>
                                 <img width='20px'
                                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
                                      alt=""/>
                                 <span className='ml-2'>{' ' + option?.name || ''}</span>
-                            </React.Fragment>
+                            </a>
                         )}
                         openOnFocus={false}
                         renderInput={(params) => (
