@@ -21,16 +21,17 @@ const ProductGridSingle = ({
 
     return (
 
-        <div className="card m-4 p-2 d-flex flex-column justify-content-center text-center">
+        <div className="card m-4 p-2 d-flex flex-column justify-content-center text-center hover-item">
             <div className="img-wrapper">
                 {/* <div className="lable-block">
                         {(product.new == true)? <span className="lable3">new</span> : ''}
                         {(product.sale == true)? <span className="lable4">on sale</span> : ''}
                     </div> */}
                 <div className="front">
-                    <Link href={`/product/${product.id}`} >
-                        <Image src={product.productVariances[selectedVariant].images[0].url} height={150} width={200} alt={product.name} />
-                    </Link>
+                    <a href={`/product/${product.slug}`} >
+                        <Image src={product.productVariances[selectedVariant].images[0].url} height={150} width={200} alt={product.name}
+                        />
+                    </a>
                 </div>
                 {/* <div className="cart-info cart-wrap">
                         <button title="Add to cart" onClick={() => onAddToCartClicked(product, 1)}>
@@ -49,11 +50,13 @@ const ProductGridSingle = ({
                     </div> */}
                 {product.productVariances ?
                     <ul className="product-thumb-list">
-                        <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}>
+                        {product.productVariances.length >1 && <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}>
                             {product.productVariances.map((variant, index) => (
                                 <option value={index}>{variant.unit_value} {variant.unit.name}</option>
                             ))}
-                        </select>
+                        </select>}
+                        {product.productVariances.length == 1 && <h5 className="mt-2">
+                            {product.productVariances[0].unit_value + ' ' + product.productVariances[0].unit.name}</h5>}
                         {/* {product.variants.map((vari, i) =>
                             <li className={`grid_thumb_img ${(vari.images === this.state.image)?'active':''}`} key={i}>
                                 <a href="javascript:void(0)" title="Add to Wishlist">
@@ -71,7 +74,7 @@ const ProductGridSingle = ({
                     <Link href={`/product/${product.slug}`}>
                         <h6>{product.name}</h6>
                     </Link>
-                    <h4>{product.symbol || <span className="font-weight-bold">৳ </span>}{product.productVariances[selectedVariant].price}</h4>
+                    <h4>{product.symbol || <span className="font-weight-bold"> </span>}{product.productVariances[selectedVariant].price} Tk</h4>
                     {/* {product.productVariances?
                         <ul className="color-variant">
                             {product.variants.map((vari, i) => {
