@@ -1,30 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {withTranslate} from 'react-redux-multilingual'
+import Link from 'next/link';
+import {withTranslate} from 'react-redux-multilingual';
 import axios from "axios";
 import DropdownBeforeLogin from "./functional/dropdown-before-login";
 import {DropdownAfterLogin} from "./functional/dropdown-after-login";
-import SideBar from './sidebar';
 import {useRouter} from 'next/router';
+import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {makeStyles} from '@material-ui/core/styles';
-import Link from 'next/link'
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 import SearchSuggestionBlock from './../../../products/common/product/search-suggestion-block'
 
 const TopBar = (props) => {
-    const [isLogin, setIsLogin] = useState(false);
+    const { wishlist, isLogin } = useSelector(state => ({
+        wishlist: state.wishlist.list,
+        isLogin: state.login.isLoggedIn,
+    }));
     const [SuggestionList, setSuggestionList] = useState([]);
     const router = useRouter();
-    useEffect(() => {
-        axios.get(`/login/check`)
-            .then((res) => {
-                setIsLogin(res.data.isLogin);
-            }).catch(error => {
-        });
-        // this.toggleNav();
-    }, []);
-
 
     const toggleNav = () => {
         var openmyslide = document.getElementById("mySidenav");
@@ -76,7 +70,7 @@ const TopBar = (props) => {
     return (<div className="top-header">
         <div className="container-fluid">
             <div className="row">
-                <div className="col-sm-1 d-flex align-items-center justify-content-start p-0">
+                <div className="col-xs-1 d-flex align-items-center justify-content-start p-0">
                     <div className="navbar navbar-dark">
                         <button onClick={toggleNav} className="navbar-toggler" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
@@ -84,27 +78,22 @@ const TopBar = (props) => {
                                 aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <SideBar/>
                     </div>
                 </div>
-                <div className="col-sm-1 d-flex align-items-center justify-content-end p-0">
-                    <div
-                        className="bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">KFC
-                    </div>
+                <div className="col-xs-1 d-flex align-items-center justify-content-end p-0 logo-container">
+                    <a href="/" className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
+                            KFC
+                    </a>
                 </div>
-                <div className="d-flex flex-row justify-content-between align-items-center col-sm-10 w-100 p-0">
+                <div className="d-flex flex-row justify-content-between align-items-center col-xs-8 pr-2">
                     {/*<input type="text" placeholder="Search..."*/}
                     {/*       className="form-control w-75 h-100 rounded d-inline"*/}
                     {/*       onInput={searchInputHandle}*/}
                     {/*       onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}/>*/}
                     <Autocomplete
-                        style={{
-                            width: '50%',
-                            height: '75%',
-                            display: 'inline-block',
-                            background: 'white',
-                        }}
+                        className="search-autocomplete"
                         id="debug"
+                        freeSolo
                         options={[...SuggestionList]}
                         autoHighlight
                         getOptionLabel={(option) => option?.name || ''}
@@ -114,6 +103,7 @@ const TopBar = (props) => {
                         openOnFocus={false}
                         renderInput={(params) => (
                             <TextField
+                                style={{ height: '100%' }}
                                 onFocus={searchInputHandle}
                                 onBlur={() => setSuggestionList([])}
                                 onInput={searchInputHandle}
@@ -132,6 +122,14 @@ const TopBar = (props) => {
                             type="button">
                         <i className="fa fa-search"></i>
                     </button>
+                </div>
+                <div className="d-flex align-items-center col-xs-2 other-nav-items">
+                    {isLogin && <a href="/user/wishlist" className="d-flex items-center text-danger" replace>
+                        <span className="text-danger">
+                            <i className="fa fa-heart mr-2"></i> 
+                            <span className="badge badge-secondary">{wishlist.length}</span>
+                        </span>
+                    </a>}
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props}/>}
                         {!isLogin && <DropdownBeforeLogin props={props}/>}

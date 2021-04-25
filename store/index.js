@@ -8,27 +8,32 @@ import logger from 'redux-logger'
 import rootReducer from '../reducers';
 
 
-// function saveToLocalStorage(state) {
-//     try {
-//         const serializedState = JSON.stringify(state)
-//         localStorage.setItem('state', serializedState)
-//     }catch(e){
-//         console.log(e);
-//     }
-// }
+function saveToLocalStorage(state) {
+    try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            const serializedState = JSON.stringify(state)
+            localStorage.setItem('state', serializedState)
+        }
+    }catch(e){
+        console.log(e);
+    }
+}
 
-// function loadFromLocalStorage() {
-//     try {
-//         const serializedState = localStorage.getItem('state')
-//         if(serializedState === null) return undefined
-//         return JSON.parse(serializedState)
-//     }catch (e) {
-//         console.log(e)
-//         return undefined
-//     }
-// }
+function loadFromLocalStorage() {
+    try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            const serializedState = localStorage.getItem('state')
+            if(serializedState === null) return undefined
+            return JSON.parse(serializedState)
+        }
+        return undefined;
+    }catch (e) {
+        console.log(e)
+        return undefined
+    }
+}
 
-const persistedState = {}
+const persistedState = loadFromLocalStorage();
 
 /**
  * Create a Redux store that holds the app state.
@@ -44,7 +49,7 @@ const store = createStore(rootReducer, persistedState, compose(
 
 const unsubscribe = store.subscribe(() => {
     const state = store.getState();
-    // saveToLocalStorage(state);
+    saveToLocalStorage(state);
 });
 
 export default store;

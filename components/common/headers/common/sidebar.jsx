@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
+import Link from 'next/link';
 class SideBar extends Component {
     state = {
         menu: []
@@ -106,8 +107,7 @@ class SideBar extends Component {
 
     render() {
         return (
-            <div id="mySidenav" className="sidenav card" style={{ "marginTop": "56px" }}>
-                <a href="javascript:void(0)" onClick={this.closeNav}></a>
+            <div id="mySidenav" className="sidenav card">
                 <nav>
                     {this.state.menu && <SideMenu items={this.state.menu} />}
                 </nav>

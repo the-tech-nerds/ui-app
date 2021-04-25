@@ -3,6 +3,8 @@ import * as types from '../constants/ActionTypes'
 import store from "../store";
 import { toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+export * from './action-wishilist';
+export * from './action-login';
 
 export const fetchProductsBegin = () => ({
     type: types.FETCH_PRODUCTS_BEGIN
@@ -64,26 +66,6 @@ export const decrementQty = productId => (dispatch) => {
     dispatch({
     type: types.DECREMENT_QTY,
     productId})
-};
-
-
-
-//it seems that I should probably use this as the basis for "Wishlist"
-export const addToWishlist = (product) => (dispatch) => {
-    toast.success("Item Added to Wishlist");
-    dispatch(addToWishlistUnsafe(product))
-
-}
-export const addToWishlistUnsafe = (product) => ({
-    type: types.ADD_TO_WISHLIST,
-    product
-});
-export const removeFromWishlist = product_id => (dispatch) => {
-    toast.error("Item Removed from Wishlist");
-    dispatch({
-        type: types.REMOVE_FROM_WISHLIST,
-        product_id
-    })
 };
 
 

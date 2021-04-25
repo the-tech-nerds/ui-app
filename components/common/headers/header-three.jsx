@@ -7,6 +7,7 @@ import store from '../../../store';
 import { changeCurrency } from '../../../actions'
 import { connect } from "react-redux";
 import TopBar from "./common/topbar";
+import SideBar from './common/sidebar';
 
 class HeaderThree extends Component {
 
@@ -93,12 +94,12 @@ class HeaderThree extends Component {
 
         return (
             <div>
-                <header id="sticky" className="fixed-top w-100 header-2 header-6" style={{ zIndex: 2000 }}>
+                <header id="sticky" className="fixed-top w-100 header-2 header-6">
                     {this.state.isLoading ? <div>Loading...</div> : null}
                     <div className="mobile-fix-option"></div>
                     {/*Top Header Component*/}
                     <TopBar />
-
+                    <SideBar />
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-12">
