@@ -60,7 +60,7 @@ body {
 }
 .app-body {
   transition: all 0.5s ease-in-out;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 h1 {
   font-size: 60px;
@@ -14327,6 +14327,10 @@ a:hover {
   color: white;
 }
 
+.logo-container {
+  width: 80px;
+}
+
 // .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-endAdornment {
 //   padding-top: 6px !important;
 // }
@@ -14334,21 +14338,29 @@ a:hover {
 // .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child {
 //   height: 100% !important;
 // }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) {  
+  .logo-container {
+    margin-left: 90px;
+  }
+
   .search-autocomplete {
-    width: 500px;
+    width: 550px;
   }
 }
 
 @media screen and (min-device-width: 481px) and (max-device-width: 768px) { 
   .search-autocomplete {
-    width: 210px;
+    width: 220px;
   }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .logo-container {
+    display: none !important;
+  }
+
   .search-autocomplete {
-    width: 120px;
+    width: 220px;
   }
 }
 
