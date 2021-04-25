@@ -14384,3 +14384,7 @@ a:hover {
     right: 0;
   }
 }
+
+.MuiAutocomplete-inputRoot[class*="MuiInput-root"] {
+  height: 100%;
+}

@@ -110,7 +110,7 @@ const TopBar = (props) => {
                                 onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
                                 {...params}
                                 // label="Seach product"
-                                variant="outlined"
+                                // variant="outlined"
                                 inputProps={{
                                     ...params.inputProps,
                                     // autoComplete: 'procuct-serach', // disable autocomplete and autofill
