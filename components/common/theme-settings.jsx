@@ -99,7 +99,7 @@ class ThemeSettings extends Component {
                 {/*    </div>*/}
                 {/*</a>*/}
                 <div id="setting_box" className="setting-box">
-                    <a href="javascript:void(0)" className="overlay" onClick={() => this.closeSetting()}></a>
+                    <Link href="#" className="overlay" onClick={() => this.closeSetting()}>&nbsp;</Link>
                     <div className="setting_box_body">
                         <div onClick={() => this.closeSetting()}>
                             <div className="sidebar-back text-left">

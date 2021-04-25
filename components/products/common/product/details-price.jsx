@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import { useDispatch } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import wishlistReducer from 'reducers/wishlist';
 import { ADD_TO_WISHLIST } from 'constants/ActionTypes';
+import { addItemToWishlist } from '../../../../actions';
 
 
 const DetailsWithPrice = (props) => {
@@ -17,9 +19,9 @@ const DetailsWithPrice = (props) => {
         setStock(stock);
     }, []);
 
-    const [state, dispatch] = useReducer(wishlistReducer, []);
+    const dispatch = useDispatch();
     const addToWishList = () => {
-        dispatch({ type: ADD_TO_WISHLIST, payload: item.product_variances[variance_index] })
+        dispatch(addItemToWishlist( item.product_variances[variance_index]));
     }
 
     const onOpenModal = () => {
