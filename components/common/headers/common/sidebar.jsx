@@ -106,7 +106,7 @@ class SideBar extends Component {
 
     render() {
         return (
-            <div id="mySidenav" className="sidenav card" style={{ "marginTop": "56px" }}>
+            <div id="mySidenav" className="sidenav card">
                 <a href="javascript:void(0)" onClick={this.closeNav}></a>
                 <nav>
                     {this.state.menu && <SideMenu items={this.state.menu} />}

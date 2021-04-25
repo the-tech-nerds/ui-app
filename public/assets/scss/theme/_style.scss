@@ -781,7 +781,7 @@ button {
     2.Header CSS start
 ==========================*/
 header {
-  background-color: $white;
+  background-color: $theme-deafult;
 }
 .onhover-dropdown {
   position: relative;
@@ -14320,4 +14320,55 @@ a:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 10px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   cursor: pointer;
+}
+
+.kfc-logo {
+  text-decoration: none;
+  color: white;
+}
+
+// .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-endAdornment {
+//   padding-top: 6px !important;
+// }
+
+// .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child {
+//   height: 100% !important;
+// }
+@media screen and (min-width: 769px) {
+  .search-autocomplete {
+    width: 500px;
+  }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 768px) { 
+  .search-autocomplete {
+    width: 210px;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .search-autocomplete {
+    width: 120px;
+  }
+}
+
+@media only screen and (max-device-width: 560px) {
+  #mySidenav {
+    margin-top: 60px;
+  }
+}
+
+
+.search-autocomplete {
+  height: 75%;
+  display: inline-block;
+  background: white;
+}
+
+
+@media screen and (min-width: 600px) {
+  .other-nav-items {
+    position: fixed;
+    right: 0;
+  }
 }

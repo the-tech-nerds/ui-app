@@ -119,7 +119,7 @@ class Vegetables extends Component {
                             <div className="row">
                                 <div className="col">
                                     <div className="banner-contain">
-                                        <h2>2018</h2>
+                                        <h2>2021</h2>
                                         <h3>food market</h3>
                                         <h4>special offer</h4>
                                     </div>

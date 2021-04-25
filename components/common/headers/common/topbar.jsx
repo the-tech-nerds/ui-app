@@ -76,7 +76,7 @@ const TopBar = (props) => {
     return (<div className="top-header">
         <div className="container-fluid">
             <div className="row">
-                <div className="col-sm-1 d-flex align-items-center justify-content-start p-0">
+                <div className="col-xs-1 d-flex align-items-center justify-content-start p-0">
                     <div className="navbar navbar-dark">
                         <button onClick={toggleNav} className="navbar-toggler" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
@@ -84,27 +84,22 @@ const TopBar = (props) => {
                                 aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <SideBar/>
                     </div>
                 </div>
-                <div className="col-sm-1 d-flex align-items-center justify-content-end p-0">
-                    <div
-                        className="bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">KFC
-                    </div>
+                <div className="col-xs-1 d-flex align-items-center justify-content-end p-0" style={{ width: '80px' }}>
+                    <a href="/" className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
+                            KFC
+                    </a>
                 </div>
-                <div className="d-flex flex-row justify-content-between align-items-center col-sm-10 w-100 p-0">
+                <div className="d-flex flex-row justify-content-between align-items-center col-xs-8 pr-2">
                     {/*<input type="text" placeholder="Search..."*/}
                     {/*       className="form-control w-75 h-100 rounded d-inline"*/}
                     {/*       onInput={searchInputHandle}*/}
                     {/*       onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}/>*/}
                     <Autocomplete
-                        style={{
-                            width: '50%',
-                            height: '75%',
-                            display: 'inline-block',
-                            background: 'white',
-                        }}
+                        className="search-autocomplete"
                         id="debug"
+                        freeSolo
                         options={[...SuggestionList]}
                         autoHighlight
                         getOptionLabel={(option) => option?.name || ''}
@@ -114,6 +109,7 @@ const TopBar = (props) => {
                         openOnFocus={false}
                         renderInput={(params) => (
                             <TextField
+                                style={{ height: '100%' }}
                                 onFocus={searchInputHandle}
                                 onBlur={() => setSuggestionList([])}
                                 onInput={searchInputHandle}
@@ -132,6 +128,8 @@ const TopBar = (props) => {
                             type="button">
                         <i className="fa fa-search"></i>
                     </button>
+                </div>
+                <div className="col-xs-2 other-nav-items">
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props}/>}
                         {!isLogin && <DropdownBeforeLogin props={props}/>}
