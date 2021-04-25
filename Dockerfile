@@ -13,5 +13,5 @@ RUN rm -f .npmrc
 COPY .next /app/.next
 COPY public /app/public
 
-CMD [ "npm start" ]
+CMD [ "cp /data/env /app/.env && npm start" ]
 ENTRYPOINT [ "sh", "-c" ]
