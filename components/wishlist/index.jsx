@@ -80,7 +80,7 @@ const WishList = (props) => {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        className={classes.button}
+                                        className={`${classes.button} ml-2`}
                                         startIcon={<ShoppingCart />}
                                     >
                                         check out

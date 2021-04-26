@@ -40,13 +40,22 @@ const DetailsWithPrice = (props) => {
 
     const plusQty = () => {
         if (item.product_variances[variance_index].stock_count >= quantity) {
+            setStock('InStock')
             setQuantity(quantity + 1);
         } else {
+            setQuantity(quantity + 1);
             setStock('Out of Stock !')
         }
     }
     const changeQty = (e) => {
-        setQuantity(parseInt(e.target.value))
+        const qnt = parseInt(e.target.value);
+        if (item.product_variances[variance_index].stock_count >= qnt) {
+            setStock('InStock')
+            setQuantity(qnt);
+        } else {
+            setQuantity(quantity + 1);
+            setStock('Out of Stock !')
+        }
     }
     const changeVariance = (e) => {
         setVariance_index(Number(e.target.value));
@@ -144,7 +153,7 @@ const DetailsWithPrice = (props) => {
                     </div>
                 </div>
                 <div className="product-buttons" >
-                    <a className="btn btn-solid" onClick={() => addToCartClicked(item, quantity)}>add to cart</a>
+                    <button disabled={item.product_variances[variance_index].stock_count < quantity}  className="btn btn-solid" onClick={() => addToCartClicked(item, quantity)}>add to cart</button>
                     <a href={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid" onClick={() => BuynowClicked(item, quantity)} >buy now</a>
                 </div>
                 <div className="border-product">
