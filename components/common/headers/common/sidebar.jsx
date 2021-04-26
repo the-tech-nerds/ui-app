@@ -1,47 +1,34 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
 import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
 import Link from 'next/link';
-class SideBar extends Component {
-    state = {
-        menu: []
-    }
-
-    componentDidMount() {
-        const cachedMenu = localStorage.getItem('menu');
+import {useSelector} from "react-redux";
+import {fetchItemsForCategory} from "../../../../actions";
+const SideBar = () => {
+    const [menu, setMenu] = useState([]);
+    const { categories } = useSelector(state => ({
+        categories: state.categories?.list?.menus,
+    }));
+    useEffect(() => {
+        setMenu(categories);
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
         if(sideBarStatus === 'close'){
-                closemyslide.classList.remove('open-side');
+            closemyslide.classList.remove('open-side');
             document.getElementById('app-body').classList.remove('left-sidebar_space')
         } else{
             closemyslide.classList.add('open-side');
             document.getElementById('app-body').classList.add('left-sidebar_space')
         }
-        if (cachedMenu) {
-            this.setState({
-                menu: JSON.parse(cachedMenu),
-            })
-        }
-        fetch("/category/all")
-        .then(res => res.json())
-        .then(res => {
-            const { data: menu } = res;
-            localStorage.setItem("menu", JSON.stringify(menu));
-            this.setState({
-                menu,
-            })
-        }).catch(e => { throw e; });
+    }, []);
 
-    }
-
-    closeNav = () => {
+    const closeNav = () => {
         var closemyslide = document.getElementById("mySidenav");
         if (closemyslide)
             closemyslide.classList.remove('open-side');
     }
 
-    handleSubmenu = (event) => {
+    const handleSubmenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -54,7 +41,7 @@ class SideBar extends Component {
             event.target.nextElementSibling.classList.add('opensub1')
         }
     }
-    handleSubTwoMenu = (event) => {
+   const handleSubTwoMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -67,7 +54,7 @@ class SideBar extends Component {
             event.target.nextElementSibling.classList.add('opensub2')
         }
     }
-    handleSubThreeMenu = (event) => {
+   const handleSubThreeMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -80,7 +67,7 @@ class SideBar extends Component {
             event.target.nextElementSibling.classList.add('opensub3')
         }
     }
-    handleSubFourMenu = (event) => {
+   const handleSubFourMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -94,7 +81,7 @@ class SideBar extends Component {
         }
     }
 
-    handleMegaSubmenu = (event) => {
+    const handleMegaSubmenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -104,17 +91,14 @@ class SideBar extends Component {
             event.target.nextElementSibling.classList.add('opensidesubmenu')
         }
     }
-
-    render() {
         return (
             <div id="mySidenav" className="sidenav card">
                 <nav>
-                    {this.state.menu && <SideMenu items={this.state.menu} />}
+                    {menu && <SideMenu items={menu} />}
                 </nav>
             </div >
 
         )
-    }
 }
 
 
