@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import {SIDEBAR_MENU, SIDEBAR_STATUS, USER_DASHBOARD} from "../../../constants/app_constant";
+import {useSelector} from "react-redux";
 const MENU_STATUS = {
     EXPANDED: true,
     COLLAPSED: false
@@ -57,6 +58,9 @@ const SideBarItem = ({
 export const SideMenu = ({
     items = [],
 }) => {
+    const { total } = useSelector(state => ({
+        total: state.categories?.list?.total,
+    }));
     const createMenu = useCallback((items) => {
         const createIndividualMenu = (item) => {
             return {
@@ -81,16 +85,23 @@ export const SideMenu = ({
         }));
         const itemsToChange = updateItems(menu, index);
         setMenu(itemsToChange);
-        localStorage.setItem(SIDEBAR_MENU, JSON.stringify(itemsToChange));
+        // store_sidebar
+        const sideMenu = {
+            menus:itemsToChange,
+            total: total
+        }
+        localStorage.setItem(SIDEBAR_MENU, JSON.stringify(sideMenu));
     }
-
     useEffect(() => {
-        const menus = localStorage.getItem(SIDEBAR_MENU) || null
-        if(!menus){
+        let menuItems = localStorage.getItem(SIDEBAR_MENU) || null;
+        if(menuItems){
+            menuItems = JSON.parse(menuItems);
+        }
+        if(!menuItems || Number(menuItems.total) !== total){
             setMenu(createMenu(items));
         }
         else {
-            setMenu(JSON.parse(menus))
+            setMenu(menuItems.menus)
         }
     }, [items])
 

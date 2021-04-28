@@ -6,12 +6,13 @@ import App from 'next/'
 import '../pages/index.scss';
 import '../components/common/index.scss';
 import store from 'store';
-import { checkLogin, fetchItemsForWishlist } from 'actions';
+import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory } from 'actions';
 import { GetStaticProps } from 'next';
 
 const initialActions = () => {
   store.dispatch(checkLogin());
   store.dispatch(fetchItemsForWishlist());
+  store.dispatch(fetchItemsForCategory());
 };
 
 

@@ -5,6 +5,7 @@ import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
 import ComponentCategoryHeader from '../../../components/categories/category-header';
 import ProductGrid from '../../../components/products/product-grid';
+import {useSelector} from "react-redux";
 
 type CategoryListProps = {
     slug: string;
@@ -13,9 +14,11 @@ type CategoryListProps = {
 const CategoryList = ({slug}: CategoryListProps) => {
     const [categories, setCategories] = useState([]);
     const [currentCategory, setcurrentategory] = useState(null);
+    const { menus } = useSelector(state => ({
+        menus: state.categories?.list?.menus,
+    }));
     useEffect(() => {
-        const menu = JSON.parse(localStorage.getItem('menu'));
-        for (let category of menu) {
+        for (let category of menus) {
             if (category.slug === slug) {
                 setcurrentategory(category);
                 if (category.children && category.children.length > 0) {
