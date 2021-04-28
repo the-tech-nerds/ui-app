@@ -1,33 +1,26 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Category from '../../components/categories/category';
-import {FormControlLabel, FormLabel, Grid, makeStyles, Paper, Radio, RadioGroup} from "@material-ui/core";
+import { FormControlLabel, FormLabel, Grid, makeStyles, Paper, Radio, RadioGroup } from "@material-ui/core";
 import Image from "../image/image";
 
 const CategoryList = ({ categories = [], category = {} }) => {
-    const settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: categories.length < 4 ? categories.length : 4,
-        slidesToScroll: 2,
-    };
 
     return (
-    <section className="ratio_asos section-b-space">
-        <div className="container">
-            <div className="d-flex">
-                <div className="flex-fill"><hr/></div>
-                <div className="ml-4 mr-4 font-weight-bold">{category.name}</div>
-                <div className="flex-fill"><hr/></div>
+        <section className="ratio_asos section-b-space">
+            <div className="container">
+                <div className="d-flex">
+                    <div className="flex-fill"><hr /></div>
+                    <div className="ml-4 mr-4 font-weight-bold">{category.name}</div>
+                    <div className="flex-fill"><hr /></div>
+                </div>
+                <CategoryItem categories={categories} />
             </div>
-            <CategoryItem categories = {categories}/>
-        </div>
-    </section>
+        </section>
     );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         flexGrow: 1,
     },
@@ -35,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         width: 160,
     }
 }));
-const  CategoryItem = ({categories = []}) =>{
+const CategoryItem = ({ categories = [] }) => {
 
     const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
@@ -45,8 +38,8 @@ const  CategoryItem = ({categories = []}) =>{
                 <Grid container justify="center" spacing={spacing}>
                     {categories.map((value) => (
                         <Grid key={value} item>
-                            <Paper className={`${classes.paper} hover-item p-2`} onClick={() =>{
-                                window.location.href=`/${value.slug}`;
+                            <Paper className={`${classes.paper} hover-item p-2`} onClick={() => {
+                                window.location.href = `/${value.slug}`;
                             }} >
                                 <div className="text-center">
                                     <Image
@@ -56,7 +49,7 @@ const  CategoryItem = ({categories = []}) =>{
                                         alt="click to view"
                                     />
                                 </div>
-                                <div className = " text-center mt-1">
+                                <div className=" text-center mt-1">
                                     {value.name}
                                 </div>
                             </Paper>
