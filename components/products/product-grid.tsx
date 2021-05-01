@@ -5,6 +5,7 @@ import ProductGridSingle from "./common/product/product-grid-single";
 import InfiniteScroll from 'react-infinite-scroller';
 import {Skeleton} from '../../components/skeleton-loader/skeletons';
 import {Product} from 'types';
+import { CircularProgress } from '@material-ui/core';
 
 type ProductGridProps = {
     slug: string;
@@ -13,34 +14,43 @@ type ProductGridProps = {
 
 
 const ProductGrid = (props: ProductGridProps) => {
-    const {slug} = props;
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
-    const [nextUrl, setNextUrl] = useState(`?limit=10`);
-
-    const fetchData = async () => {
-        if (nextUrl && !loading) {
-            setLoading(true);
-            fetch(`${props.fetchUrl}${nextUrl}`)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.code === 200) {
-                        setProducts([...products, ...res.data.results]);
-                        setNextUrl(res.data.links.next)
-                    }
-                    setLoading(false);
-                })
-        }
-    }
+    const [nextUrl, setNextUrl] = useState(undefined);
+    const [fetched, setFetched] = useState<Record<string, true | undefined>>({});
 
     useEffect(() => {
-        setLoading(true);
-        fetchData();
-    }, []);
+        setProducts([]);
+        setFetched({});
+        console.log(products);
+        if (!products.length) {
+            fetchData();
+        }
+    }, [props.fetchUrl]);
+
+    const fetchData = async () => {
+        if (!loading) {
+            const url = nextUrl ? `${props.fetchUrl}${nextUrl}` : props.fetchUrl;
+            if (!fetched[url]) {
+                setLoading(true);
+                fetch(url)
+                .then(res => res.json())
+                .then(res => {
+                    setFetched({ ...fetched, [url] : true });
+                    if (res.code === 200) {
+                        setProducts([...products, ...res.data.results]);
+                        const next = res.data.links.next;
+                        setNextUrl(next);
+                    }
+                    setLoading(false);
+                })   
+            }
+        }    
+    }
 
     const items = products.map((product, index) =>
         <ProductGridSingle
-            key={product.id}
+            key={product.slug}
             product={product}
         />
     );
@@ -76,6 +86,9 @@ const ProductGrid = (props: ProductGridProps) => {
                                 </div>
                             </div>
                         </div>
+                        {loading && <div className="d-flex justify-content-center">
+                             <CircularProgress />
+                        </div>}
                     </InfiniteScroll>
                     <Skeleton width={500}></Skeleton>
                 </div>

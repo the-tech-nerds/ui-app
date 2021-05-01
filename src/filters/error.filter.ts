@@ -17,6 +17,7 @@ export class ErrorHandler {
 
   handle() {
     const { status, message } = this.error;
+    console.log(this.error);
     // if (status === HttpStatus.UNAUTHORIZED) {
     //   return this.response.redirect('/logout');
     // } 

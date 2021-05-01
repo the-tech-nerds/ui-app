@@ -124,12 +124,12 @@ const TopBar = (props) => {
                     </button>
                 </div>
                 <div className="d-flex align-items-center col-xs-2 other-nav-items">
-                    {isLogin && <a href="/user/wishlist" className="d-flex items-center text-danger" replace>
+                    {isLogin && <Link href="/views/wishlist" as="/user/wishlist" className="d-flex items-center text-danger" replace>
                         <span className="text-danger">
                             <i className="fa fa-heart mr-2"></i> 
                             <span className="badge badge-secondary">{wishlist.length}</span>
                         </span>
-                    </a>}
+                    </Link>}
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props}/>}
                         {!isLogin && <DropdownBeforeLogin props={props}/>}

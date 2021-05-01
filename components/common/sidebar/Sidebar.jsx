@@ -16,16 +16,30 @@ const SideBarItem = ({
     slug,
     selected = false
 }) => {
-    const subItemsWithOutChildren = <Link href={`/${slug}`} key={index} onClick={() =>{
-      //  window.location.href=`/${slug}`;
-    }}>
-        <li key={index} className="p-1">
+    const subItemsWithOutChildren = <Link
+        href={{
+            pathname: '/views/category/[slug]',
+            query: { slug: slug },
+        }}
+        as={`/${slug}`}
+        key={slug} onClick={() =>{
+        //  window.location.href=`/${slug}`;
+        }}>
+        <li key={slug} className="p-1">
             {icon && <i className={`fa fa-${icon} p-1`} />}{name}
         </li>
     </Link>;
-    const subItemsWithChildren = children ? <div key={index} className="d-flex flex-column">
+    const subItemsWithChildren = children ? <div key={slug} className="d-flex flex-column">
         <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={() => onToggle(index)}>
-            <Link href={`/${slug}`}><span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span></Link>
+            <Link
+                href={{
+                    pathname: '/views/category/[slug]',
+                    query: { slug: slug },
+                  }}
+                  as={`/${slug}`}
+            >
+                <span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span>
+            </Link>
             {children.length > 0 && <span onClick={() => onToggle(index)}>
                 {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" />}
                 {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" />}

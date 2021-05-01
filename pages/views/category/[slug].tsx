@@ -53,6 +53,7 @@ type CategroyProductProps = {
 }
 
 const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
+    console.log(slug);
     return (
         <div>
             <Head>
