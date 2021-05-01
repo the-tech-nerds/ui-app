@@ -1,22 +1,18 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
-import {SIDEBAR_STATUS} from "../../../../constants/app_constant";
+import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
 import Link from 'next/link';
-import {useSelector} from "react-redux";
-import {fetchItemsForCategory} from "../../../../actions";
+import { useSelector } from "react-redux";
+import { fetchItemsForCategory } from "../../../../actions";
 const SideBar = () => {
-    const [menu, setMenu] = useState([]);
-    const { categories } = useSelector(state => ({
-        categories: state.categories?.list?.menus,
-    }));
+
     useEffect(() => {
-        setMenu(categories);
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
-        if(sideBarStatus === 'close'){
+        if (sideBarStatus === 'close') {
             closemyslide.classList.remove('open-side');
             document.getElementById('app-body').classList.remove('left-sidebar_space')
-        } else{
+        } else {
             closemyslide.classList.add('open-side');
             document.getElementById('app-body').classList.add('left-sidebar_space')
         }
@@ -41,7 +37,7 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensub1')
         }
     }
-   const handleSubTwoMenu = (event) => {
+    const handleSubTwoMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -54,7 +50,7 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensub2')
         }
     }
-   const handleSubThreeMenu = (event) => {
+    const handleSubThreeMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -67,7 +63,7 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensub3')
         }
     }
-   const handleSubFourMenu = (event) => {
+    const handleSubFourMenu = (event) => {
         if (event.target.classList.contains('sub-arrow'))
             return;
 
@@ -91,14 +87,14 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensidesubmenu')
         }
     }
-        return (
-            <div id="mySidenav" className="sidenav card">
-                <nav>
-                    {menu && <SideMenu items={menu} />}
-                </nav>
-            </div >
+    return (
+        <div id="mySidenav" className="sidenav card">
+            <nav>
+                <SideMenu />
+            </nav>
+        </div >
 
-        )
+    )
 }
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import {SIDEBAR_MENU, SIDEBAR_STATUS, USER_DASHBOARD} from "../../../constants/app_constant";
-import {useSelector} from "react-redux";
+import { SIDEBAR_MENU, SIDEBAR_STATUS, USER_DASHBOARD } from "../../../constants/app_constant";
+import { useSelector } from "react-redux";
 const MENU_STATUS = {
     EXPANDED: true,
     COLLAPSED: false
@@ -17,8 +17,8 @@ const SideBarItem = ({
     slug,
     selected = false
 }) => {
-    const subItemsWithOutChildren = <Link href={`/${slug}`} key={index} onClick={() =>{
-      //  window.location.href=`/${slug}`;
+    const subItemsWithOutChildren = <Link href={`/${slug}`} key={index} onClick={() => {
+        //  window.location.href=`/${slug}`;
     }}>
         <li key={index} className="p-1">
             {icon && <i className={`fa fa-${icon} p-1`} />}{name}
@@ -42,7 +42,7 @@ const SideBarItem = ({
                     status={child.status}
                     icon={child.icon}
                     slug={child.slug}
-                    selected= {child.selected}
+                    selected={child.selected}
                 />)
             }</ul>)
         }
@@ -55,11 +55,13 @@ const SideBarItem = ({
     );
 };
 
-export const SideMenu = ({
-    items = [],
-}) => {
-    const { total } = useSelector(state => ({
+export const SideMenu = () => {
+    // const { items } = useSelector(state => ({
+    //     items: state.categories?.list?.menus,
+    // }));
+    const { total = 0, items = [] } = useSelector(state => ({
         total: state.categories?.list?.total,
+        items: state.categories?.list?.menus,
     }));
     const createMenu = useCallback((items) => {
         const createIndividualMenu = (item) => {
@@ -87,17 +89,17 @@ export const SideMenu = ({
         setMenu(itemsToChange);
         // store_sidebar
         const sideMenu = {
-            menus:itemsToChange,
+            menus: itemsToChange,
             total: total
         }
         localStorage.setItem(SIDEBAR_MENU, JSON.stringify(sideMenu));
     }
     useEffect(() => {
         let menuItems = localStorage.getItem(SIDEBAR_MENU) || null;
-        if(menuItems){
+        if (menuItems) {
             menuItems = JSON.parse(menuItems);
         }
-        if(!menuItems || Number(menuItems.total) !== total){
+        if (!menuItems || menuItems?.total !== total) {
             setMenu(createMenu(items));
         }
         else {
@@ -115,7 +117,7 @@ export const SideMenu = ({
                 status={item.status}
                 icon={item.icon}
                 slug={item.slug}
-                selected= {item.selected}
+                selected={item.selected}
             />)}
         </div>
     );
