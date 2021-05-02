@@ -6,7 +6,7 @@ import {UserUpdateRequest} from "../requests/user_update.request";
 import {UpdatePhoneRequest} from "../requests/update-phone.request";
 import {UpdateEmailRequest} from "../requests/update-email.request";
 
-@Injectable()
+// @Injectable()
 export class UserService {
     constructor( private readonly gatewayService: GatewayService) {}
 

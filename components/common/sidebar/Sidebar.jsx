@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import {SIDEBAR_MENU, SIDEBAR_STATUS, USER_DASHBOARD} from "../../../constants/app_constant";
 const MENU_STATUS = {
     EXPANDED: true,
     COLLAPSED: false
@@ -10,6 +9,7 @@ const SideBarItem = ({
     name = "",
     children = null,
     onToggle = () => { },
+    onSelect = () => { },
     index = "",
     status = MENU_STATUS.COLLAPSED,
     icon = null,
@@ -25,37 +25,39 @@ const SideBarItem = ({
         key={slug} onClick={() =>{
         //  window.location.href=`/${slug}`;
         }}>
-        <li key={slug} className="p-1">
+        <li key={slug} className={`p-1 ${selected ? 'item-selected' : ''}`}>
             {icon && <i className={`fa fa-${icon} p-1`} />}{name}
         </li>
     </Link>;
     const subItemsWithChildren = children ? <div key={slug} className="d-flex flex-column">
-        <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={() => onToggle(index)}>
-            <Link
+        <Link
                 href={{
                     pathname: '/views/category/[slug]',
                     query: { slug: slug },
                   }}
                   as={`/${slug}`}
             >
-                <span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span>
-            </Link>
-            {children.length > 0 && <span onClick={() => onToggle(index)}>
-                {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" />}
-                {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" />}
-            </span>}
-        </li>
+            <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={() => { onSelect(index); }}>
+                
+                    <span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span>
+                        {children.length > 0 && <span className="nav-toggle-icon" onClick={() => onToggle(index)}>
+                    {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" onClick={() => onToggle(index)}/>}
+                    {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" onClick={() => onToggle(index)} />}
+                </span>}
+            </li>
+        </Link>
         {children.length > 0 && status === MENU_STATUS.EXPANDED && (<ul className='vl'>
             {children.map(child =>
                 <SideBarItem
                     name={child.name}
                     children={child.children}
                     index={child.index}
-                    onToggle={() => onToggle(child.index)}
+                    onToggle={onToggle}
+                    onSelect={onSelect}
                     status={child.status}
                     icon={child.icon}
                     slug={child.slug}
-                    selected= {child.selected}
+                    selected={child.selected}
                 />)
             }</ul>)
         }
@@ -68,9 +70,7 @@ const SideBarItem = ({
     );
 };
 
-export const SideMenu = ({
-    items = [],
-}) => {
+export const SideMenu = ({ items = [] }) => {
     const createMenu = useCallback((items) => {
         const createIndividualMenu = (item) => {
             return {
@@ -83,7 +83,7 @@ export const SideMenu = ({
                 selected: false,
             };
         }
-        return items.map(item => createIndividualMenu(item))
+        return items && items.length ? items.map(item => createIndividualMenu(item)) : [];
     }, [items])
     const [menu, setMenu] = useState(null);
     const toggleMenu = (index) => {
@@ -91,21 +91,21 @@ export const SideMenu = ({
             ...item,
             children: item.children ? updateItems(item.children, index) : null,
             status: item.index === index ? item.status = !item.status : item.status,
-            selected: item.index === index
         }));
         const itemsToChange = updateItems(menu, index);
         setMenu(itemsToChange);
-        localStorage.setItem(SIDEBAR_MENU, JSON.stringify(itemsToChange));
     }
-
+    const selectMenu = (index) => {
+        const updateItems = (items, index) => items.map(item => ({
+            ...item,
+            children: item.children ? updateItems(item.children, index) : null,
+            selected: item.index === index,
+        }));
+        const itemsToChange = updateItems(menu, index);
+        setMenu(itemsToChange);
+    }
     useEffect(() => {
-        const menus = localStorage.getItem(SIDEBAR_MENU) || null
-        if(!menus){
             setMenu(createMenu(items));
-        }
-        else {
-            setMenu(JSON.parse(menus))
-        }
     }, [items])
 
     return (
@@ -115,10 +115,11 @@ export const SideMenu = ({
                 children={item.children}
                 index={item.index}
                 onToggle={toggleMenu}
+                onSelect={selectMenu}
                 status={item.status}
                 icon={item.icon}
                 slug={item.slug}
-                selected= {item.selected}
+                selected={item.selected}
             />)}
         </div>
     );

@@ -11,7 +11,6 @@ export class ProductController {
     async getProductItemsBySearchParamView(
         @Param('q') query: string
     ) {
-        console.log(query);
         return {
             query: query
         };
@@ -21,7 +20,6 @@ export class ProductController {
     async getProductItemsBySearchParam(
         @Param('q') query: string
     ) {
-        console.log(query);
         return this.productService.getProductsBySearchParam(query);
     }
     @Get('product/:slug')

@@ -22,10 +22,11 @@ export class CategoryController {
         };
     }
 
-    @Get('/category-product/:slug')
+    @Get('/category-product/:shop/:slug')
     async getProductItemsByCategorySlug(
-        @Param('slug') slug: string
+        @Param('slug') slug: string,
+        @Param('shop') shopId: string,
     ) {
-        return this.categoryService.getProductsByCategorySlug(slug);
+        return this.categoryService.getProductsByCategorySlug(slug, shopId);
     }
 }

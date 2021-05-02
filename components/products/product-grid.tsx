@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {Skeleton} from '../../components/skeleton-loader/skeletons';
 import {Product} from 'types';
 import { CircularProgress } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 type ProductGridProps = {
     slug: string;
@@ -22,7 +23,6 @@ const ProductGrid = (props: ProductGridProps) => {
     useEffect(() => {
         setProducts([]);
         setFetched({});
-        console.log(products);
         if (!products.length) {
             fetchData();
         }
@@ -48,11 +48,13 @@ const ProductGrid = (props: ProductGridProps) => {
         }    
     }
 
-    const items = products.map((product, index) =>
-        <ProductGridSingle
-            key={product.slug}
-            product={product}
-        />
+    const items = products
+                .filter(product => product.productVariances && product.productVariances.length > 0)
+                .map((product) =>
+                    <ProductGridSingle
+                        key={product.slug}
+                        product={product}
+                    />
     );
 
     if (!products.length) {

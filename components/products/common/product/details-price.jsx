@@ -21,7 +21,7 @@ const DetailsWithPrice = (props) => {
 
     const dispatch = useDispatch();
     const addToWishList = () => {
-        dispatch(addItemToWishlist( item.product_variances[variance_index]));
+        dispatch(addItemToWishlist(item.product_variances[variance_index]));
     }
 
     const onOpenModal = () => {
@@ -76,7 +76,7 @@ const DetailsWithPrice = (props) => {
     return (
         <div className="col-lg-6 rtl-text">
             <div className="product-right">
-                <h2> {item.productInfo.name} </h2>
+                <h2> {item.product_variances[variance_index].title} </h2>
                 {/*<h4>*/}
                 {/*    <del>{symbol}{item.product_variances[0].price}</del>*/}
                 {/*    <span>{item.discount}% off</span></h4>*/}
@@ -153,7 +153,7 @@ const DetailsWithPrice = (props) => {
                     </div>
                 </div>
                 <div className="product-buttons" >
-                    <button disabled={item.product_variances[variance_index].stock_count < quantity}  className="btn btn-solid" onClick={() => addToCartClicked(item, quantity)}>add to cart</button>
+                    <button disabled={item.product_variances[variance_index].stock_count < quantity} className="btn btn-solid" onClick={() => addToCartClicked(item, quantity)}>add to cart</button>
                     <a href={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid" onClick={() => BuynowClicked(item, quantity)} >buy now</a>
                 </div>
                 <div className="border-product">

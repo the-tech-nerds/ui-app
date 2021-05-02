@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import { Dashboard as ComponentDashboard } from '../../components/pages/dashboard';
 import '../../components/styles/user_dashbord.module.scss'
+import { UserService } from 'src/app/user/services/user.service';
 const Dashboard = ({ user }) => (<div>
     <Head>
         <title>Khan Fresh Corner | User Dashboard.</title>
