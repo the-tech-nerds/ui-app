@@ -126,13 +126,13 @@ const TopBar = (props) => {
                 </div>
                 <div className="d-flex align-items-center col-xs-2 other-nav-items">
                     {isLogin && <Link href="/views/wishlist" as="/user/wishlist" className="d-flex items-center text-danger" replace>
-                        <span className="text-danger">
+                        <span className="text-danger additional-menu">
                             <i className="fa fa-heart mr-2"></i>
                             <span className="badge badge-secondary">{wishlist?.length}</span>
                         </span>
                     </Link>}
                     <Link href="/views/shops" as="/shops/select" className="d-flex items-center text-dark cursor-pointer" replace>
-                        <span className="text-light">
+                        <span className="text-light additional-menu">
                             <i className="fa fa-home ml-4 mr-2"></i>
                             <span className="badge badge-secondary">{currentShop ? currentShop.name : ''}</span>
                         </span>
