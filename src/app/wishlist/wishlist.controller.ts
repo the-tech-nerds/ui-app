@@ -14,7 +14,6 @@ export class WishlistController {
     }
     @Post('wishlist/create')
     async addWishlist(@Body() wishlistRequest: any, @Req() req: any, @Res() res: any) {
-        console.log(wishlistRequest);
         const data = req.headers.access_token || null;
         if (!data) {
             res.redirect('/login');

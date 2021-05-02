@@ -15,7 +15,7 @@ class Root extends React.Component {
 
     render() {
         const { children } = this.props;
-        store.dispatch(getAllProducts());
+        // store.dispatch(getAllProducts());
 
         return(
         	<Provider store={store}>

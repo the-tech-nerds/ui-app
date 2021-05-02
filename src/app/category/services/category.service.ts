@@ -12,9 +12,12 @@ export class CategoryService {
         })
     }
 
-    async getProductsByCategorySlug(slug: string) {
+    async getProductsByCategorySlug(slug: string, shopId: string) {
         return this.gatewayService.execute('product', {
-            path: `/api/v1/category/${slug}/products?limit=20`,
+            path: `/api/v1/category/${slug}/products`,
+            qs: {
+                shop_id: shopId,
+            },
             method: 'GET'
         })
     }

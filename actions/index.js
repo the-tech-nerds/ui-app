@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 export * from './action-wishilist';
 export * from './action-login';
 export * from './action-category';
+export * from './action-shop';
+
 
 export const fetchProductsBegin = () => ({
     type: types.FETCH_PRODUCTS_BEGIN

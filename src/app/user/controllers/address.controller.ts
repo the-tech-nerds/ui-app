@@ -12,7 +12,6 @@ export class AddressController {
     @Render('address')
     async index() {
         const response = await this.addressService.getAllByUserId();
-        console.log(response);
         return { 'address': response };
     }
     @Get('/cities')

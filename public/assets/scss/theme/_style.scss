@@ -14338,7 +14338,7 @@ a:hover {
 // .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child {
 //   height: 100% !important;
 // }
-@media screen and (min-width: 769px) {  
+@media screen and (min-width: 1024px) {  
   .logo-container {
     margin-left: 90px;
   }
@@ -14348,13 +14348,19 @@ a:hover {
   }
 }
 
-@media screen and (min-device-width: 481px) and (max-device-width: 768px) { 
+@media screen and (min-width: 769px) and (max-width: 1023px) { 
+  .search-autocomplete {
+    width: 360px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) { 
   .search-autocomplete {
     width: 220px;
   }
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (min-width: 320px) and (max-width: 480px) {
   .logo-container {
     display: none !important;
   }
@@ -14364,7 +14370,7 @@ a:hover {
   }
 }
 
-@media only screen and (max-device-width: 560px) {
+@media only screen and (max-width: 560px) {
   #mySidenav {
     margin-top: 60px;
   }
@@ -14387,4 +14393,22 @@ a:hover {
 
 .MuiAutocomplete-inputRoot[class*="MuiInput-root"] {
   height: 100%;
+}
+
+.nav-toggle-icon {
+  width: 40px;
+  float: right;
+  text-align: right;
+}
+
+.shop {
+  max-width: 250px;
+  cursor: pointer;
+  &:hover {
+    border: solid blue 1px;
+  }
+}
+
+.shop--selected {
+  border: solid blue 1px;
 }

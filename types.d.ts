@@ -22,7 +22,34 @@ export type Product = {
     images: Image[];
 };
 
-export type Category = {};
+export type Category = {
+    id: number;
+    name: string;
+    slug: string;
+    parent_id: number | null;
+    children: Category[];
+    images: Image[];
+};
+
+export type Shop = {
+    id: number;
+    name: string;
+    description: string;
+    type_id: number;
+    is_active: boolean;
+    address: string;
+}
+
+export type AxiosDefaultResponseData<T> = {
+    message: string[];
+    data: T;
+    code: number;
+}
+
+export type AxiosDefaultResponse<T> = {
+    status: number;
+    data: AxiosDefaultResponseData<T>,
+}
 
 
 declare module 'react-redux-multilingual';

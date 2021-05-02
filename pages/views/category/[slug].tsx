@@ -5,7 +5,8 @@ import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
 import ComponentCategoryHeader from '../../../components/categories/category-header';
 import ProductGrid from '../../../components/products/product-grid';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
+import { Category, Shop } from 'types';
 
 type CategoryListProps = {
     slug: string;
@@ -13,21 +14,34 @@ type CategoryListProps = {
 
 const CategoryList = ({slug}: CategoryListProps) => {
     const [categories, setCategories] = useState([]);
-    const [currentCategory, setcurrentategory] = useState(null);
-    const { menus } = useSelector(state => ({
-        menus: state.categories?.list?.menus,
-    }));
+    const [currentCategory, setcurrentcategory] = useState(null);
+    const menus: Category[] = useSelector(state => state.categories.list);
+
     useEffect(() => {
-        for (let category of menus) {
-            if (category.slug === slug) {
-                setcurrentategory(category);
-                if (category.children && category.children.length > 0) {
-                    setCategories(category.children);
+        const searchForCategorySlug = 
+        (cateogryList: Category[] = [], searchSlug: string = ''): Category | null =>  {
+            let foundCategory = null;
+            for (let category of cateogryList) {
+                if (category.slug === searchSlug) {
+                    foundCategory = category;
+                    break;
+                }
+                
+                const matchedCategory = searchForCategorySlug(category.children, searchSlug);
+                if (matchedCategory) {
+                    foundCategory = matchedCategory;
                     break;
                 }
             }
+            return foundCategory;
         }
-    }, []);
+                
+        const selectedCategory: Category = searchForCategorySlug(menus, slug);
+        if (selectedCategory) {
+            setcurrentcategory(selectedCategory);
+            setCategories(selectedCategory.children);
+        }
+    }, [slug]);
 
     if (!categories.length) {
         return <span/>
@@ -47,7 +61,8 @@ type ProductListProps = {
 }
 
 const ProductList = ({slug, fetchUrl}: ProductListProps) => {
-    return <ProductGrid slug={slug} fetchUrl={'/category-product/' + slug}/>
+    const currentShop: Shop = useSelector(state => state.shops.current);
+    return currentShop ? <ProductGrid slug={slug} fetchUrl={'/category-product/' + currentShop.id + '/' + slug} /> : <span />
 };
 
 type CategroyProductProps = {

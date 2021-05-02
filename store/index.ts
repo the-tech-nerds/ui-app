@@ -2,13 +2,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 // middlewares
 import thunkMiddleware from 'redux-thunk'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 
 // Import custom components
 import rootReducer from '../reducers';
 
 
-function saveToLocalStorage(state) {
+function saveToLocalStorage(state: any = {}) {
     try {
         if (typeof window !== 'undefined' && window.localStorage) {
             const serializedState = JSON.stringify(state)
@@ -46,6 +46,8 @@ const store = createStore(rootReducer, persistedState, compose(
         return f;
     }
 ));
+
+export type AppDispatch = typeof store.dispatch;
 
 const unsubscribe = store.subscribe(() => {
     const state = store.getState();

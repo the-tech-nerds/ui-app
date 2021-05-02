@@ -27,7 +27,11 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST'
 export const FETCH_WISHLIST = 'FETCH_WISHLIST';
 
 // Category
-export const FETCH_CATEGORY = 'FETCH_WISHLIST';
+export const FETCH_CATEGORY = 'FETCH_CATEGORY';
+
+// SHOPS
+export const FETCH_SHOPS = 'FETCH_SHOPS';
+export const SELECT_SHOP = 'SELECT_SHOP';
 
 // Compare
 export const ADD_TO_COMPARE = 'ADD_TO_COMPARE'

@@ -5,7 +5,6 @@ import { FormControlLabel, FormLabel, Grid, makeStyles, Paper, Radio, RadioGroup
 import Image from "../image/image";
 
 const CategoryList = ({ categories = [], category = {} }) => {
-
     return (
         <section className="ratio_asos section-b-space">
             <div className="container">
@@ -36,21 +35,21 @@ const CategoryItem = ({ categories = [] }) => {
         <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
                 <Grid container justify="center" spacing={spacing}>
-                    {categories.map((value) => (
-                        <Grid key={value} item>
+                    {categories.map((category) => (
+                        <Grid key={category.name} item>
                             <Paper className={`${classes.paper} hover-item p-2`} onClick={() => {
-                                window.location.href = `/${value.slug}`;
+                                window.location.href = `/${category.slug}`;
                             }} >
                                 <div className="text-center">
                                     <Image
-                                        src={`${value.images[0]}`}
+                                        src={`${category.images[0]}`}
                                         width={'146px'}
                                         height={'150px'}
                                         alt="click to view"
                                     />
                                 </div>
                                 <div className=" text-center mt-1">
-                                    {value.name}
+                                    {category.name}
                                 </div>
                             </Paper>
                         </Grid>

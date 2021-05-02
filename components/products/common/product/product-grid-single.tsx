@@ -29,7 +29,7 @@ const ProductGridSingle = ({
                     </div> */}
                 <div className="front">
                     <a href={`/product/${product.slug}`} >
-                        <Image src={product?.images?.length ? product.images[0].url : ''} height={150} width={200} alt={product.name}
+                        <Image src={product?.productVariances[0].images?.length ? product?.productVariances[0].images[0].url : ''} height={150} width={200} alt={product.name}
                         />
                     </a>
                 </div>

@@ -4,9 +4,16 @@ import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
 import Link from 'next/link';
 import { useSelector } from "react-redux";
 import { fetchItemsForCategory } from "../../../../actions";
+
 const SideBar = () => {
+    const { items = [] } = useSelector(state => ({
+        items: state.categories?.list,
+    }));
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
+        setCategories(items);
+
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
         if (sideBarStatus === 'close') {
@@ -87,10 +94,12 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensidesubmenu')
         }
     }
+
+  
     return (
         <div id="mySidenav" className="sidenav card">
             <nav>
-                <SideMenu />
+                <SideMenu items={categories} />
             </nav>
         </div >
 

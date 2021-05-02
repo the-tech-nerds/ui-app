@@ -12,6 +12,6 @@ export const fetchItemsForCategory = () => (dispatch) => {
 }
 
 export const fetchCategories = (categories) => ({
-    type: types.FETCH_WISHLIST,
+    type: types.FETCH_CATEGORY,
     categories
 });

@@ -6,20 +6,22 @@ import App from 'next/'
 import '../pages/index.scss';
 import '../components/common/index.scss';
 import store from 'store';
-import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory } from 'actions';
+import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory, fetchItemsForShop } from 'actions';
 import { GetStaticProps } from 'next';
+import Root from 'components/layouts/Root';
 
 const initialActions = () => {
   store.dispatch(checkLogin());
   store.dispatch(fetchItemsForWishlist());
   store.dispatch(fetchItemsForCategory());
+  store.dispatch(fetchItemsForShop());
 };
 
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   initialActions();
   return (
-   <Provider store={store}>
+   <Root>
       <div>
       {/* <div style={{ flexBasis: '30%', margin: 25 }}>
         <Sidebar />
@@ -28,17 +30,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </div>
     </div>
-   </Provider>
+   </Root>
   );
 };
-
-// export const getServerSideProps: GetStaticProps = async () => {
-//   console.log('here');
-//   store.dispatch(fetchWishlist());
-//   return {
-//     props: {},
-//   }
-// }
 
 
 export default MyApp;

@@ -13,9 +13,10 @@ import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
 import SearchSuggestionBlock from './../../../products/common/product/search-suggestion-block'
 
 const TopBar = (props) => {
-    const { wishlist, isLogin } = useSelector(state => ({
+    const { wishlist, isLogin, currentShop = null } = useSelector(state => ({
         wishlist: state.wishlist.list,
         isLogin: state.login.isLoggedIn,
+        currentShop: state.shops.current,
     }));
     const [SuggestionList, setSuggestionList] = useState([]);
     const router = useRouter();
@@ -124,15 +125,21 @@ const TopBar = (props) => {
                     </button>
                 </div>
                 <div className="d-flex align-items-center col-xs-2 other-nav-items">
-                    {isLogin && <a href="/user/wishlist" className="d-flex items-center text-danger" replace>
+                    {isLogin && <Link href="/views/wishlist" as="/user/wishlist" className="d-flex items-center text-danger" replace>
                         <span className="text-danger">
                             <i className="fa fa-heart mr-2"></i>
                             <span className="badge badge-secondary">{wishlist?.length}</span>
                         </span>
-                    </a>}
+                    </Link>}
+                    <Link href="/views/shops" as="/shops/select" className="d-flex items-center text-dark cursor-pointer" replace>
+                        <span className="text-light">
+                            <i className="fa fa-home ml-4 mr-2"></i>
+                            <span className="badge badge-secondary">{currentShop ? currentShop.name : ''}</span>
+                        </span>
+                    </Link>
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props} />}
-                        {!isLogin && <DropdownBeforeLogin props={props} />}
+                    {!isLogin && <DropdownBeforeLogin props={props} />}
                     </ul>
                 </div>
             </div>

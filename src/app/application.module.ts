@@ -14,6 +14,7 @@ import { CategoryModule } from './category/category.module';
 import { resolve } from 'path';
 import { ProductModule } from './product/product.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { WishlistModule } from './wishlist/wishlist.module';
     HomeModule,
     CategoryModule,
     ProductModule,
-    WishlistModule
+    WishlistModule,
+    ShopModule
   ],
   controllers: [AppController],
   providers: [AppService],
