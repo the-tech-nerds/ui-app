@@ -1,18 +1,22 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SideMenu } from '../../sidebar/Sidebar';
 import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
-import Link from 'next/link';
-import { useSelector } from "react-redux";
-import { fetchItemsForCategory } from "../../../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { setSideMenu } from '../../../../actions/action-menu';
 
 const SideBar = () => {
-    const { items = [] } = useSelector(state => ({
+    const { items = [], menu = [] } = useSelector(state => ({
         items: state.categories?.list,
+        menu: state.menus.menu,
     }));
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        setCategories(items);
+        if (menu.length) {
+            setCategories(menu);
+        } else {
+            setCategories(items);
+        }
 
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
@@ -23,7 +27,7 @@ const SideBar = () => {
             closemyslide.classList.add('open-side');
             document.getElementById('app-body').classList.add('left-sidebar_space')
         }
-    }, []);
+    }, [items, menu]);
 
     const closeNav = () => {
         var closemyslide = document.getElementById("mySidenav");
@@ -95,11 +99,16 @@ const SideBar = () => {
         }
     }
 
+    const dispatch = useDispatch();
+    
   
     return (
         <div id="mySidenav" className="sidenav card">
             <nav>
-                <SideMenu items={categories} />
+                <SideMenu 
+                    items={categories} 
+                    setSideMenu={(menu) => dispatch(setSideMenu(menu))}
+                />
             </nav>
         </div >
 

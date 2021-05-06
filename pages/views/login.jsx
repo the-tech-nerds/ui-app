@@ -9,9 +9,7 @@ const Login = () => (<div>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Root>
-        <ComponentLogin />
-    </Root>
+    <ComponentLogin />
 </div>)
 
 export async function getServerSideProps(ctx) {

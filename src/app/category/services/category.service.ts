@@ -5,10 +5,13 @@ import { Injectable } from "@nestjs/common";;
 export class CategoryService {
     constructor(private readonly gatewayService: GatewayService) { }
 
-    async getAll() {
+    async getAll(shopTypeId: string = undefined) {
         return this.gatewayService.execute('product', {
             path: '/api/v1/category/menu/all',
-            method: 'GET'
+            method: 'GET',
+            qs: {
+                shop_type_id: shopTypeId,
+            }
         })
     }
 

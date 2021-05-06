@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-responsive-modal';
-import wishlistReducer from 'reducers/wishlist';
-import { ADD_TO_WISHLIST } from 'constants/ActionTypes';
 import { addItemToWishlist } from '../../../../actions';
 
 
 const DetailsWithPrice = (props) => {
     const [open, setOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
-    const [nav3, setNav3] = useState(null);
     const [variance_index, setVariance_index] = useState(0);
     const [stock, setStock] = useState(null);
     const { item } = props;
@@ -64,14 +60,6 @@ const DetailsWithPrice = (props) => {
         setStock(stock);
     }
     // const { symbol, item, addToCartClicked, BuynowClicked, addToWishlistClicked } = props;
-
-    var colorsnav = {
-        slidesToShow: 6,
-        swipeToSlide: true,
-        arrows: false,
-        dots: false,
-        focusOnSelect: true
-    };
 
     return (
         <div className="col-lg-6 rtl-text">

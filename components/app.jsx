@@ -13,23 +13,28 @@ import FooterThree from "./common/footers/footer-three";
 
 // ThemeSettings
 import ThemeSettings from "./common/theme-settings"
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItemsForCategory } from 'actions';
 
 
 
-class App extends Component {
-
-    render() {
-        return (
-            <div>
-                <HeaderThree logoName={'logo.png'} />
-                <div className="app-body" id="app-body">
-                    {this.props.children}
-                    <FooterOne logoName={'logo.png'} />
-                    <ThemeSettings />
-                </div>
-            </div>
-        );
+const App = ({ children }) => {
+    const currentShop = useSelector(state => state.shops.current);
+    const dispatch = useDispatch();
+    if (currentShop) {
+      dispatch(fetchItemsForCategory(currentShop.type_id));
     }
+    return (
+        <div>
+            <HeaderThree logoName={'logo.png'} />
+            <div className="app-body" id="app-body">
+                {children}
+                <FooterOne logoName={'logo.png'} />
+                <ThemeSettings />
+            </div>
+        </div>
+    );
 }
+
 
 export default withTranslate(App);

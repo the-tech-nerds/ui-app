@@ -6973,7 +6973,7 @@ footer p {
   -webkit-box-shadow: -1px 2px 5px 1px #ececec;
           box-shadow: -1px 2px 5px 1px #ececec;
 }
-.demo-section .demo-effects > div .layout-container.demo1 {
+/* .demo-section .demo-effects > div .layout-container.demo1 {
   background-image: url("/assets/images/landing-page/demo/1.jpg");
 }
 .demo-section .demo-effects > div .layout-container.demo2 {
@@ -7226,7 +7226,7 @@ footer p {
 }
 .demo-section .demo-effects:hover .layout-container {
   background-position: center 100% !important;
-}
+} */
 
 @-webkit-keyframes ring-rotate {
   0% {

@@ -2,11 +2,13 @@ import React from 'react';
 import Breadcrumb from "../../../common/breadcrumb";
 import {utils} from "../index";
 import UserProfilePic from "./user-profile-pic";
+import Link from 'next/link';
 export default  function UserDashboard({name,title,component}){
     const menuList = [];
-    const sideMenus =utils.getSideMenus(name);
+    const sideMenus = utils.getSideMenus(name);
+
     sideMenus.forEach((menu)=>{
-        menuList.push(  <li className={menu.className} key={menu.id.toString()}><a className={menu.className} href={menu.url}>{menu.name}</a></li>)
+        menuList.push(<li className={menu.className} key={menu.id.toString()}><Link className={menu.className} href={menu.href} as={menu.as}>{menu.name}</Link></li>)
     })
 
 

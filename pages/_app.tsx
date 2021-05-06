@@ -1,20 +1,18 @@
 import { FC } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import type { AppContext, AppProps } from 'next/app';
-import App from 'next/'
-// import Sidebar from '../components/sidebar';
+import App from 'next/';
 import '../pages/index.scss';
 import '../components/common/index.scss';
 import store from 'store';
-import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory, fetchItemsForShop } from 'actions';
-import { GetStaticProps } from 'next';
+import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory, fetchItemsForShop, fetchUserDetails } from 'actions';
 import Root from 'components/layouts/Root';
 
 const initialActions = () => {
-  store.dispatch(checkLogin());
-  store.dispatch(fetchItemsForWishlist());
-  store.dispatch(fetchItemsForCategory());
   store.dispatch(fetchItemsForShop());
+  store.dispatch(checkLogin());
+  store.dispatch(fetchUserDetails());
+  store.dispatch(fetchItemsForWishlist());
 };
 
 

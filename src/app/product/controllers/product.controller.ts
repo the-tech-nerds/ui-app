@@ -16,12 +16,24 @@ export class ProductController {
         };
     }
 
-    @Get('/product/search/:q')
+    @Get('/product/search/:shop/:q')
     async getProductItemsBySearchParam(
-        @Param('q') query: string
+        @Param('q') query: string,
+        @Param('shop') shopId: string,
     ) {
-        return this.productService.getProductsBySearchParam(query);
+        return this.productService.getProductsBySearchParam(query, shopId);
     }
+
+    @Get('product-details/:slug')
+    async getProductDetailsBySlug(
+        @Param('slug') slug: string
+    ) {
+        const product = await this.productService.getProductBySlug(slug);
+        return {
+            product,
+        };
+    }
+    
     @Get('product/:slug')
     @Render('product/[product]')
     async getProductBySlug(
@@ -29,7 +41,8 @@ export class ProductController {
     ) {
         const product = await this.productService.getProductBySlug(slug);
         return {
-            product,
+            productDetails: product,
+            slug,
         };
     }
 }

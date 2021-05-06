@@ -13,17 +13,19 @@ import SmallImages from "./common/product/small-image";
 
 class LeftSideBar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        const { productInfo, product_variances } = props.product;
         this.state = {
             open: false,
             nav1: null,
-            nav2: null
+            nav2: null,
+            product: props.product,
+            productInfo,
+            product_variances,
         };
+       
     }
-
-    // document.getElementById('idOfElement').classList.add('newClassName');
-
 
     componentDidMount() {
         this.setState({
@@ -35,12 +37,13 @@ class LeftSideBar extends Component {
     filterClick() {
         document.getElementById("filter").style.left = "-15px";
     }
+
     backClick() {
         document.getElementById("filter").style.left = "-365px";
     }
 
     getImagesList = (product, variances) => {
-        let images = product.images || [];
+        let images = [];
         variances.forEach((v) => {
             v.images.forEach((i) => {
                 images.push(i);
@@ -49,9 +52,9 @@ class LeftSideBar extends Component {
         return images;
     }
     render() {
-        const { symbol, product } = this.props
-        const { productInfo, product_variances } = product;
-        const imageUrls = this.getImagesList(productInfo, product_variances);
+        const { symbol } = this.props;
+
+        const imageUrls = this.getImagesList(this.state.productInfo, this.state.product_variances);
         var products = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -61,25 +64,20 @@ class LeftSideBar extends Component {
         };
         var productsnav = {
             slidesToShow: 3,
+            slidesToScroll: 1,
             swipeToSlide: true,
             arrows: false,
             dots: false,
-            focusOnSelect: true
+            focusOnSelect: true,
+            infinite: false,
         };
 
         return (
             <div>
-                {/*SEO Support*/}
-                {/*<Helmet>*/}
-                {/*    <title>MultiKart | {item.category} | {item.name}</title>*/}
-                {/*    <meta name="description" content="Multikart – Multipurpose eCommerce React Template is a multi-use React template. It is designed to go well with multi-purpose websites. Multikart Bootstrap 4 Template will help you run multiple businesses." />*/}
-                {/*</Helmet>*/}
-                {/*SEO Support End */}
-
-                <Breadcrumb parent={'Product'} title={product.productInfo.name} />
+                <Breadcrumb parent={'Product'} title={this.state.productInfo.name} />
 
                 {/*Section Start*/}
-                {(product) ?
+                {(this.state.product) ?
                     <section className="section-b-space">
                         <div className="collection-wrapper">
                             <div className="container">
@@ -111,24 +109,18 @@ class LeftSideBar extends Component {
                                             <div className="row">
                                                 <div className="col-lg-6 product-thumbnail">
                                                     <Slider {...products} asNavFor={this.state.nav2} ref={slider => (this.slider1 = slider)} className="product-slick">
-                                                        {imageUrls.length > 0 ?
-                                                            imageUrls.map((vari, index) =>
+                                                            {imageUrls.map((vari, index) =>
                                                                 <div key={index}>
                                                                     <ImageZoom image={vari} />
                                                                 </div>
-                                                            ) :
-                                                            imageUrls.map((vari, index) =>
-                                                                <div key={index}>
-                                                                    <ImageZoom image={vari} />
-                                                                </div>
-                                                            )}
+                                                            ) }
                                                     </Slider>
-                                                    {imageUrls.length > 1 && <SmallImages images={imageUrls} settings={productsnav} navOne={this.state.nav1} />}
+                                                    {imageUrls.length > 0 && <SmallImages images={imageUrls} settings={productsnav} navOne={this.state.nav1} />}
                                                 </div>
-                                                <DetailsWithPrice symbol={symbol} item={product} navOne={this.state.nav1} />
+                                                <DetailsWithPrice symbol={symbol} item={this.state.product} navOne={this.state.nav1} />
                                             </div>
                                         </div>
-                                        <DetailsTopTabs item={product} />
+                                        <DetailsTopTabs item={this.state.product} />
                                     </div>
                                 </div>
                             </div>

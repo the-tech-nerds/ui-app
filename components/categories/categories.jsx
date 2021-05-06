@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import Category from '../../components/categories/category';
 import { FormControlLabel, FormLabel, Grid, makeStyles, Paper, Radio, RadioGroup } from "@material-ui/core";
 import Image from "../image/image";
+import Link from 'next/link';
 
 const CategoryList = ({ categories = [], category = {} }) => {
     return (
@@ -37,21 +38,27 @@ const CategoryItem = ({ categories = [] }) => {
                 <Grid container justify="center" spacing={spacing}>
                     {categories.map((category) => (
                         <Grid key={category.name} item>
-                            <Paper className={`${classes.paper} hover-item p-2`} onClick={() => {
-                                window.location.href = `/${category.slug}`;
-                            }} >
-                                <div className="text-center">
-                                    <Image
-                                        src={`${category.images[0]}`}
-                                        width={'146px'}
-                                        height={'150px'}
-                                        alt="click to view"
-                                    />
-                                </div>
-                                <div className=" text-center mt-1">
-                                    {category.name}
-                                </div>
-                            </Paper>
+                            <Link
+                                href={{
+                                    pathname: '/views/category/[slug]',
+                                    query: { slug: category.slug },
+                                }}
+                                as={`/${category.slug}`}
+                            >
+                                <Paper className={`${classes.paper} hover-item p-2`}>
+                                    <div className="text-center">
+                                        <Image
+                                            src={`${category.images[0]}`}
+                                            width={'146px'}
+                                            height={'150px'}
+                                            alt="click to view"
+                                        />
+                                    </div>
+                                    <div className=" text-center mt-1">
+                                        {category.name}
+                                    </div>
+                                </Paper>
+                            </Link>
                         </Grid>
                     ))}
                 </Grid>

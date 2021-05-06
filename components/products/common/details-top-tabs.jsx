@@ -32,11 +32,11 @@ const DetailsTopTabs = (props) => {
                             <TabPanel className="tab-pane fade mt-4 show active">
                                 <div dangerouslySetInnerHTML={{__html: item.productInfo.description}}></div>
                             </TabPanel>
-                            <TabPanel>
+                            {/* <TabPanel>
                             </TabPanel>
                             <TabPanel>
-                            </TabPanel>
-                            <TabPanel>
+                            </TabPanel> */}
+                            {/* <TabPanel> */}
                                 {/*<form className="theme-form mt-4">*/}
                                 {/*    <div className="form-row">*/}
                                 {/*        <div className="col-md-12 ">*/}
@@ -74,7 +74,7 @@ const DetailsTopTabs = (props) => {
                                 {/*        </div>*/}
                                 {/*    </div>*/}
                                 {/*</form>*/}
-                            </TabPanel>
+                            {/* </TabPanel> */}
                         </Tabs>
                     </div>
                 </div>
