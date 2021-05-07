@@ -67,7 +67,6 @@ const TopBar = (props) => {
                     <input
                         className="form-control search-autocomplete"
                         onFocus={searchInputHandle}
-                        onBlur={() => setSuggestionList([])}
                         onInput={searchInputHandle}
                         onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
                     />
