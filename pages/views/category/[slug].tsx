@@ -1,4 +1,3 @@
-import Root from 'components/layouts/Root';
 import React, {useEffect, useState} from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
@@ -81,10 +80,10 @@ const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
                 <title>Khan Fresh Corner | Category.</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
-            <Root>
+            <div>
                 <CategoryList slug={slug}/>
                 <ProductList slug={slug} />
-            </Root>
+            </div>
         </div>
     )
 }
