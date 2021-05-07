@@ -37,10 +37,10 @@ const SideBarItem = ({
                   }}
                   as={`/${slug}`}
             >
-            <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={() => { onSelect(index); }}>
+            <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={(e) => { e.stopPropagation(); onSelect(index) }}>
                 
                     <span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span>
-                        {children.length > 0 && <span className="nav-toggle-icon" onClick={() => onToggle(index)}>
+                        {children.length > 0 && <span className="nav-toggle-icon" onClick={(e) => { e.stopPropagation(); onToggle(index) }}>
                     {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" onClick={() => onToggle(index)}/>}
                     {status === MENU_STATUS.COLLAPSED && <i className="fa fa-angle-right" onClick={() => onToggle(index)} />}
                 </span>}
@@ -58,6 +58,7 @@ const SideBarItem = ({
                     icon={child.icon}
                     slug={child.slug}
                     selected={child.selected}
+                    key={child.slug}
                 />)
             }</ul>)
         }
@@ -70,30 +71,37 @@ const SideBarItem = ({
     );
 };
 
-export const SideMenu = ({ items = [] }) => {
+export const SideMenu = ({ items = [], setSideMenu = () => {} }) => {
+    const saveMenu = (menu) => {
+        if (items !== menu) {
+            setMenu(menu);
+        }
+    };
     const createMenu = useCallback((items) => {
         const createIndividualMenu = (item) => {
-            return {
+            return {    
                 name: item.name,
                 index: item.id,
                 children: item.children ? item.children.map(child => createIndividualMenu(child)) : null,
-                status: MENU_STATUS.COLLAPSED,
+                status: item.status || MENU_STATUS.COLLAPSED,
                 icon: item.icon,
                 slug: item.slug,
-                selected: false,
+                selected: item.selected || false,
+                id: item.id,
             };
         }
         return items && items.length ? items.map(item => createIndividualMenu(item)) : [];
-    }, [items])
+    }, [items]);
     const [menu, setMenu] = useState(null);
     const toggleMenu = (index) => {
         const updateItems = (items, index) => items.map(item => ({
             ...item,
             children: item.children ? updateItems(item.children, index) : null,
-            status: item.index === index ? item.status = !item.status : item.status,
+            status: item.index === index ? !item.status : item.status,
         }));
         const itemsToChange = updateItems(menu, index);
-        setMenu(itemsToChange);
+        saveMenu(itemsToChange);
+        setSideMenu(itemsToChange);
     }
     const selectMenu = (index) => {
         const updateItems = (items, index) => items.map(item => ({
@@ -102,15 +110,18 @@ export const SideMenu = ({ items = [] }) => {
             selected: item.index === index,
         }));
         const itemsToChange = updateItems(menu, index);
-        setMenu(itemsToChange);
+        saveMenu(itemsToChange);
+        setSideMenu(itemsToChange);
     }
     useEffect(() => {
-            setMenu(createMenu(items));
+        const menu = createMenu(items);       
+        setMenu(menu);
     }, [items])
 
     return (
         <div className="d-flex flex-column sidemenu">
             {menu?.map(item => <SideBarItem
+                key={item.slug}
                 name={item.name}
                 children={item.children}
                 index={item.index}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback } from 'react';
 
 import ProductGridSingle from "./common/product/product-grid-single";
 // @ts-ignore
@@ -6,10 +6,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {Skeleton} from '../../components/skeleton-loader/skeletons';
 import {Product} from 'types';
 import { CircularProgress } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 
 type ProductGridProps = {
-    slug: string;
     fetchUrl: string
 }
 
@@ -17,36 +15,45 @@ type ProductGridProps = {
 const ProductGrid = (props: ProductGridProps) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
+    const [scrolling, setScrolling] = useState(false);
+    const [baseUrl, setBaseUrl] = useState(null);
     const [nextUrl, setNextUrl] = useState(undefined);
     const [fetched, setFetched] = useState<Record<string, true | undefined>>({});
 
     useEffect(() => {
-        setProducts([]);
-        setFetched({});
-        if (!products.length) {
+        if (props.fetchUrl !== baseUrl) {
+             setBaseUrl(props.fetchUrl);
+             setProducts([]);
+             setLoading(false);
+             setFetched({});
+        } else {
             fetchData();
         }
-    }, [props.fetchUrl]);
+    }, [props.fetchUrl, baseUrl]);
 
     const fetchData = async () => {
         if (!loading) {
-            const url = nextUrl ? `${props.fetchUrl}${nextUrl}` : props.fetchUrl;
+            const url = nextUrl ? `${baseUrl}${nextUrl}` : baseUrl;
             if (!fetched[url]) {
                 setLoading(true);
+                if (nextUrl) {
+                    setScrolling(true);
+                }
                 fetch(url)
                 .then(res => res.json())
                 .then(res => {
+                    setLoading(false);
+                    setScrolling(false);
                     setFetched({ ...fetched, [url] : true });
                     if (res.code === 200) {
                         setProducts([...products, ...res.data.results]);
                         const next = res.data.links.next;
                         setNextUrl(next);
                     }
-                    setLoading(false);
-                })   
+                }).catch(e => setLoading(false))  
             }
         }    
-    }
+    };
 
     const items = products
                 .filter(product => product.productVariances && product.productVariances.length > 0)
@@ -56,6 +63,14 @@ const ProductGrid = (props: ProductGridProps) => {
                         product={product}
                     />
     );
+    
+    if (loading && !scrolling) {
+        return (
+            <div className="d-flex justify-content-center m-5">
+                <CircularProgress />
+            </div>
+        );
+    }
 
     if (!products.length) {
         return (
@@ -68,7 +83,7 @@ const ProductGrid = (props: ProductGridProps) => {
     }
 
     return (
-        <div>
+        <div key={props.fetchUrl}>
             <section className="ratio_asos section-b-space">
                 <div className="container">
                     <div className="d-flex">

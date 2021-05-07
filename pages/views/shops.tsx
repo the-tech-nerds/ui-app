@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { Shop } from 'types';
-import { selectShop } from 'actions';
+import { fetchItemsForCategory, selectShop } from 'actions';
 
 type ShopListProps = {
     shops: Shop[];
@@ -18,7 +18,10 @@ const ShopList= ({ shops, current }: ShopListProps) => {
                     key={shop.id} 
                     className={`jumbotron d-flex p-5 m-2 align-items-center justify-content-center
                                 ${current.id === shop.id ? 'shop--selected': ''} shop`}
-                    onClick={() => dispatch(selectShop(shop))}
+                    onClick={() => {
+                        dispatch(selectShop(shop));
+                        dispatch(fetchItemsForCategory(shop.type_id, true))
+                    }}
                 >
                     {shop.name}
                 </div>
@@ -32,7 +35,6 @@ const Shops = () => {
         shops: state.shops.list,
         selected: state.shops.current,
     }));
-    console.log(shops, selected)
     return(
         <div>
             <Head>

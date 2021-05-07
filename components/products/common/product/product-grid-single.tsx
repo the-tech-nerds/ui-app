@@ -27,12 +27,22 @@ const ProductGridSingle = ({
                         {(product.new == true)? <span className="lable3">new</span> : ''}
                         {(product.sale == true)? <span className="lable4">on sale</span> : ''}
                     </div> */}
-                <div className="front">
-                    <a href={`/product/${product.slug}`} >
-                        <Image src={product?.productVariances[0].images?.length ? product?.productVariances[0].images[0].url : ''} height={150} width={200} alt={product.name}
+                <Link 
+                    href={{
+                        pathname: '/views/product/[product]',
+                        query: { product: product.slug },
+                    }}
+                    as={`/product/${product.slug}`}
+                >
+                    <div className="front">
+                        <Image 
+                            src={product?.productVariances[0].images?.length ? product?.productVariances[0].images[0].url : ''} 
+                            height={150}
+                            width={200}
+                            alt={product.name}
                         />
-                    </a>
-                </div>
+                    </div>
+                </Link>
                 {/* <div className="cart-info cart-wrap">
                         <button title="Add to cart" onClick={() => onAddToCartClicked(product, 1)}>
                             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -71,7 +81,13 @@ const ProductGridSingle = ({
                     {/* <div className="rating">
                             {RatingStars}
                         </div> */}
-                    <Link href={`/product/${product.slug}`}>
+                    <Link 
+                        href={{
+                            pathname: '/views/product/[product]',
+                            query: { slug: product.slug },
+                        }}
+                        as={`/product/${product.slug}`}
+                    >
                         <h6>{product.name}</h6>
                     </Link>
                     <h4>{product.symbol || <span className="font-weight-bold"> </span>}{product.productVariances[selectedVariant].price} Tk</h4>

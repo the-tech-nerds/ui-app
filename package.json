@@ -21,7 +21,7 @@
     "@nestjs/jwt": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.5",
-    "@the-tech-nerds/common-services": "^0.5.3",
+    "@the-tech-nerds/common-services": "^0.5.4",
     "cache-manager": "^3.4.0",
     "cache-manager-redis-store": "^2.0.0",
     "class-validator": "^0.12.2",

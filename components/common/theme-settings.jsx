@@ -508,7 +508,7 @@ class ThemeSettings extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <div className="buy_btn">
+                            {/* <div className="buy_btn">
                                 <a href="https://themeforest.net/item/multikart-responsive-react-ecommerce-template/23067773?s_rank=1"
                                    target="_blank" className="btn btn-block purchase_btn">
                                     <i className="fa fa-shopping-cart" aria-hidden="true"></i> purchase Multikart now!</a>
@@ -521,7 +521,7 @@ class ThemeSettings extends Component {
                                 <a href="https://themeforest.net/item/multikart-multipurpose-shopify-sections-theme/23093831?s_rank=1"
                                    target="_blank" className="btn btn-block purchase_btn">
                                     <img src={`${process.env.PUBLIC_URL}/assets/images/icon/shopify.png`} alt="" className="img-fluid" /> Multikart Shopify</a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

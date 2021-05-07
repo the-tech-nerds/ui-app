@@ -12,6 +12,11 @@ export class CategoryController {
         return this.categoryService.getAll();
     }
 
+    @Get('/category/:shop/all')
+    async indexByShop(@Param('shop') shop: string) {
+        return this.categoryService.getAll(shop);
+    }
+
     @Get('/:slug')
     @Render('category/[slug]')
     async getProductsByCategorySlug(

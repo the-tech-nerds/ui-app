@@ -3,11 +3,14 @@ import React from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import LeftSideBar from "components/products/left-sidebar";
+import { fetchProductDetailsApi } from '../../../api/product';
+import { Product } from 'types';
+
 type ProductSlug = {
-    product: any;
+    pro: Product;
 };
 
-const productDetails = ({ product }: ProductSlug) => {
+const ProductDetails = ({ pro }: ProductSlug) => {
     return (
         <div>
             <Head>
@@ -15,16 +18,24 @@ const productDetails = ({ product }: ProductSlug) => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Root>
-                <LeftSideBar product={product} />
+                <LeftSideBar product={pro} />
             </Root>
         </div>
     )
 }
 
-productDetails.getInitialProps = (ctx: any) => {
+ProductDetails.getInitialProps = async (ctx: any) => {
+    let product: Product = ctx.query.productDetails?.data || null;
+    if (!product) {
+        const slug = ctx.query.product;
+        const productDetailsResponse = await fetchProductDetailsApi(slug);
+        if (productDetailsResponse) {
+            product = productDetailsResponse?.data?.product?.data;
+        }
+    }
     return {
-        product: ctx.query.product.data,
+        pro: product,
     }
 }
 
-export default productDetails;
+export default ProductDetails;

@@ -8,9 +8,7 @@ const Home = () => (<div>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Root>
-        <ComponentHome />
-    </Root>
+    <ComponentHome />
 </div>)
 
 export default Home;

@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { withTranslate } from 'react-redux-multilingual';
-import axios from "axios";
 import DropdownBeforeLogin from "./functional/dropdown-before-login";
 import { DropdownAfterLogin } from "./functional/dropdown-after-login";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/core/styles';
 import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
-import SearchSuggestionBlock from './../../../products/common/product/search-suggestion-block'
 
 const TopBar = (props) => {
     const { wishlist, isLogin, currentShop = null } = useSelector(state => ({
@@ -18,7 +13,6 @@ const TopBar = (props) => {
         isLogin: state.login.isLoggedIn,
         currentShop: state.shops.current,
     }));
-    const [SuggestionList, setSuggestionList] = useState([]);
     const router = useRouter();
 
     const toggleNav = () => {
@@ -35,40 +29,21 @@ const TopBar = (props) => {
             }
         }
     }
-    const getAutoCompleteSearchData = (key) => {
-        axios.get(`/product/search/${key}`)
-            .then((res) => {
-                if (res.data.code == 200) {
-                    setSuggestionList(res.data.data.results);
-                }
-            }).catch(error => {
-            });
-    }
     const searchInputHandle = (event) => {
         if (!event) return;
-        if (event == "enter") {
-            router.push('/product/search' + window.location.search);
-            return;
-        }
-        getAutoCompleteSearchData(event.target.value);
+
         window.history.replaceState(null, "Product Search", "/product/search?q=" + event.target.value);
+        router.push(
+            '/views/product/search',
+            '/product/search' + window.location.search,
+            undefined
+        );
     }
     const searchSubmitHandle = (event) => {
         event.preventDefault();
         router.push('/product/search' + window.location.search);
     }
-    const { translate } = props;
-    const useStyles = makeStyles({
-        option: {
-            // fontSize: 15,
-            // '& > span': {
-            //     marginRight: 10,
-            //     fontSize: 18,
-            // },
-        },
-    });
-    const classes = useStyles();
-    return (<div className="top-header">
+    return (<div suppressHydrationWarning className="top-header">
         <div className="container-fluid">
             <div className="row">
                 <div className="col-xs-1 d-flex align-items-center justify-content-start p-0">
@@ -82,42 +57,18 @@ const TopBar = (props) => {
                     </div>
                 </div>
                 <div className="col-xs-1 d-flex align-items-center justify-content-end p-0 logo-container">
-                    <a href="/" className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
-                        KFC
-                    </a>
+                    <Link href="/views/home" as="/">
+                       <a className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
+                            KFC
+                       </a>
+                    </Link>
                 </div>
                 <div className="d-flex flex-row justify-content-between align-items-center col-xs-8 pr-2">
-                    {/*<input type="text" placeholder="Search..."*/}
-                    {/*       className="form-control w-75 h-100 rounded d-inline"*/}
-                    {/*       onInput={searchInputHandle}*/}
-                    {/*       onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}/>*/}
-                    <Autocomplete
-                        className="search-autocomplete"
-                        id="debug"
-                        freeSolo
-                        options={[...SuggestionList]}
-                        autoHighlight
-                        getOptionLabel={(option) => option?.name || ''}
-                        renderOption={(option) => (
-                            <SearchSuggestionBlock product={option} />
-                        )}
-                        openOnFocus={false}
-                        renderInput={(params) => (
-                            <TextField
-                                style={{ height: '100%' }}
-                                onFocus={searchInputHandle}
-                                onBlur={() => setSuggestionList([])}
-                                onInput={searchInputHandle}
-                                onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
-                                {...params}
-                                // label="Seach product"
-                                // variant="outlined"
-                                inputProps={{
-                                    ...params.inputProps,
-                                    // autoComplete: 'procuct-serach', // disable autocomplete and autofill
-                                }}
-                            />
-                        )}
+                    <input
+                        className="form-control search-autocomplete"
+                        onFocus={searchInputHandle}
+                        onInput={searchInputHandle}
+                        onKeyDown={(e) => searchInputHandle(e.key === 'Enter' ? 'enter' : false)}
                     />
                     <button onClick={searchSubmitHandle} className="search-button btn btn-success h-100 rounded"
                         type="button">
@@ -125,18 +76,22 @@ const TopBar = (props) => {
                     </button>
                 </div>
                 <div className="d-flex align-items-center col-xs-2 other-nav-items">
-                    {isLogin && <Link href="/views/wishlist" as="/user/wishlist" className="d-flex items-center text-danger" replace>
-                        <span className="text-danger additional-menu">
-                            <i className="fa fa-heart mr-2"></i>
-                            <span className="badge badge-secondary">{wishlist?.length}</span>
-                        </span>
-                    </Link>}
-                    <Link href="/views/shops" as="/shops/select" className="d-flex items-center text-dark cursor-pointer" replace>
-                        <span className="text-light additional-menu">
-                            <i className="fa fa-home ml-4 mr-2"></i>
-                            <span className="badge badge-secondary">{currentShop ? currentShop.name : ''}</span>
-                        </span>
-                    </Link>
+                    {isLogin && <ul>
+                        <Link key="wishlist" href="/views/wishlist" as="/user/wishlist" className="d-flex items-center text-danger">
+                            <a className="text-danger additional-menu">
+                                <i className="fa fa-heart mr-2"></i>
+                                <span className="badge badge-secondary">{wishlist?.length}</span>
+                            </a>
+                        </Link>
+                    </ul>}
+                    <ul>
+                        <Link key="select-shop" href="/views/shops" as="/shops/select" className="d-flex items-center text-dark">
+                            <a suppressHydrationWarning className="text-light additional-menu">
+                                <i className="fa fa-home ml-4 mr-2"></i>
+                                <span className="badge badge-secondary">{currentShop ? currentShop.name : ''}</span>
+                            </a>
+                        </Link>
+                    </ul>
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props} />}
                     {!isLogin && <DropdownBeforeLogin props={props} />}

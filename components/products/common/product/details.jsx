@@ -50,7 +50,7 @@ class Details extends Component {
                     <div className="border-product">
                         <h6 className="product-title">100% SECURE PAYMENT</h6>
                         <div className="payment-card-bottom">
-                            <ul>
+                            {/* <ul>
                                 <li>
                                     <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/visa.png`} alt="" /></a>
                                 </li>
@@ -66,7 +66,7 @@ class Details extends Component {
                                 <li>
                                     <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icon/discover.png`} alt="" /></a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </div>

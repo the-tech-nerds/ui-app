@@ -25,31 +25,35 @@ export function getSideMenus(name) {
             id: 0,
             name: 'Account Info',
             className: name === 'AccountInfo' ? 'text-danger' : 'Inactive',
-            url: USER_DASHBOARD
+            href: '/views/dashboard',
+            as: USER_DASHBOARD
         },
         {
             id: 1,
             name: 'Address Book',
             className: name === 'AddressBook' ? 'text-danger' : 'Inactive',
-            url: USER_ADDRESS
+            href: '/views/address',
+            as: USER_ADDRESS
         },
         {
             id: 2,
             name: 'Wishlist',
             className: name === 'Wishlist' ? 'text-danger' : 'Inactive',
-            url: WISHLIST
+            href: '/views/wishlist',
+            as: WISHLIST
         },
         {
             id: 3,
             name: 'Change Password',
             className: name === 'ChangePassword' ? 'text-danger' : 'Inactive',
-            url: CHANGE_PASSWORD
+            href: '/views/change-password',
+            as: CHANGE_PASSWORD
         },
         {
             id: 4,
             name: 'Log Out',
-            className: name === 'LogOut' ? 'text-danger' : 'Inactive',
-            url: USER_LOGOUT
+            className: name === 'LogOut' ? 'text-danger' : 'Inactive',  
+            href: USER_LOGOUT
         },
     ]
 }

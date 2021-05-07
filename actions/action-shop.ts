@@ -9,24 +9,28 @@ export const fetchShops = (shops: Shop[]) => ({
     shops
 });
 
-export const selectShop = (shop: Shop) => (dispatch: AppDispatch) => {
-    return dispatch({
+export const selectShop = (shop: Shop) => {
+    return ({
         type: types.SELECT_SHOP,
         shop,
     })
 }
 
-
 export const fetchItemsForShop = () => (dispatch: AppDispatch) => {
     fetchShopListApi().then((res: AxiosDefaultResponse<Shop[]>) => {
         if (res.data) {
-            dispatch(fetchShops(res.data.data));
+            const shops: Shop[] = res.data.data;
+            dispatch(fetchShops(shops));
             if (window.localStorage) {
                 const { shops = null } = JSON.parse(localStorage.getItem('state'));
                 if (shops && shops.current) {
                     const currentShop: Shop = shops.current;
-                    selectShop(currentShop);
+                    dispatch(selectShop(currentShop));
+                } else {
+                    dispatch(selectShop(shops.list[0]))
                 }
+            } else {
+                dispatch(selectShop(shops[0]));
             }
         } else {
             dispatch(fetchShops([]));

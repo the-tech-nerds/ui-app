@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
-import ComponentCategoryHeader from '../../../components/categories/category-header';
 import ProductGrid from '../../../components/products/product-grid';
 import { useSelector } from "react-redux";
 import { Category, Shop } from 'types';
@@ -57,12 +56,17 @@ const CategoryList = ({slug}: CategoryListProps) => {
 
 type ProductListProps = {
     slug: string;
-    fetchUrl: string
+    // fetchUrl: string
 }
 
-const ProductList = ({slug, fetchUrl}: ProductListProps) => {
+const ProductList = ({ slug }: ProductListProps) => {
     const currentShop: Shop = useSelector(state => state.shops.current);
-    return currentShop ? <ProductGrid slug={slug} fetchUrl={'/category-product/' + currentShop.id + '/' + slug} /> : <span />
+    const [apiUrl, setApiUrl] = useState(null);
+    useEffect(() => {
+        setApiUrl(`/category-product/${currentShop.id}/${slug}`);
+    }, [slug])
+
+    return <ProductGrid key={slug} fetchUrl={apiUrl} />;
 };
 
 type CategroyProductProps = {
@@ -79,7 +83,7 @@ const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
             </Head>
             <Root>
                 <CategoryList slug={slug}/>
-                <ProductList slug={slug} fetchUrl={fetchUrl}/>
+                <ProductList slug={slug} />
             </Root>
         </div>
     )
