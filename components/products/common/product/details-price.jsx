@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import { addItemToWishlist } from '../../../../actions';
-
+import { useRouter } from 'next/router'
+import { USER_LOGIN } from 'constants/app_constant';
 
 const DetailsWithPrice = (props) => {
     const [open, setOpen] = useState(false);
@@ -10,6 +11,11 @@ const DetailsWithPrice = (props) => {
     const [variance_index, setVariance_index] = useState(0);
     const [stock, setStock] = useState(null);
     const { item } = props;
+    console.log(item);
+    const router = useRouter();
+    const { isLogin } = useSelector(state => ({
+        isLogin: state.login.isLoggedIn
+    }));
     useEffect(() => {
         const stock = props.item.product_variances[0].stock_count ? 'InStock' : 'Out of Stock !';
         setStock(stock);
@@ -17,7 +23,11 @@ const DetailsWithPrice = (props) => {
 
     const dispatch = useDispatch();
     const addToWishList = () => {
-        dispatch(addItemToWishlist(item.product_variances[variance_index]));
+        if (isLogin) {
+            dispatch(addItemToWishlist(item.product_variances[variance_index]));
+        } else {
+            router.push(`/product/${item?.slug}`, USER_LOGIN, { shallow: true })
+        }
     }
 
     const onOpenModal = () => {
@@ -35,7 +45,7 @@ const DetailsWithPrice = (props) => {
     }
 
     const plusQty = () => {
-        if (item.product_variances[variance_index].stock_count >= quantity) {
+        if (item.product_variances[variance_index].stock_count > quantity) {
             setStock('InStock')
             setQuantity(quantity + 1);
         } else {

@@ -20,4 +20,18 @@ export class WishlistService {
         })
         return wishlists;
     }
+    async delete(id: number) {
+        let wishlists = await this.gatewayService.execute('product', {
+            path: '/api/v1/wishlist/' + id,
+            method: 'DELETE'
+        })
+        return wishlists;
+    }
+    async deleteAll() {
+        let wishlists = await this.gatewayService.execute('product', {
+            path: '/api/v1/wishlist/all',
+            method: 'DELETE'
+        })
+        return wishlists;
+    }
 }
