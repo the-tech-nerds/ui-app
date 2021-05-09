@@ -11,7 +11,6 @@ const DetailsWithPrice = (props) => {
     const [variance_index, setVariance_index] = useState(0);
     const [stock, setStock] = useState(null);
     const { item } = props;
-    console.log(item);
     const router = useRouter();
     const { isLogin } = useSelector(state => ({
         isLogin: state.login.isLoggedIn
