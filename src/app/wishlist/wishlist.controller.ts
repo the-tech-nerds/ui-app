@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Render, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Render, Post, Req, Res, Delete, Param } from '@nestjs/common';
 import { WishlistService } from './wishlist.service';
 
 @Controller()
@@ -25,6 +25,16 @@ export class WishlistController {
     @Get('wishlist/list')
     async getWishlist() {
         const result = await this.wishlistService.gets();
+        return result;
+    }
+    @Delete('user/wishlist/:id')
+    async deleteWishlist(@Param('id') id: string) {
+        const result = await this.wishlistService.delete(Number(id));
+        return result;
+    }
+    @Delete('user/wishlist/list/all')
+    async deleteAllWishlist() {
+        const result = await this.wishlistService.deleteAll();
         return result;
     }
 }

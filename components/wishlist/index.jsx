@@ -1,44 +1,59 @@
-import React, { useReducer, userSate } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Breadcrumb from '../common/breadcrumb';
-import { addToCartAndRemoveWishlist, removeFromWishlist } from '../../actions'
+import { fetchWishlist } from '../../actions'
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
-import wishlistReducer from 'reducers/wishlist';
+import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { ShoppingCart, ShoppingBasket } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
-
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
     },
 }));
 const WishList = (props) => {
-    const { Items, symbol } = props;
+    const [wishlist, setWishlist] = useState(false);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const { Items = [], symbol } = props;
+        setWishlist(Items);
+    }, []);
     const classes = useStyles();
+    const deleteWishList = (item) => {
+        axios.delete(`/user/wishlist/${item.id}`).then(res => {
+            const list = wishlist.filter(x => x.id !== item.id);
+            setWishlist(list);
+            dispatch(fetchWishlist(list))
+        }).catch(err => {
+
+        });
+
+    }
     return (
         <div>
             <Breadcrumb title={'Wishlist'} />
-            {Items?.length > 0 ?
+            {wishlist?.length > 0 ?
                 <section className="wishlist-section section-b-space">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-12">
-                                {Items.map((item, index) => {
+                                {wishlist.map((item, index) => {
                                     return (
                                         <div className="d-flex flex-row bd-highlight mb-3 card hover-item" key={index}>
                                             <div className="p-2 bd-highlight d-flex justify-content-center image-block" style={{ alignItems: 'center' }}>
                                                 <Link href={`/product/${item.product_slug}`}>
                                                     <img style={{ maxHeight: "50px", maxWidth: "50px" }} src={item.images ?
-                                                        item.images[0]
-                                                        : item.images[0]} alt="" />
+                                                        item?.images[0]
+                                                        : item?.images[0]} alt="" />
                                                 </Link>
                                             </div>
                                             <div className="p-1 ml-3 bd-highlight flex-fill">
                                                 <div className="d-flex">
                                                     <Link href={`/product/${item.product_slug}`}>
-                                                        <span className="font-weight-bold">{item.product_name}</span>
+                                                        <span className="font-weight-bold">{item.variance_name}</span>
                                                     </Link>
                                                 </div>
                                                 <div className="d-flex">
@@ -53,7 +68,7 @@ const WishList = (props) => {
                                                 </div>
                                             </div>
                                             <div class="p-2 bd-highlight">
-                                                <IconButton color="primary" component="span">
+                                                <IconButton color="primary" onClick={() => deleteWishList(item)} component="span">
                                                     <DeleteIcon />
                                                 </IconButton>
                                                 <IconButton color="secondary" component="span">
