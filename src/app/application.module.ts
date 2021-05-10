@@ -24,7 +24,7 @@ import { ShopModule } from './shop/shop.module';
         // conf: { useFilesystemPublicRoutes: false },
         dir: resolve(__dirname, '../../')
       }),
-      { passthrough404: true, }
+      // { passthrough404: true, }
     ),
     GatewayModule,
     ConfigModule.forRoot({
