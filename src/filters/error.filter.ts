@@ -17,7 +17,7 @@ export class ErrorHandler {
 
   handle() {
     const { status, message } = this.error;
-    console.log(this.error.message);
+    // console.log(this.error.message);
     // if (status === HttpStatus.UNAUTHORIZED) {
     //   return this.response.redirect('/logout');
     // } 
@@ -26,13 +26,19 @@ export class ErrorHandler {
     // else if(status === HttpStatus.NOT_FOUND){
     //   this.response.redirect('/404');
     // } 
-    if(status !== HttpStatus.NOT_FOUND) {
-      return this.response.status(status).json({
-        message,
-        status,
-        code: status,
-        data: null,  
-      });
-    }
+    return this.response.status(status).json({
+      message,
+      status,
+      code: status,
+      data: null,  
+    });
+    // if(status !== HttpStatus.NOT_FOUND) {
+    //   return this.response.status(status).json({
+    //     message,
+    //     status,
+    //     code: status,
+    //     data: null,  
+    //   });
+    // }
   }
 }
