@@ -17,7 +17,7 @@ async function bootstrap() {
 
 
     // Setup locals middleware
-  // app.use(LocalsMiddleware);
+  app.use(LocalsMiddleware);
 
   //Set up cors
   app.enableCors();
