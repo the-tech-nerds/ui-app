@@ -79,7 +79,6 @@ const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
             <Head>
                 <title>Khan Fresh Corner | Category.</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-                <link rel="stylesheet" type="text/css" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
             </Head>
             <div>
                 <CategoryList slug={slug}/>
