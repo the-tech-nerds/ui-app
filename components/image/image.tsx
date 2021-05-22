@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import NextImage from 'next/image'
 import { Skeleton } from '../skeleton-loader/skeletons';
 
 type ImageProps = {
@@ -10,18 +11,23 @@ type ImageProps = {
 };
 
 const Image = ({
-    src,
+    src = "",
     className,
     width,
     height,
-    alt
+    alt,
+    ...restProps
 }: ImageProps) => {
     const [loaded, setLoaded] = useState(false);
-    const placeHolderImage = `https://via.placeholder.com/${width}`;
-    const [imageSrc, setImageSrc] = useState(src || placeHolderImage);
+    const placeHolderImage = `https://via.placeholder.com/${width}?text=${alt}`;
+    const defaultImageSrc = src || placeHolderImage;
+    const [imageSrc, setImageSrc] = useState(defaultImageSrc);
+    console.log(imageSrc);
+    console.log(restProps)
     return (
         <div>
-            <img
+            {width && height ? <NextImage
+                {...restProps}
                 style={{
                     visibility: loaded ? 'visible' : 'hidden',
                     display: loaded ? 'block' : 'none',
@@ -30,12 +36,26 @@ const Image = ({
                 }}
                 src={imageSrc}
                 className={className}
-                width={width}
-                height={height}
+                width={loaded? width: 0}
+                height={loaded ? height : 0}
                 onLoad={() => setLoaded(true)}
                 onError={() => setImageSrc(placeHolderImage)}
                 alt={alt} 
-            />
+            /> : <NextImage
+                    {...restProps}
+                    style={{
+                        visibility: loaded ? 'visible' : 'hidden',
+                        display: loaded ? 'block' : 'none',
+                        width,
+                        height
+                    }}
+                    src={imageSrc}
+                    className={className}
+                    onLoad={() => setLoaded(true)}
+                    onError={() => setImageSrc(placeHolderImage)}
+                    alt={alt} 
+                />
+            }
             {!loaded && <Skeleton height={height} width={width}/>}
         </div>
     );

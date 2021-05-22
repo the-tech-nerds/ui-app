@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { Shop } from 'types';
 import { fetchItemsForCategory, selectShop } from 'actions';
+import Image from 'components/image/image';
 
 type ShopListProps = {
     shops: Shop[];
@@ -16,13 +17,23 @@ const ShopList= ({ shops, current }: ShopListProps) => {
             {shops.map((shop: Shop) => (
                 <div
                     key={shop.id} 
-                    className={`jumbotron d-flex p-5 m-2 align-items-center justify-content-center
+                    className={`d-flex flex-column  m-2
                                 ${current.id === shop.id ? 'shop--selected': ''} shop`}
                     onClick={() => {
                         dispatch(selectShop(shop));
                         dispatch(fetchItemsForCategory(shop.type_id, true))
                     }}
                 >
+                    <div >
+                        <Image
+                            className={current.id === shop.id ? 'shop--selected-image': ''}
+                            src={shop?.images[0]?.url || "https://khan-fresh-corner.s3.amazonaws.com/shop/4da05526-0aa3-4daa-92e9-e533dffaad1d.jpg"}
+                            alt="Picture of the author"
+                            width={300}
+                            height={300}
+                            layout="intrinsic"
+                        /> 
+                    </div>
                     {shop.name}
                 </div>
             ))}

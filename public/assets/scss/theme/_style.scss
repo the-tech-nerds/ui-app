@@ -1374,11 +1374,12 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     height: 75vh;
-    @for $i from 1 through 56 {
-      &.home#{$i} {
-        background-image:url("#{$assetspath}/home-banner/#{$i}.jpg");
-      }
-    }
+    z-index: 2;
+    // @for $i from 1 through 56 {
+    //   &.home#{$i} {
+    //     background-image:url("#{$assetspath}/home-banner/#{$i}.jpg");
+    //   }
+    // }
   }
 
   .slider-contain {
@@ -3273,12 +3274,12 @@ header {
   background-repeat: no-repeat;
   padding-top: 190px;
   padding-bottom: 190px;
-  background-position: center;
-  @for $i from 1 through 28 {
-    &.parallax-banner#{$i} {
-      background-image:url("#{$assetspath}/parallax/#{$i}.jpg");
-    }
-  }
+  background-position: center;  
+  // @for $i from 1 through 28 {
+  //   &.parallax-banner#{$i} {
+  //     background-image:url("#{$assetspath}/parallax/#{$i}.jpg");
+  //   }
+  // }
   &.parallax-layout {
     padding-top: 350px;
     padding-bottom: 350px;
@@ -3850,11 +3851,11 @@ header {
         padding: 15px;
         background-image: linear-gradient(135deg, $theme-deafult 5.77%, $white 5.77%, $white 25%, $grey01 25%, $grey01 30.77%, $white 30.77%, $white 50%, $theme-deafult 50%, $theme-deafult 55.77%, $white 55.77%, $white 75%, $grey01 75%, $grey01 80.77%, $white 80.77%, $white 100%);
         background-size: 36.77px 36.77px;
-        @for $i from 1 through 15 {
-          &.modal#{$i} {
-            // background-image:url("#{$assetspath}/modal-bg/#{$i}.jpg");
-          }
-        }
+        // @for $i from 1 through 15 {
+        //   &.modal#{$i} {
+        //     // background-image:url("#{$assetspath}/modal-bg/#{$i}.jpg");
+        //   }
+        // }
         .modal-bg {
           background-color: $white;
           padding: 45px;
@@ -6917,11 +6918,11 @@ footer{
         background-size: cover;
         transition: all 2s ease-out 0s;
         box-shadow: -1px 2px 5px 1px #ececec;
-        @for $i from 1 through 70 {
-          &.demo#{$i} {
-            background-image:url("#{$assetspath}/landing-page/demo/#{$i}.jpg");
-          }
-        }
+        // @for $i from 1 through 70 {
+        //   &.demo#{$i} {
+        //     background-image:url("#{$assetspath}/landing-page/demo/#{$i}.jpg");
+        //   }
+        // }
       }
       .demo-text {
         h4 {
@@ -14410,13 +14411,17 @@ a:hover {
 }
 
 .shop {
-  max-width: 250px;
+  // max-width: 250px;
   cursor: pointer;
   &:hover {
-    border: solid blue 1px;
+    border: solid $theme-deafult 3px;
   }
 }
 
 .shop--selected {
-  border: solid blue 1px;
+  border: solid $theme-deafult 3px;
+}
+
+.shop--selected-image{
+  border-bottom: solid $theme-deafult 3px;
 }

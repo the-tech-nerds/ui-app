@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import type { AppContext, AppProps } from 'next/app';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 import App from 'next/';
 import '../pages/index.scss';
 import '../components/common/index.scss';
@@ -15,6 +17,22 @@ const initialActions = () => {
   store.dispatch(fetchItemsForWishlist());
 };
 
+NProgress.configure({ showSpinner: true });
+
+Router.events.on('routeChangeStart', () => {
+  console.log('onRouteChangeStart triggered');
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  console.log('onRouteChangeComplete triggered');
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  // console.log('onRouteChangeError triggered');
+  NProgress.done();
+});
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   initialActions();

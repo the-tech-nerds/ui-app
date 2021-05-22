@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import { ScrollContext } from 'react-router-scroll-4';   
+import { Provider } from 'react-redux'; 
 const { IntlProvider } = require('react-redux-multilingual');
+import Head from 'next/head';
 // Import custom components
 import store from '../../store';
 import translations from '../../constants/translations'
@@ -23,6 +21,11 @@ class Root extends React.Component {
 				{/* <BrowserRouter basename={'/'} > */}
 					{/* <ScrollContext> */}
                             <Layout>
+                            <Head>
+                                <title>Khan Fresh Corner | Category.</title>
+                                <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+                                <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" />
+                            </Head>
                                 {children}
                             </Layout>
 					  {/* </ScrollContext> */}
