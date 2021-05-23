@@ -22,8 +22,6 @@ const Image = ({
     const placeHolderImage = `https://via.placeholder.com/${width}?text=${alt}`;
     const defaultImageSrc = src || placeHolderImage;
     const [imageSrc, setImageSrc] = useState(defaultImageSrc);
-    console.log(imageSrc);
-    console.log(restProps)
     return (
         <div>
             {width && height ? <NextImage

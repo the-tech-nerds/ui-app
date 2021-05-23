@@ -168,7 +168,7 @@ class Vegetables extends Component {
                 <Special type={'vegetable'} />
                 {/*product-box slider end*/}
 
-                <section className="false">
+                <section className="false" style={{ minHeight: "300px" }}>
                     &nbsp;
                 </section>
 
