@@ -6,6 +6,7 @@ EXPOSE 3000
 
 COPY package*.json /app/
 COPY .npmrc /app/
+COPY next.config.js /app/
 
 RUN npm install --production
 RUN rm -f .npmrc
