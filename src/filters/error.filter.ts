@@ -17,16 +17,8 @@ export class ErrorHandler {
 
   handle() {
     const { status, message } = this.error;
-    // if (status === HttpStatus.UNAUTHORIZED) {
-    //   return this.response.redirect('/logout');
-    // } 
-
-    // console.log(this.error);
-    // else if(status === HttpStatus.NOT_FOUND){
-    //   this.response.redirect('/404');
-    // } 
     if(status !== HttpStatus.NOT_FOUND) {
-      return this.response.status(status).json({
+      return this.response.status(status || 500).json({
         message,
         status,
         code: status,

@@ -48,10 +48,10 @@ const CategoryItem = ({ categories = [] }) => {
                                 <Paper className={`${classes.paper} hover-item p-2`}>
                                     <div className="text-center">
                                         <Image
-                                            src={`${category.images[0]}`}
-                                            width={'146px'}
-                                            height={'150px'}
-                                            alt="click to view"
+                                            src={`${category?.images[0] || ""}`}
+                                            width={146}
+                                            height={150}
+                                            alt={category.name}
                                         />
                                     </div>
                                     <div className=" text-center mt-1">

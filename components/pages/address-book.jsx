@@ -8,7 +8,7 @@ class AddressBook extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleCancel = this.handleCancel.bind(this)
         const { address = [] } = this.props
-        const data = address.map((m) => {
+        const data = (address || []).map((m) => {
             return {
                 'name': m.name,
                 'address': m.details,

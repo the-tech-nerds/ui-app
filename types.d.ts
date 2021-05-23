@@ -38,6 +38,7 @@ export type Shop = {
     type_id: number;
     is_active: boolean;
     address: string;
+    images: Image[];
 }
 
 export type AxiosDefaultResponseData<T> = {
