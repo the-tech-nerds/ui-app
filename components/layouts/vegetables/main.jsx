@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import {Helmet} from 'react-helmet'
 // import '../../common/index.scss';        
 import Slider from 'react-slick';
-
 // Import custom components
 import {Slider3} from "../../../services/script"
 import Trading from "./tranding"
@@ -17,6 +16,8 @@ import FooterOne from "../../common/footers/footer-one"
 import ThemeSettings from "../../common/theme-settings"
 import headerOne from 'components/common/headers/header-one';
 import headerThree from 'components/common/headers/header-three';
+import Image from 'components/image/image';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 class Vegetables extends Component {
 
@@ -36,6 +37,21 @@ class Vegetables extends Component {
                 <section className="p-0">
                     <Slider className="slide-1 home-slider">
                         <div>
+                            <div style={{
+                                position: 'fixed',
+                                zIndex: -1,
+                                overflow: 'hidden',
+                                height: "100%",
+                                width: "20%"
+                            }}>
+                                <Image 
+                                    style={{ zIndex: 0 }}
+                                    src="/assets/images/home-banner/39.jpg" 
+                                    alt="Fresh Vegetables"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>
                             <div className="home home39 text-center">
                                     <div className="container">
                                         <div className="row">
@@ -106,6 +122,7 @@ class Vegetables extends Component {
                         </div>
                     </div>
                 </section>
+
                 {/*collection banner layout end*/}
 
                 {/*product section Start*/}
@@ -114,6 +131,23 @@ class Vegetables extends Component {
 
                 {/*Parallax banner*/}
                 <section className="p-0">
+                    <div style={{
+                        position: 'absolute',
+                        zIndex: -1,
+                        overflow: 'hidden',
+                        height: "100%",
+                        width: "100%"
+                    }}>
+                        <Image 
+                            style={{ zIndex: 0, backgroundAttachment: 'fixed' }}
+                            src="/assets/images/parallax/15.jpg"
+                            // width={1200}
+                            alt="Fresh Vegetables"
+                            // height={600}
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </div>
                     <div className="full-banner parallax-banner15 parallax text-left p-left">
                         <div className="container">
                             <div className="row">
@@ -133,6 +167,10 @@ class Vegetables extends Component {
                 {/*product-box slider*/}
                 <Special type={'vegetable'} />
                 {/*product-box slider end*/}
+
+                <section className="false" style={{ minHeight: "300px" }}>
+                    &nbsp;
+                </section>
 
                 {/*Blog Section*/}
                 <div className="container">
@@ -155,8 +193,14 @@ class Vegetables extends Component {
                                         <a href="#">
                                             <div className="classic-effect">
                                                 <div>
-                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/vegetables/blog/1.jpg`}
-                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                    <Image 
+                                                        src={`/assets/images/vegetables/blog/1.jpg`}
+                                                        className="img-fluid blur-up lazyload bg-img"
+                                                        alt=""
+                                                        width={1200}
+                                                        height={600}
+                                                        layout="intrinsic" 
+                                                    />
                                                 </div>
                                                 <span></span>
                                             </div>
@@ -174,8 +218,14 @@ class Vegetables extends Component {
                                         <a href="#">
                                             <div className="classic-effect">
                                                 <div>
-                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/vegetables/blog/2.jpg`}
-                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                    <Image 
+                                                        src={`/assets/images/vegetables/blog/2.jpg`}
+                                                        className="img-fluid blur-up lazyload bg-img"
+                                                        alt=""
+                                                        width={1200}
+                                                        height={600}
+                                                        layout="intrinsic" 
+                                                    />
                                                 </div>
                                                 <span></span>
                                             </div>
@@ -193,8 +243,14 @@ class Vegetables extends Component {
                                         <a href="#">
                                             <div className="classic-effect">
                                                 <div>
-                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/vegetables/blog/3.jpg`}
-                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                    <Image 
+                                                        src={`/assets/images/vegetables/blog/3.jpg`}
+                                                        className="img-fluid blur-up lazyload bg-img"
+                                                        alt=""
+                                                        width={1200}
+                                                        height={600}
+                                                        layout="intrinsic" 
+                                                    />
                                                 </div>
                                                 <span></span>
                                             </div>
@@ -212,7 +268,7 @@ class Vegetables extends Component {
                                         <a href="#">
                                             <div className="classic-effect">
                                                 <div>
-                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/vegetables/blog/4.jpg`}
+                                                    <img src={`/assets/images/vegetables/blog/4.jpg`}
                                                          className="img-fluid blur-up lazyload bg-img" alt="" />
                                                 </div>
                                                 <span></span>

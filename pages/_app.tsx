@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import type { AppContext, AppProps } from 'next/app';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 import App from 'next/';
 import '../pages/index.scss';
 import '../components/common/index.scss';
@@ -13,6 +15,19 @@ const initialActions = () => {
   store.dispatch(checkLogin());
 };
 
+NProgress.configure({ showSpinner: true });
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done();
+});
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   initialActions();
