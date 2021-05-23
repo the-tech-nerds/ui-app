@@ -16,7 +16,8 @@ const CategoryList = ({slug}: CategoryListProps) => {
     const menus: Category[] = useSelector(state => state.categories.list);
 
     useEffect(() => {
-        const searchForCategorySlug = 
+        console.info('in effect', menus);
+        const searchForCategorySlug =
         (cateogryList: Category[] = [], searchSlug: string = ''): Category | null =>  {
             let foundCategory = null;
             for (let category of cateogryList) {
@@ -24,7 +25,7 @@ const CategoryList = ({slug}: CategoryListProps) => {
                     foundCategory = category;
                     break;
                 }
-                
+
                 const matchedCategory = searchForCategorySlug(category.children, searchSlug);
                 if (matchedCategory) {
                     foundCategory = matchedCategory;
@@ -33,7 +34,7 @@ const CategoryList = ({slug}: CategoryListProps) => {
             }
             return foundCategory;
         }
-                
+
         const selectedCategory: Category = searchForCategorySlug(menus, slug);
         if (selectedCategory) {
             setcurrentcategory(selectedCategory);

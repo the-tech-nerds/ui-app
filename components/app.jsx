@@ -15,12 +15,22 @@ import FooterThree from "./common/footers/footer-three";
 import ThemeSettings from "./common/theme-settings"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItemsForCategory } from 'actions';
+import store from "../store";
+import {fetchItemsForWishlist, fetchUserDetails} from "../actions";
 
 
 
 const App = ({ children }) => {
     const currentShop = useSelector(state => state.shops.current);
     const dispatch = useDispatch();
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn);
+
+    console.log('isLogged in : ',isLoggedIn);
+    if(isLoggedIn){
+        dispatch(fetchUserDetails());
+        dispatch(fetchItemsForWishlist());
+    }
+
     if (currentShop) {
       dispatch(fetchItemsForCategory(currentShop.type_id));
     }

@@ -11,8 +11,6 @@ import Root from 'components/layouts/Root';
 const initialActions = () => {
   store.dispatch(fetchItemsForShop());
   store.dispatch(checkLogin());
-  store.dispatch(fetchUserDetails());
-  store.dispatch(fetchItemsForWishlist());
 };
 
 
