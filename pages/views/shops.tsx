@@ -16,7 +16,7 @@ const ShopList= ({ shops, current }: ShopListProps) => {
         <div className="d-flex flex-row p-5 m-5">
             {shops.map((shop: Shop) => (
                 <div
-                    key={shop.id} 
+                    key={shop.id}
                     className={`d-flex flex-column  m-2
                                 ${current.id === shop.id ? 'shop--selected': ''} shop`}
                     onClick={() => {
@@ -27,12 +27,12 @@ const ShopList= ({ shops, current }: ShopListProps) => {
                     <div >
                         <Image
                             className={current.id === shop.id ? 'shop--selected-image': ''}
-                            src={shop?.images[0]?.url || "https://khan-fresh-corner.s3.amazonaws.com/shop/4da05526-0aa3-4daa-92e9-e533dffaad1d.jpg"}
+                            src={shop && shop.images?.length > 0 ? shop.images[0].url : "https://khan-fresh-corner.s3.amazonaws.com/shop/4da05526-0aa3-4daa-92e9-e533dffaad1d.jpg"}
                             alt="Picture of the author"
                             width={300}
                             height={300}
                             layout="intrinsic"
-                        /> 
+                        />
                     </div>
                     {shop.name}
                 </div>
