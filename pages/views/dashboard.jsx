@@ -6,6 +6,7 @@ import '../../components/styles/user_dashbord.module.scss';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+
     const user = useSelector(state => state.login.user);
     return (
         <div>
@@ -13,7 +14,7 @@ const Dashboard = () => {
                 <title>Khan Fresh Corner | User Dashboard.</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <ComponentDashboard user={user} />
+            { user && <ComponentDashboard user={user} />}
         </div>
     );
 }

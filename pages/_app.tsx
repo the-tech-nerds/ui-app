@@ -1,20 +1,16 @@
-import { FC } from 'react';
-import { Provider, useSelector } from 'react-redux';
-import type { AppContext, AppProps } from 'next/app';
+import {FC} from 'react';
+import type {AppProps} from 'next/app';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import App from 'next/';
 import '../pages/index.scss';
 import '../components/common/index.scss';
 import store from 'store';
-import { checkLogin, fetchItemsForWishlist, fetchItemsForCategory, fetchItemsForShop, fetchUserDetails } from 'actions';
+import {checkLogin, fetchItemsForShop} from 'actions';
 import Root from 'components/layouts/Root';
 
 const initialActions = () => {
   store.dispatch(fetchItemsForShop());
   store.dispatch(checkLogin());
-  store.dispatch(fetchUserDetails());
-  store.dispatch(fetchItemsForWishlist());
 };
 
 NProgress.configure({ showSpinner: true });

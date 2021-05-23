@@ -13,6 +13,9 @@ import {errorHandle} from "../../../share";
 import  '../../styles/user_dashbord.module.scss'
 import AlertMessage from "../../common/alert/alert-message";
 import Button from "../../common/buttons/button";
+import store from "../../../store";
+import {useDispatch} from "react-redux";
+import {fetchUserDetails} from "../../../actions";
 
 export default  function    LoginForm(){
     const { register, handleSubmit, errors  } = useForm();

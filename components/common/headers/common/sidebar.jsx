@@ -12,11 +12,7 @@ const SideBar = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        if (menu.length) {
-            setCategories(menu);
-        } else {
-            setCategories(items);
-        }
+        setCategories(items);
 
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
@@ -100,13 +96,13 @@ const SideBar = () => {
     }
 
     const dispatch = useDispatch();
-    
-  
+
+
     return (
         <div id="mySidenav" className="sidenav card">
             <nav>
-                <SideMenu 
-                    items={categories} 
+                <SideMenu
+                    items={categories}
                     setSideMenu={(menu) => dispatch(setSideMenu(menu))}
                 />
             </nav>
