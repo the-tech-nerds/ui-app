@@ -32,6 +32,7 @@ const Image = ({
                     width,
                     height
                 }}
+                priority={true}
                 src={imageSrc}
                 className={className}
                 width={loaded? width: 0}
