@@ -7,7 +7,7 @@ import productReducer from './products';
 // import filtersReducer from './filters';
 import wishlistReducer from './wishlist';
 import loginReducer from './login';
-import categoryListReducer from "./category";
+import { categoryListReducer, TolatNumberCategoryReducer } from "./category";
 import shopListReducer from "./shop";
 import menuListReducer from "./menu";
 // import compareReducer from './compare';
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
     categories: categoryListReducer,
     shops: shopListReducer,
     menus: menuListReducer,
+    menuLength: TolatNumberCategoryReducer,
     Intl
 });
 

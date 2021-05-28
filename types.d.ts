@@ -20,6 +20,7 @@ export type Product = {
     slug: string;
     productVariances: ProductVariant[];
     images: Image[];
+    image: string;
 };
 
 export type Category = {

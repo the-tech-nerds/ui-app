@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ComponentCategoryList from '../../../components/categories/categories';
@@ -10,30 +10,30 @@ type CategoryListProps = {
     slug: string;
 };
 
-const CategoryList = ({slug}: CategoryListProps) => {
+const CategoryList = ({ slug }: CategoryListProps) => {
     const [categories, setCategories] = useState([]);
     const [currentCategory, setcurrentcategory] = useState(null);
-    const menus: Category[] = useSelector(state => state.categories.list);
+    const menus: Category[] = useSelector(state => state?.categories?.list) || [];
 
     useEffect(() => {
         console.info('in effect', menus);
         const searchForCategorySlug =
-        (cateogryList: Category[] = [], searchSlug: string = ''): Category | null =>  {
-            let foundCategory = null;
-            for (let category of cateogryList) {
-                if (category.slug === searchSlug) {
-                    foundCategory = category;
-                    break;
-                }
+            (cateogryList: Category[] = [], searchSlug: string = ''): Category | null => {
+                let foundCategory = null;
+                for (let category of cateogryList) {
+                    if (category.slug === searchSlug) {
+                        foundCategory = category;
+                        break;
+                    }
 
-                const matchedCategory = searchForCategorySlug(category.children, searchSlug);
-                if (matchedCategory) {
-                    foundCategory = matchedCategory;
-                    break;
+                    const matchedCategory = searchForCategorySlug(category.children, searchSlug);
+                    if (matchedCategory) {
+                        foundCategory = matchedCategory;
+                        break;
+                    }
                 }
+                return foundCategory;
             }
-            return foundCategory;
-        }
 
         const selectedCategory: Category = searchForCategorySlug(menus, slug);
         if (selectedCategory) {
@@ -43,12 +43,12 @@ const CategoryList = ({slug}: CategoryListProps) => {
     }, [slug]);
 
     if (!categories.length) {
-        return <span/>
+        return <span />
     }
 
     return (
-        <div style={{marginTop: '4%'}}>
-            <ComponentCategoryList categories={categories} category = {currentCategory}/>
+        <div style={{ marginTop: '4%' }}>
+            <ComponentCategoryList categories={categories} category={currentCategory} />
         </div>
     )
 }
@@ -74,15 +74,15 @@ type CategroyProductProps = {
     fetchUrl: string
 }
 
-const CategoryProducts = ({slug, fetchUrl}: CategroyProductProps) => {
+const CategoryProducts = ({ slug, fetchUrl }: CategroyProductProps) => {
     return (
         <div>
             <Head>
                 <title>Khan Fresh Corner | Category.</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div>
-                <CategoryList slug={slug}/>
+                <CategoryList slug={slug} />
                 <ProductList slug={slug} />
             </div>
         </div>
