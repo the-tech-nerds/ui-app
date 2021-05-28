@@ -1,19 +1,7 @@
 import {PreventRouteAfterLogin, PreventRouteBeforeLogin} from "../utils/app.route";
 
 export const LocalsMiddleware = async (req: any, res: any, next: Function) => {
-    res.header({ 'Cache-Control': 'no-cache, max-age=0, must-revalidate, no-store' });
-
-    // if (req.url.includes(".js")) {
-    //     req.url = req.url + '.gz';
-    //     res.set('Content-Encoding', 'gzip');
-    //     res.set('Content-Type', 'text/javascript');
-    // }
-
-    // if (req.url.includes(".css")) {
-    //     req.url = req.url + '.gz';
-    //     res.set('Content-Encoding', 'gzip');
-    //     res.set('Content-Type', 'text/css');
-    // }
+    res.header({ 'Cache-Control': 'no-cache, max-age=6000, must-revalidate' });
 
     if (!req.url.includes('sockjs') && !req.url.includes('?t=')) {
         if (req.headers && req.headers.access_token) {
