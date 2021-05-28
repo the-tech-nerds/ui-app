@@ -3,16 +3,25 @@ import { SideMenu } from '../../sidebar/Sidebar';
 import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setSideMenu } from '../../../../actions/action-menu';
+import { addPreviousLength } from '../../../../actions/action-category'
+
 
 const SideBar = () => {
-    const { items = [], menu = [] } = useSelector(state => ({
+    const { items = [], menu = [], currentMenuLength = 0, previousMenuLength = 0 } = useSelector(state => ({
         items: state.categories?.list,
         menu: state.menus.menu,
+        currentMenuLength: state.menuLength.currentLength,
+        previousMenuLength: state.menuLength.previousLength,
     }));
     const [categories, setCategories] = useState([]);
-
+    const dispatch = useDispatch();
     useEffect(() => {
-        setCategories(items);
+        if (currentMenuLength === previousMenuLength && menu.length > 0) {
+            setCategories(menu);
+        } else {
+            setCategories(items);
+            dispatch(addPreviousLength(currentMenuLength));
+        }
 
         const sideBarStatus = localStorage.getItem(SIDEBAR_STATUS) || 'close';
         const closemyslide = document.getElementById("mySidenav");
@@ -94,9 +103,6 @@ const SideBar = () => {
             event.target.nextElementSibling.classList.add('opensidesubmenu')
         }
     }
-
-    const dispatch = useDispatch();
-
 
     return (
         <div id="mySidenav" className="sidenav card">

@@ -10,7 +10,7 @@ type ShopListProps = {
     current: Shop;
 }
 
-const ShopList= ({ shops, current }: ShopListProps) => {
+const ShopList = ({ shops, current }: ShopListProps) => {
     const dispatch = useDispatch();
     return (
         <div className="d-flex flex-row p-5 m-5">
@@ -18,23 +18,23 @@ const ShopList= ({ shops, current }: ShopListProps) => {
                 <div
                     key={shop.id}
                     className={`d-flex flex-column  m-2
-                                ${current.id === shop.id ? 'shop--selected': ''} shop`}
+                                ${current.id === shop.id ? 'shop--selected' : ''} shop`}
                     onClick={() => {
                         dispatch(selectShop(shop));
                         dispatch(fetchItemsForCategory(shop.type_id, true))
                     }}
                 >
-                    <div >
+                    <div className="shop_container card">
                         <Image
-                            className={current.id === shop.id ? 'shop--selected-image': ''}
+                            className={current.id === shop.id ? 'shop--selected-image' : ''}
                             src={shop && shop.images?.length > 0 ? shop.images[0].url : "https://khan-fresh-corner.s3.amazonaws.com/shop/4da05526-0aa3-4daa-92e9-e533dffaad1d.jpg"}
-                            alt="Picture of the author"
+                            alt={shop.name}
                             width={300}
                             height={300}
                             layout="intrinsic"
                         />
+                        <div className="centered">{shop.name}</div>
                     </div>
-                    {shop.name}
                 </div>
             ))}
         </div>
@@ -46,7 +46,7 @@ const Shops = () => {
         shops: state.shops.list,
         selected: state.shops.current,
     }));
-    return(
+    return (
         <div>
             <Head>
                 <title>Khan Fresh Corner | Shop List`.</title>

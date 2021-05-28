@@ -27,7 +27,7 @@ const ProductGridSingle = ({
                         {(product.new == true)? <span className="lable3">new</span> : ''}
                         {(product.sale == true)? <span className="lable4">on sale</span> : ''}
                     </div> */}
-                <Link 
+                <Link
                     href={{
                         pathname: '/views/product/[product]',
                         query: { product: product.slug },
@@ -35,8 +35,8 @@ const ProductGridSingle = ({
                     as={`/product/${product.slug}`}
                 >
                     <div className="front">
-                        <Image 
-                            src={product?.productVariances[0].images?.length ? product?.productVariances[0].images[0].url : ''} 
+                        <Image
+                            src={product?.image ? product?.image : ''}
                             height={150}
                             width={200}
                             alt={product.name}
@@ -60,7 +60,7 @@ const ProductGridSingle = ({
                     </div> */}
                 {product.productVariances ?
                     <ul className="product-thumb-list">
-                        {product.productVariances.length >1 && <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}>
+                        {product.productVariances.length > 1 && <select className="form-control" onChange={e => setSelectedVariant(Number(e.target.value))}>
                             {product.productVariances.map((variant, index) => (
                                 <option value={index}>{variant.unit_value} {variant.unit.name}</option>
                             ))}
@@ -81,7 +81,7 @@ const ProductGridSingle = ({
                     {/* <div className="rating">
                             {RatingStars}
                         </div> */}
-                    <Link 
+                    <Link
                         href={{
                             pathname: '/views/product/[product]',
                             query: { slug: product.slug },

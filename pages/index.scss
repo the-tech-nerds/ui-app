@@ -33,3 +33,17 @@ a:hover {
 .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
   padding: 0 !important;
 }
+.shop_container{
+  // position: inherit;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  font-weight: bold;
+}
