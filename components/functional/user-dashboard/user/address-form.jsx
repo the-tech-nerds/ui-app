@@ -14,7 +14,7 @@ export default function AddAddress(props) {
         axios.get(`/address/division`)
             .then(res => {
                 const divs = [];
-                res.data.forEach((div) => {
+                res?.data?.data.forEach((div) => {
                     divs.push(<option key={div.id} value={div.id}>{div.name}</option>)
                 })
                 setDivision(divs);
@@ -22,17 +22,17 @@ export default function AddAddress(props) {
             })
         axios.get(`/address/cities`)
             .then(res => {
-                const cits = [];
-                res.data.forEach((div) => {
-                    cits.push(<option key={div.id} value={div.id}>{div.name}</option>)
+                const cities = [];
+                res?.data?.data.forEach((div) => {
+                    cities.push(<option key={div.id} value={div.id}>{div.name}</option>)
                 })
-                setCities(cits);
+                setCities(cities);
             }).catch(error => {
             })
         axios.get(`/address/areas`)
             .then(res => {
                 const ars = [];
-                res.data.forEach((div) => {
+                res?.data?.data.forEach((div) => {
                     ars.push(<option key={div.id} value={div.id}>{div.name}</option>)
                 });
                 setAreas(ars);
@@ -40,7 +40,10 @@ export default function AddAddress(props) {
             })
     }, []);
 
-
+   const divisionChange = (event) =>{
+       debugger
+       console.log(event);
+    }
     const onSubmit = data => {
         setError({
             error: undefined
@@ -99,7 +102,7 @@ export default function AddAddress(props) {
                             <div className="form-row">
                                 <div className="col-md-6">
                                     <label htmlFor="Division">Division</label>
-                                    <select name="division_id" className="form-control select-dropdown" {...register('division_id', { required: true })}>
+                                    <select name="division_id" onChange={divisionChange} className="form-control select-dropdown font-14" {...register('division_id', { required: true })}>
                                         {divisions}
                                     </select>
                                     {errors && errors.division_id && <span style={error}>Division is required</span>}

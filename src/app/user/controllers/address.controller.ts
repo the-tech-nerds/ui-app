@@ -16,28 +16,17 @@ export class AddressController {
     }
     @Get('/cities')
     async loadCity() {
-        const cities = [{
-            id: 1,
-            division_id: 1,
-            name: 'dhaka'
-        }]
+        const cities = this.addressService.getCities();
         return cities;
     }
     @Get('/areas')
     async loadArea() {
-        const areas = [{
-            id: 1,
-            city_id: 1,
-            name: 'badda'
-        }]
+        const areas = this.addressService.getAreas();
         return areas;
     }
     @Get('/division')
     async loadDivisions() {
-        const divisions = [{
-            id: 1,
-            name: 'Dhaka'
-        }]
+        const divisions = this.addressService.getDivsion();
         return divisions;
     }
     @Post('/')
