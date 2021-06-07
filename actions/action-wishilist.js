@@ -6,7 +6,7 @@ import * as types from '../constants/ActionTypes';
 export const addItemToWishlist = (product) => (dispatch) => {
     addItemToWishlistApi(product).then((res) => {
         if (res.data && res.status === 200 || res.status === 201) {
-            dispatch(addToWishlist(product))
+            dispatch(fetchItemsForWishlist())
             toast.success('Added to wishlist');
             return;
         } else {
@@ -14,7 +14,7 @@ export const addItemToWishlist = (product) => (dispatch) => {
             return;
         }
     }).catch(err => {
-       toast.error("Error adding in wishlist!");
+        toast.error("Error adding in wishlist!");
     })
 }
 

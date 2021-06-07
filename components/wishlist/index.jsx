@@ -19,6 +19,7 @@ const WishList = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         const { Items = [], symbol } = props;
+        console.log(Items);
         setWishlist(Items);
     }, []);
     const classes = useStyles();
