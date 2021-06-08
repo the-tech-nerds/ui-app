@@ -32,7 +32,7 @@ export function getSideMenus(name) {
             id: 1,
             name: 'Address Book',
             className: name === 'AddressBook' ? 'text-danger' : 'Inactive',
-            href: '/views/address',
+            href: '/address',
             as: USER_ADDRESS
         },
         {
@@ -52,7 +52,7 @@ export function getSideMenus(name) {
         {
             id: 4,
             name: 'Log Out',
-            className: name === 'LogOut' ? 'text-danger' : 'Inactive',  
+            className: name === 'LogOut' ? 'text-danger' : 'Inactive',
             href: USER_LOGOUT
         },
     ]

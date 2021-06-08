@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 import { getTotal, getCartProducts } from '../../../reducers'
 import { addToCart, addToWishlist, addToCompare } from '../../../actions'
-import {getVisibleproducts} from '../../../services';
+import { getVisibleproducts } from '../../../services';
 import ProductListItem from "./product-list-item";
 
 class ProductListing extends Component {
 
-    constructor (props) {
-        super (props)
+    constructor(props) {
+        super(props)
 
         this.state = { limit: 5, hasMoreItems: true };
 
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.fetchMoreItems();
     }
 
@@ -37,9 +37,8 @@ class ProductListing extends Component {
 
     }
 
-    render (){
-        const {products, addToCart, symbol, addToWishlist, addToCompare} = this.props;
-        console.log(this.props.colSize)
+    render() {
+        const { products, addToCart, symbol, addToWishlist, addToCompare } = this.props;
         return (
             <div>
                 <div className="product-wrapper-grid">
@@ -57,12 +56,12 @@ class ProductListing extends Component {
                                 }
                             >
                                 <div className="row">
-                                    { products.slice(0, this.state.limit).map((product, index) =>
-                                        <div className={`${this.props.colSize===3?'col-xl-3 col-md-6 col-grid-box':'col-lg-'+this.props.colSize}`} key={index}>
-                                        <ProductListItem product={product} symbol={symbol}
-                                                         onAddToCompareClicked={() => addToCompare(product)}
-                                                         onAddToWishlistClicked={() => addToWishlist(product)}
-                                                         onAddToCartClicked={addToCart} key={index}/>
+                                    {products.slice(0, this.state.limit).map((product, index) =>
+                                        <div className={`${this.props.colSize === 3 ? 'col-xl-3 col-md-6 col-grid-box' : 'col-lg-' + this.props.colSize}`} key={index}>
+                                            <ProductListItem product={product} symbol={symbol}
+                                                onAddToCompareClicked={() => addToCompare(product)}
+                                                onAddToWishlistClicked={() => addToWishlist(product)}
+                                                onAddToCartClicked={addToCart} key={index} />
                                         </div>)
                                     }
                                 </div>
@@ -89,5 +88,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(
-    mapStateToProps, {addToCart, addToWishlist, addToCompare}
+    mapStateToProps, { addToCart, addToWishlist, addToCompare }
 )(ProductListing)

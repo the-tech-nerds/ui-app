@@ -6,7 +6,6 @@ import { AddressRequest } from "../requests/address.request";
 export class AddressService {
     constructor(private readonly gatewayService: GatewayService) { }
     async create(addressRequest: AddressRequest) {
-        addressRequest.user_id = 1;
         addressRequest.lat = 0;
         addressRequest.long = 0;
         addressRequest.is_default = false;
@@ -59,7 +58,7 @@ export class AddressService {
             path: '/api/v1/address/city/all',
             method: 'GET'
         })
-        return cities
+        return cities;
     }
 
     async getDivsion() {

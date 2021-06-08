@@ -30,9 +30,9 @@ export class AddressController {
         return divisions;
     }
     @Post('/')
-    async add(@Body() addressRequest: AddressRequest, @Res() res: Response): Promise<any> {
-        await this.addressService.create(addressRequest);
-        res.redirect('/user/address');
+    async add(@Body() addressRequest: AddressRequest) {
+        const result = await this.addressService.create(addressRequest);
+        return result;
     }
     @Put('/:id')
     async update(@Param('id') id: number, @Body() addressRequest: AddressRequest, @Res() res: Response) {

@@ -9,7 +9,7 @@ const Address = ({ address }) => (<div>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <ComponentAddressBook address={address} />
+    {address && <ComponentAddressBook address={address} />}
 </div>)
 
 export async function getServerSideProps(ctx) {
