@@ -6,14 +6,23 @@ import { number } from "prop-types";
 import Button from "components/common/buttons/button";
 function BuildDropwDown(list = []) {
     let items = [];
-    items.push(<option></option>);
+    items.push(<option key="234"></option>);
     list.forEach((item) => {
         items.push(<option key={item.id} value={item.id}>{item.name}</option>)
     });
     return items;
 }
 export default function AddAddress(props) {
-    const { register, handleSubmit, errors } = useForm();
+    const { address = undefined } = props;
+    const { register, handleSubmit, errors } = useForm({
+        defaultValues: {
+            name: address?.name,
+            details: address?.address,
+            area_id: address?.area_id,
+            contact_no: address?.mobile,
+            postcode: address?.postcode
+        }
+    });
     const [serverError, setError] = useState({
         error: undefined
     })
@@ -21,6 +30,7 @@ export default function AddAddress(props) {
     const [division_id, setDebisionId] = useState(0);
     const [isLoading, setLoading] = useState(false);
     const [city_id, setCityId] = useState(0);
+    const [area_id, setAreaId] = useState(0);
     const [cities, setCities] = useState({
         current: [],
         total: []
@@ -33,23 +43,44 @@ export default function AddAddress(props) {
         axios.get(`/address/division`)
             .then(res => {
                 setDivision(res?.data?.data || []);
-                setDebisionId(divisions.length > 0 ? divisions[0].id : 0);
+                if (address) {
+                    setDebisionId(address?.division_id);
+                } else {
+                    setDebisionId(divisions.length > 0 ? divisions[0].id : 0);
+                }
+
             }).catch(error => {
             })
         axios.get(`/address/cities`)
             .then(res => {
                 setCities({
-                    ...cities,
+                    current: res?.data?.data,
                     total: res?.data?.data
                 });
+                if (address) {
+                    const crnt = res?.data?.data?.filter(x => x.division_id == Number(address?.division_id));
+                    setCities({
+                        total: res?.data?.data,
+                        current: crnt
+                    })
+                    setCityId(address?.city_id);
+                }
             }).catch(error => {
             })
         axios.get(`/address/areas`)
             .then(res => {
                 setAreas({
-                    ...areas,
+                    current: res?.data?.data,
                     total: res?.data?.data
                 });
+                if (address) {
+                    const crnt = res?.data?.data?.filter(x => x.city_id == Number(address?.city_id));
+                    setAreas({
+                        total: res?.data?.data,
+                        current: crnt
+                    })
+                    setAreaId(address?.area_id);
+                }
             }).catch(error => {
             })
     }, []);
@@ -71,33 +102,58 @@ export default function AddAddress(props) {
         })
         setCityId(Number(event.target.value));
     }
-
+    const areaChange = (event) => {
+        setAreaId(Number(event.target.value));
+    }
     const onSubmit = data => {
         setError({
             error: undefined
         });
         setLoading(true);
         data.division_id = Number(division_id);
-        data.area_id = Number(data.area_id);
+        data.area_id = Number(area_id);
         data.city_id = Number(city_id);
-        axios.post(`/address`, data)
-            .then(res => {
-                window.location.href = USER_ADDRESS;
-            }).catch(error => {
-                const err = error.response.data.message;
-                const matches = err.match(/\[(.*?)\]/);
-                setLoading(false);
-                if (matches) {
-                    setError({
-                        error: matches[1]
-                    });
-                } else {
-                    setError({
-                        error: 'Address creation failed. please try again'
-                    });
-                }
 
-            })
+        if (!address) {
+            axios.post(`/address`, data)
+                .then(res => {
+                    window.location.href = USER_ADDRESS;
+                }).catch(error => {
+                    const err = error.response.data.message;
+                    const matches = err.match(/\[(.*?)\]/);
+                    setLoading(false);
+                    if (matches) {
+                        setError({
+                            error: matches[1]
+                        });
+                    } else {
+                        setError({
+                            error: 'Address creation failed. please try again'
+                        });
+                    }
+
+                })
+        } else {
+            axios.put(`/address/${address.id}`, data)
+                .then(res => {
+                    window.location.href = USER_ADDRESS;
+                }).catch(error => {
+                    const err = error.response.data.message;
+                    const matches = err.match(/\[(.*?)\]/);
+                    setLoading(false);
+                    if (matches) {
+                        setError({
+                            error: matches[1]
+                        });
+                    } else {
+                        setError({
+                            error: 'Address creation failed. please try again'
+                        });
+                    }
+
+                })
+        }
+
     };
     const error = {
         color: "red",
@@ -149,14 +205,14 @@ export default function AddAddress(props) {
                             <div className="form-row">
                                 <div className="col-md-6">
                                     <label htmlFor="Area">Area</label>
-                                    <select name="area_id" className="form-control select-dropdown" {...register('area_id', { required: true })}>
+                                    <select name="area_id" value={area_id} onChange={areaChange} className="form-control select-dropdown">
                                         {BuildDropwDown(areas.current)}
                                     </select>
                                     {errors && errors.area_id && <span style={error}>Area is required</span>}
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="PostCode">Post Code</label>
-                                    <input type="number" name="postcode" className="form-control" id="postcode"
+                                    <input type="number" name="postcode" className="form-control" id="postcode" {...register('postcode')}
                                         placeholder="postcode" required="" />
                                 </div>
                             </div>
@@ -172,7 +228,8 @@ export default function AddAddress(props) {
 
                                 </div>
                                 {/* <button type="submit" className="btn btn-solid">create Address</button> */}
-                                <Button type="submit" loading={isLoading} disabled={isLoading}>Create Address</Button>
+                                {!address && <Button type="submit" loading={isLoading} disabled={isLoading}>Create Address</Button>}
+                                {address && <Button type="submit" loading={isLoading} disabled={isLoading}>Update Address</Button>}
                                 <button type="button" onClick={props.cancel} className="btn btn-solid ml-4">Cancel</button>
                             </div>
                         </form>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { SERVER_PATH, USER_ADDRESS } from "../../../../constants/app_constant";
 export default function DefaultAddress() {
     useEffect(() => {
-        axios.get(SERVER_PATH + `user/address/default`)
+        axios.get(`/address/default`)
             .then(res => {
                 //  window.location.href="/dashboard";
             }).catch(error => {

@@ -58,7 +58,7 @@ const TopBar = (props) => {
                 </div>
                 <div className="col-xs-1 d-flex align-items-center justify-content-end p-0 logo-container">
                     <Link href="/views/home" as="/">
-                       <a className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
+                        <a className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
                             KFC
                        </a>
                     </Link>
@@ -88,13 +88,13 @@ const TopBar = (props) => {
                         <Link key="select-shop" href="/views/shops" as="/shops/select" className="d-flex items-center text-dark">
                             <a suppressHydrationWarning className="text-light additional-menu">
                                 <i className="fa fa-home ml-4 mr-2"></i>
-                                <span className="badge badge-secondary">{currentShop ? currentShop.name : ''}</span>
+                                <span className="badge badge-secondary">{currentShop ? currentShop?.name : ''}</span>
                             </a>
                         </Link>
                     </ul>
                     <ul className="header-dropdown float-right text-right mr-5">
                         {isLogin && <DropdownAfterLogin props={props} />}
-                    {!isLogin && <DropdownBeforeLogin props={props} />}
+                        {!isLogin && <DropdownBeforeLogin props={props} />}
                     </ul>
                 </div>
             </div>

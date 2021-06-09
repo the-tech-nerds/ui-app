@@ -35,20 +35,24 @@ export class AddressController {
         return result;
     }
     @Put('/:id')
-    async update(@Param('id') id: number, @Body() addressRequest: AddressRequest, @Res() res: Response) {
+    async update(@Param('id') id: number, @Body() addressRequest: AddressRequest) {
         const address = await this.addressService.update(id, addressRequest);
         return address;
     }
 
     @Delete('/:id')
-    async delete(@Param('id') id: number, @Res() res: Response) {
+    async delete(@Param('id') id: number) {
         const result = await this.addressService.delete(id);
         return result;
     }
     @Get('/default')
     async getUserDefaultAddress(): Promise<any> {
-        const result = await this.addressService.getUserDefaultAddress(1);
+        const result = await this.addressService.getUserDefaultAddress();
         return result;
     }
-
+    @Put('/default/:id')
+    async makeDefaultAddress(@Param('id') id: number, @Body() addressRequest: any) {
+        const result = await this.addressService.updateDefaultAddress(id);
+        return result;
+    }
 }

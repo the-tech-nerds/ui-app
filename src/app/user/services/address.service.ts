@@ -18,7 +18,7 @@ export class AddressService {
     }
     async getAllByUserId() {
         const addresses = await this.gatewayService.execute('auth', {
-            path: '/api/v1/address/all',
+            path: '/api/v1/address/user/all',
             method: 'GET'
         })
         return addresses
@@ -31,8 +31,10 @@ export class AddressService {
         return addresses
     }
     async update(id: number, addressRequest: AddressRequest) {
+        addressRequest.lat = 0;
+        addressRequest.long = 0;
         const addressInfo = await this.gatewayService.execute('auth', {
-            path: '/api/v1/address' + id,
+            path: '/api/v1/address/' + id,
             body: { ...addressRequest },
             method: 'PUT'
         })
@@ -40,15 +42,28 @@ export class AddressService {
     }
     async delete(id: number) {
         const addressInfo = await this.gatewayService.execute('auth', {
-            path: '/api/v1/address' + id,
+            path: '/api/v1/address/' + id,
             method: 'DELETE'
         })
         return addressInfo
     }
-    async getUserDefaultAddress(id: number) {
-        const addressInfo = await this.gatewayService.execute('auth', {
-            path: '/api/v1/address/user/default/' + id,
+    async getUserDefaultAddress() {
+        let addressInfo = await this.gatewayService.execute('auth', {
+            path: '/api/v1/address/user/default/',
             method: 'GET'
+        })
+        if (addressInfo?.data) {
+            addressInfo.data.user_id = 0;
+            addressInfo.data.created_by = 0;
+            addressInfo.data.updated_by = 0;
+        }
+        return addressInfo;
+    }
+    async updateDefaultAddress(id: number) {
+        const addressInfo = await this.gatewayService.execute('auth', {
+            path: '/api/v1/address/default/' + id,
+            method: 'PUT',
+            body: null,
         })
         return addressInfo
     }
