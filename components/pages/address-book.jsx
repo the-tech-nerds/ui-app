@@ -8,7 +8,7 @@ import { USER_ADDRESS } from 'constants/app_constant';
 import { errorHandle } from 'share';
 import AlertMessage from 'components/common/alert/alert-message';
 import { toast } from 'react-toastify';
-class AddressBook extends Component {
+export class AddressBook extends Component {
 
     constructor(props) {
         super(props)
@@ -69,7 +69,7 @@ class AddressBook extends Component {
     }
 }
 
-function MyAddress({ item }) {
+export function MyAddress({ item }) {
     const [serverError, setError] = useState(undefined);
     const [isEditMode, setEditMode] = useState(false);
     const error = {
@@ -154,5 +154,3 @@ function MyAddress({ item }) {
     }
 
 }
-
-export default AddressBook;
