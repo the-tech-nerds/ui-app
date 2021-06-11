@@ -16,50 +16,43 @@ export class AddressController {
     }
     @Get('/cities')
     async loadCity() {
-        const cities = [{
-            id: 1,
-            division_id: 1,
-            name: 'dhaka'
-        }]
+        const cities = this.addressService.getCities();
         return cities;
     }
     @Get('/areas')
     async loadArea() {
-        const areas = [{
-            id: 1,
-            city_id: 1,
-            name: 'badda'
-        }]
+        const areas = this.addressService.getAreas();
         return areas;
     }
     @Get('/division')
     async loadDivisions() {
-        const divisions = [{
-            id: 1,
-            name: 'Dhaka'
-        }]
+        const divisions = this.addressService.getDivsion();
         return divisions;
     }
     @Post('/')
-    async add(@Body() addressRequest: AddressRequest, @Res() res: Response): Promise<any> {
-        await this.addressService.create(addressRequest);
-        res.redirect('/user/address');
+    async add(@Body() addressRequest: AddressRequest) {
+        const result = await this.addressService.create(addressRequest);
+        return result;
     }
     @Put('/:id')
-    async update(@Param('id') id: number, @Body() addressRequest: AddressRequest, @Res() res: Response) {
+    async update(@Param('id') id: number, @Body() addressRequest: AddressRequest) {
         const address = await this.addressService.update(id, addressRequest);
         return address;
     }
 
     @Delete('/:id')
-    async delete(@Param('id') id: number, @Res() res: Response) {
+    async delete(@Param('id') id: number) {
         const result = await this.addressService.delete(id);
         return result;
     }
     @Get('/default')
     async getUserDefaultAddress(): Promise<any> {
-        const result = await this.addressService.getUserDefaultAddress(1);
+        const result = await this.addressService.getUserDefaultAddress();
         return result;
     }
-
+    @Put('/default/:id')
+    async makeDefaultAddress(@Param('id') id: number, @Body() addressRequest: any) {
+        const result = await this.addressService.updateDefaultAddress(id);
+        return result;
+    }
 }

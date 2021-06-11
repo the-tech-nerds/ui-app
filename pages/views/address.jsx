@@ -2,14 +2,14 @@ import Root from 'components/layouts/Root';
 import React from 'react';
 import Head from 'next/head';
 import '../../components/styles/user_dashbord.module.scss'
-import ComponentAddressBook from '../../components/pages/address-book';
+import { AddressBook } from '../../components/pages/address-book';
 
 const Address = ({ address }) => (<div>
     <Head>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <ComponentAddressBook address={address} />
+    {address && <AddressBook address={address} />}
 </div>)
 
 export async function getServerSideProps(ctx) {

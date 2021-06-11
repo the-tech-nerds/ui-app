@@ -1,14 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { SERVER_PATH, USER_ADDRESS } from "../../../../constants/app_constant";
+import { MyAddress } from 'components/pages/address-book';
 export default function DefaultAddress() {
+    const [defaultAddress, setDefaultAddress] = useState(undefined);
     useEffect(() => {
-        axios.get(SERVER_PATH + `user/address/default`)
+        axios.get(`/address/default`)
             .then(res => {
-                //  window.location.href="/dashboard";
+                const address = res?.data?.data;
+                if (address) {
+                    const data = {
+                        id: address.id,
+                        name: address.name,
+                        address: address.details,
+                        mobile: address.contact_no,
+                        region: address?.area?.name + '->' + address?.city?.name + '->' + address?.division?.name,
+                        postcode: address.postcode,
+                        is_default: address.is_default,
+                        division_id: address.division_id,
+                        city_id: address.city_id,
+                        area_id: address.area_id
+                    };
+                    setDefaultAddress(data);
+                }
+
             }).catch(error => {
-                //  const err = error.response.data.message;
-                console.log(error);
+                // console.log(error);
             })
     }, []);
 
@@ -21,10 +38,9 @@ export default function DefaultAddress() {
         <div className="row">
             <div className="col-sm-12">
                 <h6>Default Shipping Address</h6>
-                <address>
-                    You have not set a default shipping address.<br />
-                    <a href="/user/address">Edit Address</a>
-                </address>
+                {defaultAddress && <address className="mt-1">
+                    <MyAddress item={defaultAddress} />
+                </address>}
             </div>
         </div>
     </div>
