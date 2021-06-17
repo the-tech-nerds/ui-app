@@ -59,6 +59,7 @@ body {
   letter-spacing: 0.8px;
 }
 .app-body {
+  background: #f7f7f7;
   transition: all 0.5s ease-in-out;
   margin-top: 60px;
 }
@@ -5245,7 +5246,7 @@ footer {
 }
 .header-6 {
   .top-header {
-    background-color: $theme-deafult;
+    background-color: white;
     .header-contact {
       li {
         color: $white;
@@ -5256,9 +5257,9 @@ footer {
     }
     .header-dropdown {
       li {
-        color: $white;
+        color: $black;
         a {
-          color: $white;
+          color: $black;
           i {
             color: white;
           }

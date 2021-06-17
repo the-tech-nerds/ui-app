@@ -21,7 +21,7 @@ const ProductGridSingle = ({
 
     return (
 
-        <div className="m-4 p-2 d-flex flex-column justify-content-center text-center hover-item">
+        <div className="m-4 p-2 d-flex flex-column justify-content-center text-center hover-item bg-white">
             <div className="img-wrapper">
                 {/* <div className="lable-block">
                         {(product.new == true)? <span className="lable3">new</span> : ''}

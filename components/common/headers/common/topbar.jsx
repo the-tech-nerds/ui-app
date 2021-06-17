@@ -47,7 +47,7 @@ const TopBar = (props) => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-xs-1 d-flex align-items-center justify-content-start p-0">
-                    <div className="navbar navbar-dark">
+                    <div className="navbar navbar-light">
                         <button onClick={toggleNav} className="navbar-toggler" type="button"
                             data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
                             aria-controls="navbarToggleExternalContent" aria-expanded="false"
@@ -86,7 +86,7 @@ const TopBar = (props) => {
                     </ul>}
                     <ul>
                         <Link key="select-shop" href="/views/shops" as="/shops/select" className="d-flex items-center text-dark">
-                            <a suppressHydrationWarning className="text-light additional-menu">
+                            <a suppressHydrationWarning className="additional-menu">
                                 <i className="fa fa-home ml-4 mr-2"></i>
                                 <span className="badge badge-secondary">{currentShop ? currentShop?.name : ''}</span>
                             </a>
