@@ -54,30 +54,6 @@ const ItemList = ({ list, dispatch }) => (
         })}
       </div>
     </div>
-    {/* <div className="row wishlist-buttons">
-      <div className="col-12">
-        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/collection`}>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            startIcon={<ShoppingBasket />}
-          >
-            continue shopping
-          </Button>
-        </Link>
-        <Link href={`${process.env.PUBLIC_URL}/checkout`}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={`${classes.button} ml-2`}
-            startIcon={<ShoppingCart />}
-          >
-            check out
-          </Button>
-        </Link>
-      </div>
-    </div> */}
   </div>
 );
 
