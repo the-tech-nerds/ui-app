@@ -37,21 +37,6 @@ class Vegetables extends Component {
                 <section className="p-0">
                     <Slider className="slide-1 home-slider">
                         <div>
-                            <div style={{
-                                position: 'fixed',
-                                zIndex: -1,
-                                overflow: 'hidden',
-                                height: "100%",
-                                width: "20%"
-                            }}>
-                                <Image 
-                                    style={{ zIndex: 0 }}
-                                    src="/assets/images/home-banner/39.jpg" 
-                                    alt="Fresh Vegetables"
-                                    layout="fill"
-                                    objectFit="cover"
-                                />
-                            </div>
                             <div className="home home39 text-center">
                                     <div className="container">
                                         <div className="row">
@@ -75,7 +60,7 @@ class Vegetables extends Component {
                                                 <div className="slider-contain">
                                                     <div>
                                                         <h4>save upto 10%</h4>
-                                                        <h1>fresh vegetables</h1><a href="#" className="btn btn-solid">shop
+                                                          <h1>fresh vegetables</h1><a href="#" className="btn btn-solid">shop
                                                         now</a></div>
                                                 </div>
                                             </div>
@@ -131,23 +116,6 @@ class Vegetables extends Component {
 
                 {/*Parallax banner*/}
                 <section className="p-0">
-                    <div style={{
-                        position: 'absolute',
-                        zIndex: -1,
-                        overflow: 'hidden',
-                        height: "100%",
-                        width: "100%"
-                    }}>
-                        <Image 
-                            style={{ zIndex: 0, backgroundAttachment: 'fixed' }}
-                            src="/assets/images/parallax/15.jpg"
-                            // width={1200}
-                            alt="Fresh Vegetables"
-                            // height={600}
-                            layout="fill"
-                            objectFit="cover"
-                        />
-                    </div>
                     <div className="full-banner parallax-banner15 parallax text-left p-left">
                         <div className="container">
                             <div className="row">
@@ -167,10 +135,6 @@ class Vegetables extends Component {
                 {/*product-box slider*/}
                 <Special type={'vegetable'} />
                 {/*product-box slider end*/}
-
-                <section className="false" style={{ minHeight: "300px" }}>
-                    &nbsp;
-                </section>
 
                 {/*Blog Section*/}
                 <div className="container">

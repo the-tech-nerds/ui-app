@@ -10,12 +10,12 @@ function DropdownAfterLogin  ({props}) {
                 <li>
                     <i className="fa  fa-cogs mt-1" aria-hidden="true"></i>  <Link  href="/views/dashboard" as={USER_DASHBOARD}>Mange Account</Link>
                 </li>
-                {/*<li>*/}
-                {/*    <a href="">My Orders</a>*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <a>My Wishlist</a>*/}
-                {/*</li>*/}
+                {/* <li>
+                   <a href="">My Orders</a>
+                </li>
+                <li>
+                   <a>My Wishlist</a>
+                </li> */}
                 <li>
                     <i className="fa fa-sign-out mt-1" aria-hidden="true"></i> <a href={USER_LOGOUT}>Logout</a>
                 </li>

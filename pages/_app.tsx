@@ -7,6 +7,7 @@ import '../components/common/index.scss';
 import store from 'store';
 import {checkLogin, fetchItemsForShop} from 'actions';
 import Root from 'components/layouts/Root';
+import { route } from 'next/dist/next-server/server/router';
 
 const initialActions = () => {
   store.dispatch(fetchItemsForShop());
@@ -15,12 +16,16 @@ const initialActions = () => {
 
 NProgress.configure({ showSpinner: true });
 
-Router.events.on('routeChangeStart', () => {
-  NProgress.start();
+Router.events.on('routeChangeStart', (route) => {
+  if (!route.includes('search')) {
+    NProgress.start();
+  }
 });
 
-Router.events.on('routeChangeComplete', () => {
-  NProgress.done();
+Router.events.on('routeChangeComplete', (route) => {
+  if (!route.includes('search')) {
+    NProgress.done();
+  }
 });
 
 Router.events.on('routeChangeError', () => {

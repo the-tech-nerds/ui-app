@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/main.ts",
+    "dev": "NODE_OPTIONS=--max_old_space_size=1000; nodemon src/main.ts",
     "build:clean": "rimraf .next",
     "build:ui": "npx next build",
     "build:server": "npx tsc --project tsconfig.server.json && npx babel .next -d .next --extensions \".js\"",
@@ -62,6 +62,7 @@
     "rxjs": "^6.5.2",
     "sass": "^1.32.8",
     "typeorm": "^0.2.32",
+    "uuid": "^8.3.2",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
