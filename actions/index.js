@@ -4,6 +4,7 @@ import store from "../store";
 import { toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 export * from './action-wishilist';
+export * from './action-cart';
 export * from './action-login';
 export * from './action-category';
 export * from './action-shop';

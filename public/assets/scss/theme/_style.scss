@@ -61,7 +61,7 @@ body {
 .app-body {
   background: #f7f7f7;
   transition: all 0.5s ease-in-out;
-  margin-top: 60px;
+  padding-top: 60px;
 }
 h1 {
   font-size: 60px;
@@ -782,7 +782,7 @@ button {
     2.Header CSS start
 ==========================*/
 header {
-  background-color: $theme-deafult;
+  background-color: $topbar-color;
 }
 .onhover-dropdown {
   position: relative;
@@ -1375,12 +1375,12 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     height: 75vh;
-    z-index: 2;
-    // @for $i from 1 through 56 {
-    //   &.home#{$i} {
-    //     background-image:url("#{$assetspath}/home-banner/#{$i}.jpg");
-    //   }
-    // }
+    // z-index: 2;
+    @for $i from 1 through 56 {
+      &.home#{$i} {
+        background-image:url("#{$assetspath}/home-banner/#{$i}.jpg");
+      }
+    }
   }
 
   .slider-contain {
@@ -3276,11 +3276,11 @@ header {
   padding-top: 190px;
   padding-bottom: 190px;
   background-position: center;  
-  // @for $i from 1 through 28 {
-  //   &.parallax-banner#{$i} {
-  //     background-image:url("#{$assetspath}/parallax/#{$i}.jpg");
-  //   }
-  // }
+  @for $i from 1 through 28 {
+    &.parallax-banner#{$i} {
+      background-image:url("#{$assetspath}/parallax/#{$i}.jpg");
+    }
+  }
   &.parallax-layout {
     padding-top: 350px;
     padding-bottom: 350px;
@@ -5246,7 +5246,7 @@ footer {
 }
 .header-6 {
   .top-header {
-    background-color: white;
+    background-color: $topbar-color;
     .header-contact {
       li {
         color: $white;
@@ -14391,6 +14391,11 @@ a:hover {
   height: 75%;
   display: inline-block;
   background: white;
+
+  &:focus {
+    border-color: #ced4da !important;
+    box-shadow: none !important;
+  }
 }
 
 
@@ -14414,13 +14419,13 @@ a:hover {
 .shop {
   // max-width: 250px;
   cursor: pointer;
-  &:hover {
-    border: solid $theme-deafult 3px;
-  }
+  // &:hover {
+  //   border: solid $theme-deafult 3px;
+  // }
 }
 
 .shop--selected {
-  border: solid $theme-deafult 3px;
+  border: solid $theme-deafult 2px;
 }
 
 .shop--selected-image{

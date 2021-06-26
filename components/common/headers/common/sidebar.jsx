@@ -105,7 +105,7 @@ const SideBar = () => {
     }
 
     return (
-        <div id="mySidenav" className="sidenav card">
+        <div id="mySidenav" className="sidenav">
             <nav>
                 <SideMenu
                     items={categories}

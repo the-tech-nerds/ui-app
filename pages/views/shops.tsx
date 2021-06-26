@@ -17,24 +17,24 @@ const ShopList = ({ shops, current }: ShopListProps) => {
             {shops.map((shop: Shop) => (
                 <div
                     key={shop.id}
-                    className={`d-flex flex-column  m-2
-                                ${current.id === shop.id ? 'shop--selected' : ''} shop`}
+                    className={`d-flex flex-column  m-2 shop`}
                     onClick={() => {
                         dispatch(selectShop(shop));
                         dispatch(fetchItemsForCategory(shop.type_id, true))
                     }}
                 >
-                    <div className="shop_container card">
+                    <div className={`card ${current.id === shop.id ? 'shop--selected' : ''}`}>
                         <Image
                             className={current.id === shop.id ? 'shop--selected-image' : ''}
                             src={shop && shop.images?.length > 0 ? shop.images[0].url : "https://khan-fresh-corner.s3.amazonaws.com/shop/4da05526-0aa3-4daa-92e9-e533dffaad1d.jpg"}
                             alt={shop.name}
-                            width={300}
-                            height={300}
+                            width={100}
+                            height={100}
                             layout="intrinsic"
                         />
-                        <div className="centered">{shop.name}</div>
                     </div>
+                    {shop.name}
+                    
                 </div>
             ))}
         </div>

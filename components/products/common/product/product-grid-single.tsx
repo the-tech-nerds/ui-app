@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from '../../../../components/image/image';
 import { Product } from 'types';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from 'actions';
 
 
 type ProductGridSingleProps = {
@@ -18,10 +20,15 @@ const ProductGridSingle = ({
     // onAddToCompareClicked
 }: ProductGridSingleProps) => {
     const [selectedVariant, setSelectedVariant] = useState(0);
+    const dispatch = useDispatch();
+
+    const onAddToCart = () => {
+        dispatch(addItemToCart(product));
+    }
 
     return (
 
-        <div className="m-4 p-2 d-flex flex-column justify-content-center text-center hover-item bg-white">
+        <div className="col-5 col-md-2 ml-3 sm p-2 d-flex flex-column justify-content-center text-center hover-item bg-white">
             <div className="img-wrapper">
                 {/* <div className="lable-block">
                         {(product.new == true)? <span className="lable3">new</span> : ''}
@@ -38,8 +45,8 @@ const ProductGridSingle = ({
                         <Image
                             src={product?.image ? product?.image : ''}
                             height={150}
-                            width={200}
                             alt={product.name}
+                            fullWidth
                         />
                     </div>
                 </Link>
@@ -100,7 +107,12 @@ const ProductGridSingle = ({
                         </ul>:''} */}
                 </div>
             </div>
-            <button className="btn btn-success btn-lg w-full">Add to Cart</button>
+            <button
+                onClick={onAddToCart} 
+                className="btn btn-success btn-lg w-full"
+            >
+                Add to Cart
+            </button>
         </div>
     )
 };

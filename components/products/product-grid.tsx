@@ -96,13 +96,13 @@ const ProductGrid = (props: ProductGridProps) => {
                         hasMore={!!nextUrl}
                         loader={() => <Skeleton width={500}></Skeleton>}
                     >
-                        <div className="row">
-                            <div className="col">
+                        {/* <div className="row"> */}
+                            {/* <div className="col-3"> */}
                                 <div className="no-slider row">
                                     {items}
                                 </div>
-                            </div>
-                        </div>
+                            {/* </div> */}
+                        {/* </div> */}
                         {loading && <div className="d-flex justify-content-center">
                              <CircularProgress />
                         </div>}

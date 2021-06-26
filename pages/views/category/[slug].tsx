@@ -16,7 +16,6 @@ const CategoryList = ({ slug }: CategoryListProps) => {
     const menus: Category[] = useSelector(state => state?.categories?.list) || [];
 
     useEffect(() => {
-        console.info('in effect', menus);
         const searchForCategorySlug =
             (cateogryList: Category[] = [], searchSlug: string = ''): Category | null => {
                 let foundCategory = null;
