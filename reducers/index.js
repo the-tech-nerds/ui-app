@@ -3,7 +3,7 @@ import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
 
 // Import custom components
 import productReducer from './products';
-// import cartReducer from './cart';
+import cartReducer from './cart';
 // import filtersReducer from './filters';
 import wishlistReducer from './wishlist';
 import loginReducer from './login';
@@ -15,7 +15,7 @@ import menuListReducer from "./menu";
 
 const rootReducer = combineReducers({
     data: productReducer,
-    // cartList: cartReducer,
+    cart: cartReducer,
     // filters: filtersReducer,
     wishlist: wishlistReducer,
     // compare: compareReducer,
