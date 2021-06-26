@@ -2,10 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { withTranslate } from "react-redux-multilingual";
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "components/image/image";
+import { deleteItemFromCart, removeFromCart } from "actions";
 
-const ItemList = ({ list }) => (
+const ItemList = ({ list, dispatch }) => (
   <div className="container">
     <div className="row">
       <div className="col-sm-12">
@@ -24,7 +25,7 @@ const ItemList = ({ list }) => (
                     height={30}
                     width={30}
                     style={{ maxHeight: "50px", maxWidth: "50px" }}
-                    src={item.images ? item?.images[0] : item?.images[0]}
+                    src={item.image}
                     alt=""
                   />
                 </Link>
@@ -32,21 +33,21 @@ const ItemList = ({ list }) => (
               <div className="p-1 ml-3 bd-highlight flex-fill">
                 <div className="d-flex">
                   <Link href={`/product/${item.product_slug}`}>
-                    <span className="font-weight-bold">
-                      {item.variance_name}
-                    </span>
+                    <span className="font-weight-bold">{item.title}</span>
                   </Link>
                 </div>
                 <div className="d-flex">
                   <span className="font-weight-bold">
-                    {item.variance_price} Tk
+                    {item.price} Tk
                     {/* <del><span className="money">{symbol}{item.variance_price}</span></del> */}
                   </span>
                 </div>
               </div>
               <div className="p-2 bd-highlight d-flex flex-column">
-                  <span>Qty: 2</span>
-                  <span><i className="fa fa-remove"></i></span>
+                <span>Qty: {item.quantity}</span>
+                <span onClick={() => dispatch(deleteItemFromCart(item.id))}>
+                  <i className="fa fa-remove"></i>
+                </span>
               </div>
             </div>
           );
@@ -104,11 +105,14 @@ const EmptyCart = () => (
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
-  // const cart = useSelector((state) => state?.wishlist?.list);
-
+  const dispatch = useDispatch();
   const openCart = () => {
     document.getElementById("cart").classList.add("open-cart");
   };
+  const totalAmount = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   const closeCart = () => {
     document.getElementById("cart").classList.remove("open-cart");
@@ -131,9 +135,12 @@ const Cart = () => {
             )}
             {cart.length > 0 && (
               <div>
-                <button className="btn btn-success btn-lg w-100">Checkout</button>
+                <div className="d-flex justify-content-between p-2">
+                  <span className="p-3">Total: {totalAmount}</span>
+                  <button className="btn btn-success btn-sm ">Checkout</button>
+                </div>
                 <section className="cart-section">
-                  <ItemList list={cart} />
+                  <ItemList list={cart} dispatch={dispatch} />
                 </section>
               </div>
             )}

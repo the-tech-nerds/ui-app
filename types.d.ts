@@ -7,6 +7,7 @@ export type Unit = {
 }
 
 export type ProductVariant = {
+    id: number;
     unit: Unit;
     unit_value: string;
     images: Image[];

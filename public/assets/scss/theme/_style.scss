@@ -60,8 +60,14 @@ body {
 .app-body {
   background: #f7f7f7;
   transition: all 0.5s ease-in-out;
-  padding-top: 60px;
 }
+
+@media screen and (max-width: 768px) {
+  .app-body {
+    padding-top: 40px;
+  }
+}
+
 h1 {
   font-size: 60px;
   color: $dark-font;
@@ -6882,7 +6888,7 @@ footer {
     box-shadow: inset 0px 0px 6px rgba(115, 115, 115, 0.09);
     background-color: #f3f3f3;
   }
- 
+
   .overlay {
     visibility: hidden;
     opacity: 0;
@@ -14792,4 +14798,12 @@ a:hover {
 
 .shop--selected-image {
   border-bottom: solid $theme-deafult 3px;
+}
+
+.top-spacing--lg {
+  padding-top: 80px;
+}
+
+.no-border {
+  border: none !important;
 }
