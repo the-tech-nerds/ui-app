@@ -66,7 +66,7 @@ const ProductGrid = (props: ProductGridProps) => {
     
     if (loading && !scrolling) {
         return (
-            <div className="d-flex justify-content-center m-5">
+            <div className="d-flex justify-content-center section-b-space m-5">
                 <CircularProgress />
             </div>
         );
@@ -74,7 +74,7 @@ const ProductGrid = (props: ProductGridProps) => {
 
     if (!products.length) {
         return (
-            <section className="ratio_asos section-b-space">
+            <section className="ratio_asos section-b-space top-spacing--lg">
                 <div className="container">
                     <h4>No products available!</h4>
                 </div>
@@ -84,7 +84,7 @@ const ProductGrid = (props: ProductGridProps) => {
 
     return (
         <div key={props.fetchUrl}>
-            <section className="ratio_asos section-b-space">
+            <section className="ratio_asos section-b-space top-spacing--lg">
                 <div className="container">
                     <div className="d-flex">
                         <div className="flex-fill"><hr/></div>
@@ -98,7 +98,7 @@ const ProductGrid = (props: ProductGridProps) => {
                     >
                         {/* <div className="row"> */}
                             {/* <div className="col-3"> */}
-                                <div className="no-slider row">
+                                <div className="no-slider row d-flex justify-content-center">
                                     {items}
                                 </div>
                             {/* </div> */}

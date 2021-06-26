@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const CategoryList = ({ categories = [], category = {} }) => {
     return (
-        <section className="ratio_asos section-b-space">
+        <section className="ratio_asos ">
             <div className="container">
                 <div className="d-flex">
                     <div className="flex-fill"><hr /></div>

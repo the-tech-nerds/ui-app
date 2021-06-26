@@ -61,7 +61,7 @@ body {
 .app-body {
   background: #f7f7f7;
   transition: all 0.5s ease-in-out;
-  padding-top: 60px;
+  
 }
 h1 {
   font-size: 60px;
@@ -14430,4 +14430,8 @@ a:hover {
 
 .shop--selected-image{
   border-bottom: solid $theme-deafult 3px;
+}
+
+.top-spacing--lg {
+  padding-top: 80px;
 }
