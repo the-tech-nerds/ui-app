@@ -7,7 +7,6 @@ const Home = () => (<div>
     <Head>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico" />
     </Head>
     <ComponentHome />
 </div>)

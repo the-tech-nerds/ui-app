@@ -8,6 +8,7 @@ import store from 'store';
 import {checkLogin, fetchItemsForShop, getAllProducts} from 'actions';
 import Root from 'components/layouts/Root';
 import { route } from 'next/dist/next-server/server/router';
+import Head from 'next/head';
 
 const initialActions = () => {
   store.dispatch(fetchItemsForShop());
@@ -37,6 +38,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   initialActions();
   return (
    <Root>
+     <Head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico" />
+     </Head>
       <div>
       {/* <div style={{ flexBasis: '30%', margin: 25 }}>
         <Sidebar />

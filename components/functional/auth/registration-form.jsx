@@ -209,7 +209,7 @@ export default function RegisterForm() {
                     <div className="row">
                         <div className="col-lg-6">
                             <h3>create account</h3>
-                            <div className="theme-card">
+                            <div className="theme-card card">
                                 {serverError.error && <AlertMessage className = "alert alert-danger alert-dismissible">{serverError.error}</AlertMessage>}
                                 {otpInfo && <OtpForm otpInfo={otpInfo} cancel={handleCancel} otpResponse={handleOtpResponse} />}
                                 <form className="theme-form" onSubmit={onSubmit}>
@@ -311,8 +311,8 @@ export default function RegisterForm() {
                         </div>
                         <div className="col-lg-6 right-login">
                             <h3>Signup/Login</h3>
-                            <div className="theme-card authentication-right">
-                                <h6 className="title-font">Create an Accounts</h6>
+                            <div className="theme-card card authentication-right">
+                                <h6 className="title-font">Create an Account</h6>
                                 <p>Sign up for a free account at our store. Registration is quick and easy. It
                                     allows you to be able to order from our shop. To start shopping click
                                     register.</p>

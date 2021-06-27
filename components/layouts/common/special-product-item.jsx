@@ -110,9 +110,11 @@ class SpecialProductItem extends Component {
                             <i className="fa fa-refresh" aria-hidden="true"></i></Link>
                     </div>
                     <div className="addtocart_btn">
-                        <button className="add-button add_cart" title="Add to cart" onClick={this.openQuantity}>
+                        {/* <button className="add-button add_cart" title="Add to cart" 
+                            // onClick={this.openQuantity}
+                        >
                             add to cart
-                        </button>
+                        </button> */}
                         <div className={`qty-box cart_qty ${this.state.openQuantity?'open':''}`}>
                             <div className="input-group">
                               <span className="input-group-prepend">
