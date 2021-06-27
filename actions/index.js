@@ -1,4 +1,4 @@
-import shop from '../api/shop'
+import { getProducts} from '../api/shop'
 import * as types from '../constants/ActionTypes'
 import store from "../store";
 import { toast  } from 'react-toastify';
@@ -20,7 +20,7 @@ export const receiveProducts = products => ({
 
 export const getAllProducts = () => dispatch => {
     dispatch(fetchProductsBegin());
-    shop.getProducts(products => {
+    getProducts(products => {
         dispatch(receiveProducts(products));
         return products;
     })

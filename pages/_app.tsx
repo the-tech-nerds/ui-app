@@ -5,13 +5,14 @@ import Router from 'next/router';
 import '../pages/index.scss';
 import '../components/common/index.scss';
 import store from 'store';
-import {checkLogin, fetchItemsForShop} from 'actions';
+import {checkLogin, fetchItemsForShop, getAllProducts} from 'actions';
 import Root from 'components/layouts/Root';
 import { route } from 'next/dist/next-server/server/router';
 
 const initialActions = () => {
   store.dispatch(fetchItemsForShop());
   store.dispatch(checkLogin());
+  store.dispatch(getAllProducts());
 };
 
 NProgress.configure({ showSpinner: true });

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Link from 'next/link';
 import Modal from 'react-responsive-modal';
+import Image from 'components/image/image';
 
 
 class SpecialProductItem extends Component {
@@ -86,12 +87,14 @@ class SpecialProductItem extends Component {
 
                     </div>
                     <div className="front">
-                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
+                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><Image
                             src={`${
                                 product.variants?
                                     this.state.image?this.state.image:product.variants[0].images
                                 :product.pictures[0]
                             }`}
+                            fullWidth
+                            height={200}
                             className="img-fluid lazyload bg-img"
                             alt="" /></Link>
                     </div>
