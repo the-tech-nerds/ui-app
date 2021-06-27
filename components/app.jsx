@@ -7,7 +7,7 @@ import HeaderThree from './common/headers/header-three';
 import FooterOne from "./common/footers/footer-one";
 
 // ThemeSettings
-import ThemeSettings from "./common/theme-settings"
+import Cart from "./common/cart"
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchItemsForCategory} from 'actions';
 import {fetchItemsForWishlist, fetchUserDetails} from "../actions";
@@ -32,7 +32,8 @@ const App = ({ children }) => {
             <div className="app-body" id="app-body">
                 {children}
                 <FooterOne logoName={'logo.png'} />
-                <ThemeSettings />
+                {/* <ThemeSettings /> */}
+                <Cart />
             </div>
         </div>
     );

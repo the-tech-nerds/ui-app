@@ -22,6 +22,7 @@ const WishList = (props) => {
         console.log(Items);
         setWishlist(Items);
     }, []);
+    
     const classes = useStyles();
     const deleteWishList = (item) => {
         axios.delete(`/user/wishlist/${item.id}`).then(res => {

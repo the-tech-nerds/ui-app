@@ -25,7 +25,7 @@ export default  function UserDashboard({name,title,component}){
                         {/*    </a>*/}
                         {/*</div>*/}
 
-                        <div className="dashboard-left">
+                        <div className="dashboard-left card no-border">
                             {/*<div className="collection-mobile-back">*/}
                             {/*    <span className="filter-back">*/}
                             {/*        <i className="fa fa-angle-left" aria-hidden="true"></i> back*/}
@@ -40,7 +40,7 @@ export default  function UserDashboard({name,title,component}){
                         </div>
                     </div>
                     <div className="col-lg-9">
-                        <div className="dashboard-right">
+                        <div className="dashboard-right card no-border">
                             <div className="dashboard">
                                 <div className="box-head">
                                     <h2>{title}</h2>

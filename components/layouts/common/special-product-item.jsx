@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Link from 'next/link';
 import Modal from 'react-responsive-modal';
+import Image from 'components/image/image';
 
 
 class SpecialProductItem extends Component {
@@ -86,12 +87,14 @@ class SpecialProductItem extends Component {
 
                     </div>
                     <div className="front">
-                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><img
+                        <Link href={`${process.env.PUBLIC_URL}/left-sidebar/product/${product.id}`} ><Image
                             src={`${
                                 product.variants?
                                     this.state.image?this.state.image:product.variants[0].images
                                 :product.pictures[0]
                             }`}
+                            fullWidth
+                            height={200}
                             className="img-fluid lazyload bg-img"
                             alt="" /></Link>
                     </div>
@@ -107,9 +110,11 @@ class SpecialProductItem extends Component {
                             <i className="fa fa-refresh" aria-hidden="true"></i></Link>
                     </div>
                     <div className="addtocart_btn">
-                        <button className="add-button add_cart" title="Add to cart" onClick={this.openQuantity}>
+                        {/* <button className="add-button add_cart" title="Add to cart" 
+                            // onClick={this.openQuantity}
+                        >
                             add to cart
-                        </button>
+                        </button> */}
                         <div className={`qty-box cart_qty ${this.state.openQuantity?'open':''}`}>
                             <div className="input-group">
                               <span className="input-group-prepend">

@@ -61,7 +61,7 @@ export default  function    LoginForm(){
                 <div className="row">
                     <div className="col-lg-6">
                         <h3>Login</h3>
-                        <div className="theme-card">
+                        <div className="theme-card card">
                             {serverError.error && <AlertMessage className = "alert alert-danger alert-dismissible">{serverError.error}</AlertMessage>}
                             <form className="theme-form" onSubmit={handleSubmit(onSubmit)}>
                                 <div className="form-group">
@@ -90,8 +90,8 @@ export default  function    LoginForm(){
                     </div>
                     <div className="col-lg-6 right-login">
                         <h3>Create An Account</h3>
-                        <div className="theme-card authentication-right">
-                            <h6 className="title-font">Create A Accounts</h6>
+                        <div className="theme-card card authentication-right">
+                            <h6 className="title-font">Create an account</h6>
                             <p>Sign up for a free account at our store. Registration is quick and easy. It
                                 allows you to be able to order from our shop. To start shopping click
                                 register.</p>

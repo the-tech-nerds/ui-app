@@ -13,10 +13,7 @@ import DetailsWithPrice from "./common/product/details-price";
 import DetailsTopTabs from "./common/details-top-tabs";
 import { addToCart, addToCartUnsafe, addToWishlist} from '../../actions'
 import ImageZoom from './common/product/image-zoom'
-import SmallImages from './common/product/small-image'
-
-
-
+import SmallImages from './common/product/small-image';
 
 class RightSideBar extends Component {
 

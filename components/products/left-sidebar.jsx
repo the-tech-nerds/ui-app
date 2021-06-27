@@ -96,7 +96,7 @@ class LeftSideBar extends Component {
                                         {/*<NewProduct/>*/}
                                         {/*side-bar single product slider end*/}
                                     </div>
-                                    <div className="col-lg-9 col-sm-12 col-xs-12">
+                                    <div className="card p-4 col-lg-9 col-sm-12 col-xs-12">
                                         <div className="">
                                             <div className="row">
                                                 <div className="col-xl-12">

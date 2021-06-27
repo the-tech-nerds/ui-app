@@ -1,4 +1,4 @@
-import shop from '../api/shop'
+import { getProducts} from '../api/shop'
 import * as types from '../constants/ActionTypes'
 import store from "../store";
 import { toast  } from 'react-toastify';
@@ -7,7 +7,7 @@ export * from './action-wishilist';
 export * from './action-login';
 export * from './action-category';
 export * from './action-shop';
-
+export * from './action-cart';
 
 export const fetchProductsBegin = () => ({
     type: types.FETCH_PRODUCTS_BEGIN
@@ -20,7 +20,7 @@ export const receiveProducts = products => ({
 
 export const getAllProducts = () => dispatch => {
     dispatch(fetchProductsBegin());
-    shop.getProducts(products => {
+    getProducts(products => {
         dispatch(receiveProducts(products));
         return products;
     })
@@ -29,46 +29,6 @@ export const fetchSingleProduct = productId => ({
     type: types.FETCH_SINGLE_PRODUCT,
     productId
 })
-
-
-
-
-//it seems that I should probably use this as the basis for "Cart"
-export const addToCart = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
-        dispatch(addToCartUnsafe(product, qty))
-
-}
-export const addToCartAndRemoveWishlist = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
-    dispatch(addToCartUnsafe(product, qty));
-    dispatch(removeFromWishlist(product));
-}
-export const addToCartUnsafe = (product, qty) => ({
-    type: types.ADD_TO_CART,
-    product,
-    qty
-});
-export const removeFromCart = product_id => (dispatch) => {
-    toast.error("Item Removed from Cart");
-    dispatch({
-        type: types.REMOVE_FROM_CART,
-        product_id
-    })
-};
-export const incrementQty = (product,qty) => (dispatch) => {
-    toast.success("Item Added to Cart");
-    dispatch(addToCartUnsafe(product, qty))
-
-}
-export const decrementQty = productId => (dispatch) => {
-    toast.warn("Item Decrement Qty to Cart");
-
-    dispatch({
-    type: types.DECREMENT_QTY,
-    productId})
-};
-
 
 //Compare Products
 export const addToCompare = (product) => (dispatch) => {
