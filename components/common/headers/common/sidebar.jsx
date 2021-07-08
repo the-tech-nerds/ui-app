@@ -30,7 +30,10 @@ const SideBar = () => {
             document.getElementById('app-body').classList.remove('left-sidebar_space')
         } else {
             closemyslide.classList.add('open-side');
-            document.getElementById('app-body').classList.add('left-sidebar_space')
+            const windowWidth = window.innerWidth;
+            if (windowWidth > 760) {
+                document.getElementById("app-body").classList.add("left-sidebar_space");
+            }
         }
     }, [items, menu]);
 

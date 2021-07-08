@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Breadcrumb from '../common/breadcrumb';
-import { fetchWishlist } from '../../actions'
+import { addItemToCart, fetchWishlist } from '../../actions'
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -73,7 +73,7 @@ const WishList = (props) => {
                                                 <IconButton color="primary" onClick={() => deleteWishList(item)} component="span">
                                                     <DeleteIcon />
                                                 </IconButton>
-                                                <IconButton color="secondary" component="span">
+                                                <IconButton color="secondary" component="span" onClick={() => console.log(item)}>
                                                     <ShoppingCart />
                                                 </IconButton>
                                             </div>
@@ -101,7 +101,7 @@ const WishList = (props) => {
                                         startIcon={<ShoppingCart />}
                                     >
                                         check out
-                                             </Button>
+                                    </Button>
                                 </Link>
                             </div>
                         </div>

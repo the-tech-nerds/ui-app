@@ -17,7 +17,6 @@ const TopBar = (props) => {
 
   const toggleNav = () => {
     const windowWidth = window.innerWidth;
-    console.log(windowWidth);
     var openmyslide = document.getElementById("mySidenav");
     if (openmyslide) {
       if (openmyslide.classList.contains("open-side")) {
@@ -77,12 +76,12 @@ const TopBar = (props) => {
           </div>
           <div className="col-xs-1 d-flex align-items-center justify-content-end p-0 logo-container">
             <Link href="/views/home" as="/">
-              <a className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white rounded-left">
+              <a className="kfc-logo bg-success w-75 h-75 d-flex justify-content-center align-items-center text-white">
                 KFC
               </a>
             </Link>
           </div>
-          <div className="d-flex flex-row justify-content-between align-items-center col-xs-8 pr-2">
+          <div className="search-holder d-flex flex-row justify-content-between align-items-center col-xs-8 pr-2">
             <input
               className="form-control search-autocomplete"
               onFocus={searchInputHandle}
