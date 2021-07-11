@@ -38,7 +38,7 @@ const SideBarItem = ({
                   as={`/${slug}`}
             >
             <li className={`d-flex flex-row justify-content-between p-1 ${selected ? 'item-selected' : ''} menu-item`} onClick={(e) => { e.stopPropagation(); onSelect(index) }}>
-                
+
                     <span>{icon && <i className={`fa fa-${icon} p-1`}></i>}{name}</span>
                         {children.length > 0 && <span className="nav-toggle-icon" onClick={(e) => { e.stopPropagation(); onToggle(index) }}>
                     {status === MENU_STATUS.EXPANDED && <i className="fa fa-angle-down" onClick={() => onToggle(index)}/>}
@@ -79,7 +79,7 @@ export const SideMenu = ({ items = [], setSideMenu = () => {} }) => {
     };
     const createMenu = useCallback((items) => {
         const createIndividualMenu = (item) => {
-            return {    
+            return {
                 name: item.name,
                 index: item.id,
                 children: item.children ? item.children.map(child => createIndividualMenu(child)) : null,
@@ -114,7 +114,7 @@ export const SideMenu = ({ items = [], setSideMenu = () => {} }) => {
         setSideMenu(itemsToChange);
     }
     useEffect(() => {
-        const menu = createMenu(items);       
+        const menu = createMenu(items);
         setMenu(menu);
     }, [items])
 

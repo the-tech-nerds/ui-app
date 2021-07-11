@@ -1,14 +1,35 @@
 import React from "react";
 import {Offer} from "../../../types";
+import {OfferItem} from "./offer-item";
 type OfferProps = {
      offers: Offer[];
 }
 const ActiveOffers =(props: OfferProps) =>{
-     const {offers } = props;
+     let {offers } = props;
+     offers = offers.concat(offers);
+     offers = offers.concat(offers);
+     offers = offers.concat(offers);
+     offers = offers.concat(offers);
+     offers = offers.concat(offers);
+     const items = offers
+         .map((offer) =>
+             <OfferItem
+                 key={offer.id}
+                 offer={offer}
+             />
+         );
      return <div>
           <section className="ratio_asos section-b-space top-spacing--lg">
                <div className="container">
-                    <h4>No products available!</h4>
+                    <div className="d-flex">
+                         <div className="flex-fill"><hr/></div>
+                         <div className="ml-4 mr-4 font-weight-bold">Offers</div>
+                         <div className="flex-fill"><hr/></div>
+                    </div>
+                    <div className= "row">
+                         {items}
+                    </div>
+
                </div>
           </section>
      </div>
