@@ -16,9 +16,9 @@ export class OfferService {
         })
     }
 
-    async getProductBySlug(slug: string) {
+    async getOfferBySlug(slug: string) {
         return this.gatewayService.execute('product', {
-            path: `/api/v1/product/public/${slug}`,
+            path: `/api/v1/offer/detail/${slug}`,
             method: 'GET'
         })
     }
