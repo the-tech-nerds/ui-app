@@ -66,4 +66,9 @@ export type Offer = {
     end_date: Date;
 }
 
+export type OfferItem = {
+    offer: Offer,
+    images: string []
+}
+
 declare module 'react-redux-multilingual';

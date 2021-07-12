@@ -1,14 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
-import ActiveOffers from "../../../components/products/offer/offers";
-import {Offer} from "../../../types";
+import {OfferItem} from "../../../types";
+import OfferItemDetail from "../../../components/products/offer/offer-details";
 
-type Offers = {
-    off: Offer;
+export type OfferDetailType = {
+    off: OfferItem;
 };
 
-const OfferDetail = ({ off }: Offers) => {
+const OfferDetail = ({ off }: OfferDetailType) => {
     return (
         <div>
             <Head>
@@ -16,15 +16,16 @@ const OfferDetail = ({ off }: Offers) => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div>
+                <OfferItemDetail item={off}/>
             </div>
         </div>
     )
 }
 
 OfferDetail.getInitialProps = async (ctx: any) => {
-    let offers: Offer[] = ctx.query.offers?.data.results || null;
+    let item: OfferItem= ctx.query.offers?.data || null;
     return {
-        off: offers,
+        off: item,
     }
 }
 
