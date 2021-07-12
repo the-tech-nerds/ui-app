@@ -30,7 +30,7 @@ const DetailsTopTabs = (props) => {
                                 {/*</Tab>*/}
                             </TabList>
                             <TabPanel className="tab-pane fade mt-4 show active">
-                                <div dangerouslySetInnerHTML={{__html: item.productInfo.description}}></div>
+                                <div dangerouslySetInnerHTML={{__html: item?.productInfo?.description}}></div>
                             </TabPanel>
                             {/* <TabPanel>
                             </TabPanel>

@@ -64,6 +64,8 @@ export type Offer = {
     start_date: Date;
     image: string;
     end_date: Date;
+    stock: number;
+    slug: string;
 }
 
 export type OfferItem = {

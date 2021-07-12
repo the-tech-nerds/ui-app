@@ -1,12 +1,13 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Offer, OfferItem} from "../../../types";
 import Breadcrumb from "../../common/breadcrumb";
 import Service from "../common/service";
 import ImageZoom from "../common/product/image-zoom";
 import SmallImages from "../common/product/small-image";
 import DetailsWithPrice from "../common/product/details-price";
-import DetailsTopTabs from "../common/details-top-tabs";
 import Slider from "react-slick";
+import DetailsTabs, {TabsInfo} from "./details-tab";
+import DetailsPrice, {PriceDetail} from "./price-details";
 const sliders = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -28,12 +29,23 @@ type OfferDetail = {
 }
 const OfferItemDetail =(props: OfferDetail) =>{
     let {item} = props;
+    const priceDetails: PriceDetail = {
+        quantity: item.offer.stock,
+        title: item.offer.name,
+        price: item.offer.total_price,
+        isWishButtonShow: false,
+        isShowTimer: true,
+        start_date: item.offer.start_date,
+        end_date: item.offer.end_date
+    }
     item.images = item.images.concat(item.images);
-    const [init, setInit] = useState({
-        nav1: null,
-        nav2: null,
-    })
+    const tabDetails:TabsInfo= {
+        description: item.offer.description
+    }
     const [nav1, setNav1] = useState(null);
+    useEffect(() =>{
+
+    },[])
     return  <div>
         {/*Section Start*/}
         {(item.offer) ?
@@ -59,10 +71,10 @@ const OfferItemDetail =(props: OfferDetail) =>{
                                             </Slider>
                                             {item.images.length > 0 && <SmallImages images={item.images} settings={sliderNav} navOne={nav1} />}
                                         </div>
-                                        {/*<DetailsWithPrice symbol={symbol} item={this.state.product} navOne={this.state.nav1} />*/}
+                                        <DetailsPrice itemPrice={priceDetails}/>
                                     </div>
                                 </div>
-                                {/*<DetailsTopTabs/>*/}
+                                <DetailsTabs tabs={tabDetails}/>
                             </div>
                         </div>
                     </div>
