@@ -105,7 +105,7 @@ const DetailsPrice = (props: ItemPrice) => {
             </div>
         </div>
             <div className="product-buttons" >
-        <button disabled={itemPrice.quantity < quantity} className="btn btn-solid">add to cart</button>
+        <button disabled={itemPrice.quantity === 0 || itemPrice.quantity < quantity} className="btn btn-solid">add to cart</button>
         <a href={`${process.env.PUBLIC_URL}/checkout`} className="btn btn-solid">buy now</a>
         </div>
         {itemPrice?.description &&<div className="border-product">
