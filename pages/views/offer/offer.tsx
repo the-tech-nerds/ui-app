@@ -16,14 +16,14 @@ const OfferList = ({ off }: Offers) => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div>
-                <ActiveOffers offers={ off}/>
+                {off && <ActiveOffers offers={ off}/>}
             </div>
         </div>
     )
 }
 
 OfferList.getInitialProps = async (ctx: any) => {
-     let offers: Offer[] = ctx.query.offers?.data.results || null;
+     let offers: Offer[] = ctx.query.offers?.data?.results || null;
     return {
         off: offers,
     }

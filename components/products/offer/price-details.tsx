@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import {DayHourMinSec, secondsToDhms} from "../../../share/uitilies";
+import {ProductVariant} from "../../../types";
 export interface PriceDetail {
     title: string;
     price: number;
@@ -8,7 +9,7 @@ export interface PriceDetail {
     description?: string;
     start_date?: Date;
     end_date?: Date;
-    items?: any [];
+    items?: ProductVariant [];
     isWishButtonShow?: boolean;
     isShowSocial?: boolean;
     isShowTimer?: boolean;

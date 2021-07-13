@@ -6,15 +6,10 @@ type OfferProps = {
 }
 const ActiveOffers =(props: OfferProps) =>{
      let {offers } = props;
-     offers = offers.concat(offers);
-     offers = offers.concat(offers);
-     offers = offers.concat(offers);
-     offers = offers.concat(offers);
-     offers = offers.concat(offers);
      const items = offers
          .map((offer) =>
              <OfferItem
-                 key={offer.id}
+                 key={offer.slug}
                  offer={offer}
              />
          );

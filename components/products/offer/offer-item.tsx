@@ -2,6 +2,8 @@
 import React from "react";
 import Image from "../../image/image";
 import {Offer} from "../../../types";
+import Link from "next/link";
+import offers from "./offers";
 
 type OfferProp = {
     offer: Offer;
@@ -10,12 +12,24 @@ export const OfferItem = (props: OfferProp) =>{
     const {offer} = props;
     const item = <div className="d-flex flex-row offer-item mb-3 mr-2">
         <div className="p-2 flex-column card hover-item">
-            <Image
-                src= {offer.image}
-                height={200}
-                width={250}
-                alt= {offer.name}
-            />
+            <Link
+                href={{
+                    pathname: "/views/offer/detail",
+                    query: { offer: offer.slug },
+                }}
+                as={`/offer/detail/${offer?.slug}`}
+            >
+                <div className="front">
+                    <Image
+                        src= {offer?.image? offer.image : ""}
+                        height={200}
+                        width={250}
+                        alt= {offer.name}
+                        fullWidth
+                    />
+                </div>
+            </Link>
+
             <div className="text-center mt-2 ">
                 <strong>{offer.name} </strong>
             </div>

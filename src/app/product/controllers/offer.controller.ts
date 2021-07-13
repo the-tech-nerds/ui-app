@@ -27,4 +27,13 @@ export class OfferController {
             offers:data
         };
     }
+    @Get('/offer-detail/:slug')
+    async getOffer(
+        @Param('slug') slug: string
+    ) {
+        const data = await this.offerService.getOfferBySlug(slug);
+        return {
+            offers:data
+        };
+    }
 }

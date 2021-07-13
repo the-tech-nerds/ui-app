@@ -38,7 +38,6 @@ const OfferItemDetail =(props: OfferDetail) =>{
         start_date: item.offer.start_date,
         end_date: item.offer.end_date
     }
-    item.images = item.images.concat(item.images);
     const tabDetails:TabsInfo= {
         description: item.offer.description
     }
