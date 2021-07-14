@@ -22,8 +22,7 @@ export const OfferItem = (props: OfferProp) =>{
                 <div className="front">
                     <Image
                         src= {offer?.image? offer.image : ""}
-                        height={200}
-                        width={250}
+                        height={150}
                         alt= {offer.name}
                         fullWidth
                     />

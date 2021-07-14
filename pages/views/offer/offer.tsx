@@ -2,13 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import '../../../components/categories/category.module.scss';
 import ActiveOffers from "../../../components/products/offer/offers";
-import {Offer} from "../../../types";
+import {Offer, Shop} from "../../../types";
+import {useSelector} from "react-redux";
 
-type Offers = {
-    off: Offer[];
-};
-
-const OfferList = ({ off }: Offers) => {
+const OfferList = () => {
+    const currentShop: Shop = useSelector(state => state.shops.current);
     return (
         <div>
             <Head>
@@ -16,17 +14,9 @@ const OfferList = ({ off }: Offers) => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <div>
-                {off && <ActiveOffers offers={ off}/>}
+                <ActiveOffers fetchUrl={`/offer/list/${currentShop?.id}`}/>
             </div>
         </div>
     )
 }
-
-OfferList.getInitialProps = async (ctx: any) => {
-     let offers: Offer[] = ctx.query.offers?.data?.results || null;
-    return {
-        off: offers,
-    }
-}
-
 export default OfferList;

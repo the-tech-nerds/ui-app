@@ -109,7 +109,12 @@ const SideBar = () => {
         <div id="mySidenav" className="sidenav">
             <nav>
                 <li className= "ml-1 p-1">
-                    <Link href="/offer/list" as="/offer/list/1">
+                    <Link
+                          href={{
+                              pathname: '/views/offer/offer',
+                          }}
+                          as={`/offer/view`}
+                    >
                         <a>
                             <i className="fa fa-tag"></i> Offer(<span className="font-weight-bold">100</span>)
                         </a>

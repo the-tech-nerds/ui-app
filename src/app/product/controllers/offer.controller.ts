@@ -7,15 +7,16 @@ import {OfferService} from "../services/offer.service";
 export class OfferController {
     constructor(private readonly offerService: OfferService) {
     }
-    @Get('/list/:shop')
+    @Get('/view')
     @Render('offer/offer')
-    async getOffers(
-        @Param('shop') shop_id: string
+    async getOffers() {
+        return {};
+    }
+    @Get('/list/:shop')
+    async getProductItemsByCategorySlug(
+        @Param('shop') shopId: string,
     ) {
-        const data = await this.offerService.geActiveOffers(shop_id);
-        return {
-            offers:data
-        };
+        return this.offerService.geActiveOffers(shopId);
     }
     @Get('/detail/:slug')
     @Render('offer/detail')
