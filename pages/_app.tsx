@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import type {AppProps} from 'next/app';
 import NProgress from 'nprogress';
 import Router from 'next/router';
@@ -35,7 +35,9 @@ Router.events.on('routeChangeError', () => {
 });
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-  initialActions();
+    useEffect(() =>{
+        initialActions();
+    }, [])
   return (
    <Root>
      <Head>

@@ -3,8 +3,10 @@ import React from 'react';
 import Head from 'next/head';
 import '../../components/styles/user_dashbord.module.scss'
 import { AddressBook } from '../../components/pages/address-book';
+import {fetchUserAddressApi} from "../../api/address";
 
-const Address = ({ address }) => (<div>
+
+const Address = ({ address }: any) => (<div>
     <Head>
         <title>Khan Fresh Corner | The best place to find fresh vegetables.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -12,21 +14,18 @@ const Address = ({ address }) => (<div>
     {address && <AddressBook address={address} />}
 </div>)
 
-export async function getServerSideProps(ctx) {
-    const { address } = ctx.query;
-    if (address) {
-        return {
-            props: {
-                address: address.data
-            }
-        }
+
+Address.getInitialProps = async (ctx: any) => {
+    let item = ctx.query.address?.data || null;
+    console.log(item);
+    if(!item){
+        const res = await fetchUserAddressApi();
+        item = res?.data?.address?.data
     }
 
     return {
-        props: {
-            address: null
-        }
-    };
+            address: item
+    }
 }
 
 export default Address;

@@ -4,6 +4,7 @@ import { SIDEBAR_STATUS } from "../../../../constants/app_constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setSideMenu } from '../../../../actions/action-menu';
 import { addPreviousLength } from '../../../../actions/action-category'
+import Link from "next/link";
 
 
 const SideBar = () => {
@@ -110,6 +111,18 @@ const SideBar = () => {
     return (
         <div id="mySidenav" className="sidenav">
             <nav>
+                <li className= "ml-1 p-1">
+                    <Link
+                          href={{
+                              pathname: '/views/offer/offer',
+                          }}
+                          as={`/offer/view`}
+                    >
+                        <a>
+                            <i className="fa fa-tag"></i> Offer(<span className="font-weight-bold">100</span>)
+                        </a>
+                    </Link>
+                </li>
                 <SideMenu
                     items={categories}
                     setSideMenu={(menu) => dispatch(setSideMenu(menu))}

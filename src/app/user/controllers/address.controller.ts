@@ -14,6 +14,11 @@ export class AddressController {
         const response = await this.addressService.getAllByUserId();
         return { 'address': response };
     }
+    @Get('/user')
+    async getUserAddress() {
+        const response = await this.addressService.getAllByUserId();
+        return { 'address': response };
+    }
     @Get('/cities')
     async loadCity() {
         const cities = this.addressService.getCities();

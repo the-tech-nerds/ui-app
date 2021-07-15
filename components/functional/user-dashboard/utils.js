@@ -32,7 +32,7 @@ export function getSideMenus(name) {
             id: 1,
             name: 'Address Book',
             className: name === 'AddressBook' ? 'text-danger' : 'Inactive',
-            href: '/address',
+            href: '/views/address',
             as: USER_ADDRESS
         },
         {
