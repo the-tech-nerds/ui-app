@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AxiosDefaultResponse, Product } from "types";
+import { AxiosDefaultResponse, Offer } from "types";
 
-export const fetchOfferDetailsApi = (slug: string): Promise<AxiosDefaultResponse<Product>> => {
+export const fetchOfferDetailsApi = (slug: string): Promise<AxiosDefaultResponse<Offer>> => {
     return axios.get(`/offer/offer-detail/${slug}`).then(res => res).catch(err => err);
 }

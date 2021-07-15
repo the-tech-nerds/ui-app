@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AxiosDefaultResponse, Product } from "types";
+import { Address, AxiosDefaultResponse } from "types";
 
-export const fetchUserAddressApi = (): Promise<AxiosDefaultResponse<Product> => {
+export const fetchUserAddressApi = (): Promise<AxiosDefaultResponse<Address>> => {
     return axios.get(`/address/user`).then(res => res).catch(err => err);
 }

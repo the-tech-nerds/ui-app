@@ -17,6 +17,7 @@ const Address = ({ address }: any) => (<div>
 
 Address.getInitialProps = async (ctx: any) => {
     let item = ctx.query.address?.data || null;
+    console.log(item);
     if(!item){
         const res = await fetchUserAddressApi();
         item = res?.data?.address?.data
