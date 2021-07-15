@@ -10,7 +10,7 @@ type OfferProp = {
 }
 export const OfferItem = (props: OfferProp) =>{
     const {offer} = props;
-    const item = <div className="d-flex flex-row offer-item mb-3 mr-2">
+    return <div className="d-flex flex-row offer-item mb-3 mr-2">
         <div className="p-2 flex-column card hover-item">
             <Link
                 href={{
@@ -42,5 +42,4 @@ export const OfferItem = (props: OfferProp) =>{
             </div>
         </div>
     </div>
-    return item;
 }
